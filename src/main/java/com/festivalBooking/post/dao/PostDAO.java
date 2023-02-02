@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostDAO {
-	public List<Map<String,Object>> selectPostListTest();
+	
 }

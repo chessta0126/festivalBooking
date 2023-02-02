@@ -9,12 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.festivalBooking.post.dao.PostDAO;
+import com.festivalBooking.user.bo.UserBO;
 
 @Controller
 public class TestController {
 	@Autowired
-	private PostDAO postDAO;
+	private UserBO userBO;
 	
 	// 1. String 문장 확인 : @ResponseBody + String return
 	// http://localhost:8080/test1
@@ -47,6 +47,6 @@ public class TestController {
 	@GetMapping("/test4")
 	@ResponseBody
 	public List<Map<String,Object>> test4() {
-		return postDAO.selectPostListTest();
+		return userBO.getUserListTest();
 	}
 }
