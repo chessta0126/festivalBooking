@@ -19,7 +19,7 @@ class UserRestControllerTest {
 	
 	@Test
 	void test() {
-		User user = userBO.getUserByLoginIdPassword("aaaa","aaaa");
+		User user = userBO.getUserByLoginIdPassword("bbbb","bbbb");
 		assertNotNull(user);
 	}
 	

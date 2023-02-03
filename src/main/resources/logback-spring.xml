@@ -9,7 +9,7 @@
     </appender>
 
     <!-- Logger -->
-    <logger name="★베이스패키지★" level="DEBUG" appender-ref="console" />
+    <logger name="com.festivalBooking" level="DEBUG" appender-ref="console" />
 
     <!-- Root Logger -->
     <root level="info">
