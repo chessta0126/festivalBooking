@@ -24,12 +24,16 @@ public class UserBO {
 		return userDAO.selectUserListTest();
 	}
 	
-	public void addUser(String name, String loginId,String hashedPassword,String email, MultipartFile file) {
+	public boolean existLoginId(String loginId) {
+		return userDAO.existLoginId(loginId);
+	}
+	
+	public void addUser(String name, String loginId,String hashedPassword,String email, MultipartFile profileImageUrl) {
 		
 		// 파일 업로드 => 경로
 		String imagePath = null;
-		if(file != null) {
-			imagePath = fileManager.saveFile(name, file);
+		if(profileImageUrl != null) {
+			imagePath = fileManager.saveFile(name, profileImageUrl);
 		}
 				
 		// DAO insert

@@ -13,6 +13,8 @@ public interface UserDAO {
 	
 	public List<Map<String,Object>> selectUserListTest();
 	
+	public boolean existLoginId(String loginId);
+	
 	public void insertUser(
 			@Param("name") String name
 			,@Param("loginId") String loginId
