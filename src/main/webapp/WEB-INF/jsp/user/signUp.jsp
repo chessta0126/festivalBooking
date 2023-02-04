@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 <div class="d-flex justify-content-center">
-	<div class="sign-up-box">
+	<div class="sign-up-box mt-5">
 		<h2 class="m-3 font-weight-bold">회원가입</h2>
 		<form id="signUpForm" method="post" action="/user/sign_up">
 			<table class="sign-up-table table table-bordered">
@@ -122,12 +122,12 @@
 			e.preventDefault(); // submit 기능 중단
 			
 			// validation check
+			let name = $('#name').val().trim();
 			let loginId = $('#loginId').val().trim();
 			let password = $('#password').val();
 			let confirmPassword = $('#confirmPassword').val();
-			let name = $('#name').val().trim();
 			let email = $('#email').val().trim();
-			let profileImageUrl = $('#file')[0].files[0];
+			let file = $('#file')[0].files[0];
 			
 			if(name == ""){
 				alert("이름을 입력해주세요");
@@ -161,21 +161,31 @@
 				return false;
 			}
 			
-			// AJAX
-			let url = $(this).attr('action');
-			let params = $(this).serialize(); // 직렬화 : form태그에 있는 name으로 파라미터를 구성
-			console.log(params);
+			// form태그를 자바스크립트에서 만든다.
+			let formData = new FormData();
+			formData.append("name", name);
+			formData.append("loginId", loginId);
+			formData.append("password", password);
+			formData.append("email", email);
+			formData.append("file", $('#file')[0].files[0]); // $('#file')[0]은 첫번째 input file 태그를 의미, files[0]는 업로드된 첫번째 파일
 			
-			$.post(url,params) // request
-			.done(function(data){
-				// response
-				if(data.code == 1){
-					// 성공
-					alert("가입을 환영합니다! 로그인 해주세요.");
-					location.href="/user/sign_in_view";
-				} else{
-					// 실패
-					alert(data.errorMessage);
+			// AJAX form 데이터 전송
+			$.ajax({
+				type:'POST'
+				,url:'/user/sign_up'
+				, data: formData
+				, enctype: "multipart/form-data"    // 파일 업로드를 위한 필수 설정
+				, processData: false    // 파일 업로드를 위한 필수 설정
+				, contentType: false    // 파일 업로드를 위한 필수 설정
+				, success: function(data) {
+					if (data.code == 1) {
+						// 성공
+						alert("가입을 환영합니다! 로그인 해주세요.");
+						location.href="/user/sign_in_view";
+					} else{
+						// 실패
+						alert("[error] 통신 문제로 가입에 실패했습니다. \n 담당자에게 문의해주세요");
+					}
 				}
 			});
 		});

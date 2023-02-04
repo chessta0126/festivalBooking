@@ -16,10 +16,15 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 <body>
-	<div id="wrap" class="container">
-		<header>
+	<div id="wrap">
+		<header class="d-flex justify-content-between align-items-center">
 			<jsp:include page="../include/header.jsp" />
 		</header>
+
+        <nav class="d-flex justify-content-between align-items-center">
+			<jsp:include page="../include/nav.jsp" />
+        </nav>
+
 		<section>
 			<jsp:include page="../${viewName}.jsp" />
 		</section>

@@ -43,14 +43,14 @@ public class UserRestController {
 		,@RequestParam("loginId") String loginId
 		,@RequestParam("password") String password
 		,@RequestParam("email") String email
-		,@RequestParam(value="profileImageUrl", required=false) MultipartFile profileImageUrl
+		,@RequestParam(value="file", required=false) MultipartFile file
 			){
 		// 비밀번호 해싱 - mb5
 		// 복호화 불가
 		String hashedPassword = EncryptUtils.md5(password);
 
 		// DB insert
-		userBO.addUser(name, loginId, hashedPassword, email, profileImageUrl);
+		userBO.addUser(name, loginId, hashedPassword, email, file);
 
 		// DB에 안 들어가고 문제 생기면 위에서 에러가 뜨므로, 여기까지 내려왔다는 건 성공했다는 뜻
 
