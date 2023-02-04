@@ -6,20 +6,25 @@
 		<h2 class="m-3 font-weight-bold">회원가입</h2>
 		<form id="signUpForm" method="post" action="/user/sign_up">
 			<table class="sign-up-table table table-bordered">
-			<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
-					<input type="file" id="file" class="d-none"
-						accept=".gif, .jpg, .png, .jpeg">
-					<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서로 변하도록 a 태그 사용 --%>
-					<a href="#" id="fileUploadBtn"><img width="35"
-						src="/img/default_profileImage.jpg"></a>
-					<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
-					<div id="fileName" class="ml-2"></div>
+				<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
+				<input type="file" id="file" class="d-none"
+					accept=".gif, .jpg, .png, .jpeg">
+				
+				<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서로 변하도록 a 태그 사용 --%>
+				<%-- default 이미지 --%>
+				<a href="#" id="fileUploadBtn">
+					<img width="200" src="\images\★default file/default profileImage.jpg">
+				</a>
+				
+				<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
+				<div id="fileName" class="ml-2"></div>
+				
 				<tr>
-					<th>* 이름</th>
+					<th>* 닉네임(활동명)</th>
 					<td><input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요."></td>
 				</tr>
 				<tr>
-					<th>* 아이디(4자 이상)<br></th>
+					<th>* 아이디</th>
 					<td>
 						<%-- 인풋박스 옆에 중복확인을 붙이기 위해 div를 하나 더 만들고 d-flex --%>
 						<div class="d-flex">
@@ -78,6 +83,8 @@
 			
 			// 유효성 통과한 이미지는 상자에 업로드 된 파일 이름 노출
 			$('#fileName').text(fileName);
+			// 기본 이미지 숨기기
+			$('#fileUploadBtn').addClass('d-none');
 		});
 		
 		// 중복확인 버튼 클릭

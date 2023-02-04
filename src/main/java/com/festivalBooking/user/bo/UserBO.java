@@ -34,6 +34,8 @@ public class UserBO {
 		String imagePath = null;
 		if(profileImageUrl != null) {
 			imagePath = fileManager.saveFile(name, profileImageUrl);
+		} else {
+			imagePath = "/images/★default file/default profileImage.jpg";
 		}
 				
 		// DAO insert

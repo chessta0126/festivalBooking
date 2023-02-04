@@ -59,7 +59,7 @@
 			$.post(url, params)   // request
 			.done(function(data) {  // response
 				if (data.code == 1) { // 성공
-					location.href = "/timeline/timeline_view";
+					location.href = "/main/main_view";
 				} else { // 실패
 					alert(data.errorMessage);
 				}
