@@ -11,10 +11,13 @@ import com.festivalBooking.user.model.User;
 @Repository
 public interface UserDAO {
 	
+	// 테스트
 	public List<Map<String,Object>> selectUserListTest();
 	
+	// 중복 확인
 	public boolean existLoginId(String loginId);
 	
+	// 회원가입
 	public void insertUser(
 			@Param("name") String name
 			,@Param("loginId") String loginId
@@ -22,6 +25,7 @@ public interface UserDAO {
 			,@Param("email") String email
 			, @Param("imagePath") String imagePath);
 
+	// 로그인
 	public User selectUserByLoginIdPassword(
 			@Param("loginId") String loginId
 			,@Param("password") String password);

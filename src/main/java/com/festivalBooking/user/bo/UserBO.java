@@ -20,14 +20,17 @@ public class UserBO {
 	@Autowired
 	private FileManagerService fileManager;
 	
+	// 테스트
 	public List<Map<String,Object>> getUserListTest(){
 		return userDAO.selectUserListTest();
 	}
 	
+	// 중복 확인
 	public boolean existLoginId(String loginId) {
 		return userDAO.existLoginId(loginId);
 	}
 	
+	// 회원가입
 	public void addUser(String name, String loginId,String hashedPassword,String email, MultipartFile profileImageUrl) {
 		
 		// 파일 업로드 => 경로
@@ -42,7 +45,8 @@ public class UserBO {
 		userDAO.insertUser(name, loginId, hashedPassword, email, imagePath);
 	}
 	
-	public User getUserByLoginIdPassword(String loginId,String password) {
+	// 로그인
+	public User getUserByLoginIdPassword(String loginId, String password) {
 		return userDAO.selectUserByLoginIdPassword(loginId, password);
 	}
 }
