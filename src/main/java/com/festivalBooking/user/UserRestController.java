@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 public class UserRestController {
 	
 	@Autowired
-	UserBO userBO;
+	private UserBO userBO;
 	
 	@GetMapping("/is_duplicated_id")
 	public Map<String, Object> isDuplicatedId(

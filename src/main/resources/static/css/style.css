@@ -1,9 +1,7 @@
 @charset "UTF-8";
-a {text-decoration:none; color:#000;}
-a:hover {text-decoration:none; color:#000;}
+a , a:hover {text-decoration:none;}
 
 header {height:100px; background-color:black;}
-.header {height:100px;}
 
 nav{height: 50px; background-color: rgb(180, 36, 31);}
 nav .nav-link{
@@ -15,6 +13,7 @@ nav .nav-item:hover{background-color: darkcyan;}
 
 .white-text{color: #fff;}
 .yellow-text{color: yellow;}
+.bold{font-weight: bold;}
 
 #loginBtn{color: #fff; text-decoration: none;}
 #joinBtn{color: #fff; text-decoration: none;}
@@ -25,12 +24,13 @@ nav .nav-item:hover{background-color: darkcyan;}
     font-weight: bold;
 }
 
-
 .sign-up-box {width:650px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
 .sign-up-subject {margin:20px; font-weight:bold;}
 
-.shadow-box {width:550px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
 .login-box {width:400px;}
 
-.contents-box {width:650px;}
+.alert-box {width:400px; background-color:#ebebeb; margin-top:20px;}
+.book-confirm-box {width:400px; height:250px; background-color:darkcyan; margin-top:20px;}
+
+.contents-box {width:650px; background-color:#333;}
 #writeTextArea {height:100px;}

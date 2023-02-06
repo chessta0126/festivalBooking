@@ -34,7 +34,7 @@
 
 	<div>
 		<li class="nav-item">
-			<a href="#" class="nav-link">마이페이지</a>
+			<a href="/myPage/myPage_view" class="nav-link">마이페이지</a>
 		</li>
 	</div>
 </ul>
