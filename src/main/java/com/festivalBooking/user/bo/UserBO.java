@@ -49,4 +49,9 @@ public class UserBO {
 	public User getUserByLoginIdPassword(String loginId, String password) {
 		return userDAO.selectUserByLoginIdPassword(loginId, password);
 	}
+	
+	// userId로 회원정보 꺼내기
+	public User getUserByUserId(Integer userId) {
+		return userDAO.selectUserByUserId(userId);
+	}
 }

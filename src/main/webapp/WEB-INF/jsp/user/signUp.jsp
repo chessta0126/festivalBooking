@@ -33,7 +33,7 @@
 							<button type="button" id="loginIdCheckBtn" class="btn btn-success">중복확인</button><br>
 						</div>
 
-						<%-- 아이디 체크 결과 --%>
+						<%-- 아이디 중복 확인 결과 --%>
 						<%-- d-none 클래스: display none (보이지 않게) --%>
 						<div id="idCheckLength" class="small text-danger d-none">ID를 4자 이상 입력해주세요.</div>
 						<div id="idCheckDuplicated" class="small text-danger d-none">이미 사용중인 ID입니다.</div>
@@ -70,7 +70,7 @@
 		// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
 		$('#file').on('change', function(e) {
 			//alert("파일 선택");
-			let fileName = e.target.files[0].name; // 07_30_01.png
+			let fileName = e.target.files[0].name;
 			//alert(fileName);
 			
 			// 확장자 유효성 확인

@@ -29,4 +29,7 @@ public interface UserDAO {
 	public User selectUserByLoginIdPassword(
 			@Param("loginId") String loginId
 			,@Param("password") String password);
+	
+	// userId로 회원정보 꺼내기
+	public User selectUserByUserId(Integer userId);
 }

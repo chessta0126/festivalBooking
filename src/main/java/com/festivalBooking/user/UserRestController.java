@@ -97,4 +97,15 @@ public class UserRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/update")
+	public void update(
+		@RequestParam(value="changedName", required=false) String changedName
+		,@RequestParam(value="changedLoginId", required=false) String changedLoginId
+		,@RequestParam(value="changedPassword", required=false) String changedPassword
+		,@RequestParam(value="changedEmail", required=false) String changedEmail
+		,@RequestParam(value="changedFile", required=false) MultipartFile changedFile
+			) {
+		// 모두 nullable하게 한다. null일 경우 기존 회원정보로 넘어가도록 설정
+	}
 }

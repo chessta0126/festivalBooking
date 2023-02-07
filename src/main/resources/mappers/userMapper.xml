@@ -67,4 +67,21 @@
  			`loginId` = #{loginId}
  			AND `password` = #{password}
  	</select>
+
+	<select id="selectUserByUserId"
+ 	parameterType="Integer" resultType="com.festivalBooking.user.model.User">
+ 		SELECT
+ 			`id`
+ 			,`name`
+ 			,`loginId`
+ 			,`password`
+ 			,`email`
+ 			,`profileImageUrl`
+ 			,`createdAt`
+ 			,`updatedAt`
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`id` = #{userId}
+ 	</select>
 </mapper>
