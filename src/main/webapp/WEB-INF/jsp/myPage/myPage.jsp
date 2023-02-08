@@ -1,83 +1,83 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <div class="container">
 	<div class="pt-4 pb-4 border-bottom">
-		<h1 class="bold">È¸¿ø Á¤º¸</h1>
+		<h1 class="bold">íšŒì› ì •ë³´</h1>
 		<form method="Post" action="/user/update">
 		<div class="mt-4 d-flex">
-			<%-- ÇÁ·ÎÇÊ ÀÌ¹ÌÁö --%>
+			<%-- í”„ë¡œí•„ ì´ë¯¸ì§€ --%>
 			<div class="ml-5 col-3">
-				<%-- file ÅÂ±×´Â ¼û°ÜµÎ°í ÀÌ¹ÌÁö¸¦ Å¬¸¯ÇÏ¸é file ÅÂ±×¸¦ Å¬¸¯ÇÑ °ÍÃ³·³ ÀÌº¥Æ®¸¦ ÁÙ °ÍÀÌ´Ù. --%>
+				<%-- file íƒœê·¸ëŠ” ìˆ¨ê²¨ë‘ê³  ì´ë¯¸ì§€ë¥¼ í´ë¦­í•˜ë©´ file íƒœê·¸ë¥¼ í´ë¦­í•œ ê²ƒì²˜ëŸ¼ ì´ë²¤íŠ¸ë¥¼ ì¤„ ê²ƒì´ë‹¤. --%>
 				<input type="file" id="changedFile" class="d-none"
 					accept=".gif, .jpg, .png, .jpeg">
 				
-				<%-- ÀÌ¹ÌÁö¿¡ ¸¶¿ì½º ¿Ã¸®¸é ¸¶¿ì½ºÄ¿¼­°¡ ¸µÅ© Ä¿¼­·Î º¯ÇÏµµ·Ï a ÅÂ±× »ç¿ë --%>
+				<%-- ì´ë¯¸ì§€ì— ë§ˆìš°ìŠ¤ ì˜¬ë¦¬ë©´ ë§ˆìš°ìŠ¤ì»¤ì„œê°€ ë§í¬ ì»¤ì„œë¡œ ë³€í•˜ë„ë¡ a íƒœê·¸ ì‚¬ìš© --%>
 				<a href="#" id="userProfileImage" class="fileChangeBtn">
 					<img src="${userProfileImageUrl}" id="profileImage" width="150px">
 				</a>
 				
-				<%-- ¾÷·Îµå µÈ ÀÓ½Ã ÆÄÀÏ ÀÌ¸§ ÀúÀåµÉ °÷ --%>
+				<%-- ì—…ë¡œë“œ ëœ ì„ì‹œ íŒŒì¼ ì´ë¦„ ì €ì¥ë  ê³³ --%>
 				<div id="changedFileName" class="ml-2"></div>
 
-				<div class="text-center mt-2 mb-2">ÇÁ·ÎÇÊ ÀÌ¹ÌÁö</div>
+				<div class="text-center mt-2 mb-2">í”„ë¡œí•„ ì´ë¯¸ì§€</div>
 
-				<%-- ¹öÆ° ´­·¯µµ ¼öÁ¤ÇÒ ¼ö ÀÖ°Ô²û ÇÑ´Ù. --%>
-				<button class="btn btn-secondary w-100 fileChangeBtn">¼öÁ¤ÇÏ±â</button>
+				<%-- ë²„íŠ¼ ëˆŒëŸ¬ë„ ìˆ˜ì •í•  ìˆ˜ ìˆê²Œë” í•œë‹¤. --%>
+				<button class="btn btn-secondary w-100 fileChangeBtn">ìˆ˜ì •í•˜ê¸°</button>
 				
 			</div>
 			
-			<%-- È¸¿ø Á¤º¸(text) --%>
+			<%-- íšŒì› ì •ë³´(text) --%>
 			<div class="col-9">
 				<table class="table">
 					<tr>
-						<td class="pr-3">´Ğ³×ÀÓ(È°µ¿¸í)</td>
+						<td class="pr-3">ë‹‰ë„¤ì„(í™œë™ëª…)</td>
 						<td>
-							<%-- Áßº¹È®ÀÎ ¹öÆ° ¾È º¸ÀÌ°Ô ÇØµµ d-flex·Î ºÙ¿©³õÁö ¾ÊÀ¸¸é ¹Ø¿¡ ¿©¹éÀÌ »ı±â¹Ç·Î ¿©±â±îÁö ¹­¾îÁØ´Ù. --%>
+							<%-- ì¤‘ë³µí™•ì¸ ë²„íŠ¼ ì•ˆ ë³´ì´ê²Œ í•´ë„ d-flexë¡œ ë¶™ì—¬ë†“ì§€ ì•Šìœ¼ë©´ ë°‘ì— ì—¬ë°±ì´ ìƒê¸°ë¯€ë¡œ ì—¬ê¸°ê¹Œì§€ ë¬¶ì–´ì¤€ë‹¤. --%>
 							<div class="d-flex align-items-center">
 								<span id="textName">${userInfo.name}</span>
 								
-								<%-- ¼öÁ¤ Å¬¸¯ ½Ã¿¡¸¸ º¸ÀÌ±â --%>
+								<%-- ìˆ˜ì • í´ë¦­ ì‹œì—ë§Œ ë³´ì´ê¸° --%>
 								<input type="text" id="changedName" name="changedName"
 								class="form-control d-none" placeholder="${userInfo.name}">
-								<button type="button" id="changedNameCheckBtn" class="btn btn-success d-none">Áßº¹È®ÀÎ</button>
+								<button type="button" id="changedNameCheckBtn" class="btn btn-success d-none">ì¤‘ë³µí™•ì¸</button>
 							</div>
 	
-							<%-- ´Ğ³×ÀÓ Áßº¹ È®ÀÎ °á°ú --%>
-							<div id="changedNameLength" class="small text-danger d-none">´Ğ³×ÀÓÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.</div>
-							<div id="changedNameCheckDuplicated" class="small text-danger d-none">ÀÌ¹Ì »ç¿ëÁßÀÎ ´Ğ³×ÀÓ ÀÔ´Ï´Ù.</div>
-							<div id="changedNameCheckOk" class="small text-success d-none">»ç¿ë °¡´ÉÇÑ ´Ğ³×ÀÓ ÀÔ´Ï´Ù.</div>
+							<%-- ë‹‰ë„¤ì„ ì¤‘ë³µ í™•ì¸ ê²°ê³¼ --%>
+							<div id="changedNameLength" class="small text-danger d-none">ë‹‰ë„¤ì„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.</div>
+							<div id="changedNameCheckDuplicated" class="small text-danger d-none">ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ë‹‰ë„¤ì„ ì…ë‹ˆë‹¤.</div>
+							<div id="changedNameCheckOk" class="small text-success d-none">ì‚¬ìš© ê°€ëŠ¥í•œ ë‹‰ë„¤ì„ ì…ë‹ˆë‹¤.</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="pr-3">¾ÆÀÌµğ</td>
+						<td class="pr-3">ì•„ì´ë””</td>
 						<td>
-							<%-- Áßº¹È®ÀÎ ¹öÆ° ¾È º¸ÀÌ°Ô ÇØµµ d-flex·Î ºÙ¿©³õÁö ¾ÊÀ¸¸é ¹Ø¿¡ ¿©¹éÀÌ »ı±â¹Ç·Î ¿©±â±îÁö ¹­¾îÁØ´Ù. --%>
+							<%-- ì¤‘ë³µí™•ì¸ ë²„íŠ¼ ì•ˆ ë³´ì´ê²Œ í•´ë„ d-flexë¡œ ë¶™ì—¬ë†“ì§€ ì•Šìœ¼ë©´ ë°‘ì— ì—¬ë°±ì´ ìƒê¸°ë¯€ë¡œ ì—¬ê¸°ê¹Œì§€ ë¬¶ì–´ì¤€ë‹¤. --%>
 							<div class="d-flex align-items-center">
 								<span id="textLoginId">${userInfo.loginId}</span>
 
-								<%-- ¼öÁ¤ Å¬¸¯ ½Ã¿¡¸¸ º¸ÀÌ±â --%>
+								<%-- ìˆ˜ì • í´ë¦­ ì‹œì—ë§Œ ë³´ì´ê¸° --%>
 								<input type="text" id="changedLoginId" name="changedLoginId"
 								class="form-control d-none" placeholder="${userInfo.loginId}">
-								<button type="button" id="changedLoginIdCheckBtn" class="btn btn-success d-none">Áßº¹È®ÀÎ</button><br>
+								<button type="button" id="changedLoginIdCheckBtn" class="btn btn-success d-none">ì¤‘ë³µí™•ì¸</button><br>
 							</div>
 
-							<%-- ¾ÆÀÌµğ Áßº¹ È®ÀÎ °á°ú --%>
-							<div id="changedLoginIdLength" class="small text-danger d-none">ID¸¦ 4ÀÚ ÀÌ»ó ÀÔ·ÂÇØÁÖ¼¼¿ä.</div>
-							<div id="changedLoginIdCheckDuplicated" class="small text-danger d-none">ÀÌ¹Ì »ç¿ëÁßÀÎ IDÀÔ´Ï´Ù.</div>
-							<div id="changedLoginIdCheckOk" class="small text-success d-none">»ç¿ë °¡´ÉÇÑ ID ÀÔ´Ï´Ù.</div>
+							<%-- ì•„ì´ë”” ì¤‘ë³µ í™•ì¸ ê²°ê³¼ --%>
+							<div id="changedLoginIdLength" class="small text-danger d-none">IDë¥¼ 4ì ì´ìƒ ì…ë ¥í•´ì£¼ì„¸ìš”.</div>
+							<div id="changedLoginIdCheckDuplicated" class="small text-danger d-none">ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ IDì…ë‹ˆë‹¤.</div>
+							<div id="changedLoginIdCheckOk" class="small text-success d-none">ì‚¬ìš© ê°€ëŠ¥í•œ ID ì…ë‹ˆë‹¤.</div>
 						</td>
 					</tr>
-					<%-- ÇØ½ÌµÈ ºñ¹Ğ¹øÈ£°¡ ³ª¿À±â ¶§¹®¿¡, »ç¿ëÀÚ°¡ º¸±â¿¡ ÁÁÁö ¾Ê´Ù. --%>
-					<%-- ¼öÁ¤ÀÌ ÇÊ¿äÇÏÁö ¾Ê´Â ÇÑ »ç¿ëÀÚ¿¡°Ô ±»ÀÌ ÀÚ±â ºñ¹Ğ¹øÈ£¸¦ º¸¿©ÁÙ ÇÊ¿ä´Â ¾ø´Ù. ¼öÁ¤ Å¬¸¯ ½Ã¿¡¸¸ º¸ÀÌ±â --%>
+					<%-- í•´ì‹±ëœ ë¹„ë°€ë²ˆí˜¸ê°€ ë‚˜ì˜¤ê¸° ë•Œë¬¸ì—, ì‚¬ìš©ìê°€ ë³´ê¸°ì— ì¢‹ì§€ ì•Šë‹¤. --%>
+					<%-- ìˆ˜ì •ì´ í•„ìš”í•˜ì§€ ì•ŠëŠ” í•œ ì‚¬ìš©ìì—ê²Œ êµ³ì´ ìê¸° ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³´ì—¬ì¤„ í•„ìš”ëŠ” ì—†ë‹¤. ìˆ˜ì • í´ë¦­ ì‹œì—ë§Œ ë³´ì´ê¸° --%>
 					<tr id="changedPasswordLine" class="d-none">
-						<td class="pr-3">ºñ¹Ğ¹øÈ£</td>
+						<td class="pr-3">ë¹„ë°€ë²ˆí˜¸</td>
 						<td>
 							<input type="password" id="changedPassword" name="changedPassword" class="form-control">
 						</td>
 					</tr>
 					<tr id="changedPasswordConfirmLine" class="d-none">
-						<td class="pr-3">ºñ¹Ğ¹øÈ£ È®ÀÎ</td>
+						<td class="pr-3">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</td>
 						<td>
 							<input type="password" id="changedPasswordConfirm" name="changedPasswordConfirm" class="form-control">
 						</td>
@@ -87,7 +87,7 @@
 						<td class="pr-3">e-mail</td>
 						<td>
 							<span id="textEmail">${userInfo.email}</span>
-							<%-- ¼öÁ¤ Å¬¸¯ ½Ã¿¡¸¸ º¸ÀÌ±â --%>
+							<%-- ìˆ˜ì • í´ë¦­ ì‹œì—ë§Œ ë³´ì´ê¸° --%>
 							<input type="text" id="changedEmail" name="changedEmail"
 							class="form-control d-none" placeholder="${userInfo.email}">
 						</td>
@@ -96,9 +96,9 @@
 
 				<%-- button --%>
 				<div class="d-flex justify-content-center">
-					<button id="userUpdateBtn" class="btn btn-info mr-5">È¸¿ø Á¤º¸ ¼öÁ¤</button>
-					<button id="userDeleteBtn" class="btn btn-danger">È¸¿ø Å»Åğ</button>
-					<button id="userUpdateFinishBtn" class="d-none btn btn-info mr-5">¼öÁ¤ ¿Ï·á</button>
+					<button id="userUpdateBtn" class="btn btn-info mr-5">íšŒì› ì •ë³´ ìˆ˜ì •</button>
+					<button id="userDeleteBtn" class="btn btn-danger">íšŒì› íƒˆí‡´</button>
+					<button id="userUpdateFinishBtn" class="d-none btn btn-info mr-5">ìˆ˜ì • ì™„ë£Œ</button>
 				</div>
 			</div>
 		</div>
@@ -108,38 +108,38 @@
 
 <script>
 	$(document).ready(function(){
-		// ÇÁ·ÎÇÊ ÀÌ¹ÌÁö ¼öÁ¤ 
+		// í”„ë¡œí•„ ì´ë¯¸ì§€ ìˆ˜ì • 
 		$('.fileChangeBtn').on('click', function(e) {
-			// alert("ÆÄÀÏ ¼±ÅÃ");
-			e.preventDefault(); // a ÅÂ±×ÀÇ ¿Ã¶ó°¡´Â Çö»ó ¹æÁö
-			$('#changedFile').click(); // input fileÀ» Å¬¸¯ÇÑ °Í°ú °°Àº È¿°ú
+			// alert("íŒŒì¼ ì„ íƒ");
+			e.preventDefault(); // a íƒœê·¸ì˜ ì˜¬ë¼ê°€ëŠ” í˜„ìƒ ë°©ì§€
+			$('#changedFile').click(); // input fileì„ í´ë¦­í•œ ê²ƒê³¼ ê°™ì€ íš¨ê³¼
 		});
 		
-		// »ç¿ëÀÚ°¡ ÀÌ¹ÌÁö¸¦ ¼±ÅÃÇßÀ» ¶§ À¯È¿¼º È®ÀÎ ¹× ¾÷·Îµå µÈ ÆÄÀÏ ÀÌ¸§ ³ëÃâ
+		// ì‚¬ìš©ìê°€ ì´ë¯¸ì§€ë¥¼ ì„ íƒí–ˆì„ ë•Œ ìœ íš¨ì„± í™•ì¸ ë° ì—…ë¡œë“œ ëœ íŒŒì¼ ì´ë¦„ ë…¸ì¶œ
 		$('#changedFile').on('change', function(e) {
-			// alert("ÆÄÀÏ ¼±ÅÃ");
+			// alert("íŒŒì¼ ì„ íƒ");
 			let changedFileName = e.target.files[0].name;
 			// alert(changedFileName);
 
-			// È®ÀåÀÚ À¯È¿¼º È®ÀÎ
+			// í™•ì¥ì ìœ íš¨ì„± í™•ì¸
 			let ext = changedFileName.split(".").pop().toLowerCase();
 			if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
-				alert("jpg, jpeg, gif, png ÆÄÀÏ¸¸ ¾÷·Îµå ÇÒ ¼ö ÀÖ½À´Ï´Ù.");
-				$('#changedFile').val(''); // ÆÄÀÏ ÅÂ±×¿¡ ½ÇÁ¦ ÆÄÀÏ Á¦°Å
-				$("#changedFileName").text(''); // ÆÄÀÏ ÀÌ¸§ ºñ¿ì±â
+				alert("jpg, jpeg, gif, png íŒŒì¼ë§Œ ì—…ë¡œë“œ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+				$('#changedFile').val(''); // íŒŒì¼ íƒœê·¸ì— ì‹¤ì œ íŒŒì¼ ì œê±°
+				$("#changedFileName").text(''); // íŒŒì¼ ì´ë¦„ ë¹„ìš°ê¸°
 				return;
 			}
 			
-			// À¯È¿¼º Åë°ú ÈÄ ÆÄÀÏ ÀÌ¸§ È®ÀÎ
+			// ìœ íš¨ì„± í†µê³¼ í›„ íŒŒì¼ ì´ë¦„ í™•ì¸
 			// $('#changedFileName').text(changedFileName);
 			
-			// ±âÁ¸ ÀÌ¹ÌÁö ¼û±â±â
+			// ê¸°ì¡´ ì´ë¯¸ì§€ ìˆ¨ê¸°ê¸°
 			$('#userProfileImage').addClass('d-none');
 		});
 		
-		// ´Ğ³×ÀÓ Áßº¹È®ÀÎ ¹öÆ° Å¬¸¯
+		// ë‹‰ë„¤ì„ ì¤‘ë³µí™•ì¸ ë²„íŠ¼ í´ë¦­
 		$('#changedNameCheckBtn').on('click', function() {
-			// ÃÊ±âÈ­(¸ğµÎ ¼û±è)
+			// ì´ˆê¸°í™”(ëª¨ë‘ ìˆ¨ê¹€)
 			$('#changedNameLength').addClass('d-none');
 			$('#changedNameCheckDuplicated').addClass('d-none');
 			$('#changedNameCheckOk').addClass('d-none');
@@ -148,11 +148,11 @@
 			// alert(changedName);
 			
 			if (changedName.length == '') {
-				$('#changedNameLength').removeClass('d-none'); // °æ°í¹®±¸ ³ëÃâ
+				$('#changedNameLength').removeClass('d-none'); // ê²½ê³ ë¬¸êµ¬ ë…¸ì¶œ
 				return;
 			}
 			
-			// AJAX Åë½Å - ´Ğ³×ÀÓ Áßº¹È®ÀÎ
+			// AJAX í†µì‹  - ë‹‰ë„¤ì„ ì¤‘ë³µí™•ì¸
 			$.ajax({
 				// request
 				url : "/user/is_duplicated_name"
@@ -160,24 +160,24 @@
 
 				// response
 				, success : function(data) {
-					// ¼º°ø
+					// ì„±ê³µ
 					if (data.result) {
-						// Áßº¹
+						// ì¤‘ë³µ
 						$('#changedNameCheckDuplicated').removeClass('d-none');
 					} else {
-						// »ç¿ë °¡´É
+						// ì‚¬ìš© ê°€ëŠ¥
 						$('#changedNameCheckOk').removeClass('d-none');
 					}
 				}
 				,error:function(e){
-					alert("Áßº¹ È®ÀÎ¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+					alert("ì¤‘ë³µ í™•ì¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 				}
 			});
 		});
 		
-		// Id Áßº¹È®ÀÎ ¹öÆ° Å¬¸¯
+		// Id ì¤‘ë³µí™•ì¸ ë²„íŠ¼ í´ë¦­
 		$('#changedLoginIdCheckBtn').on('click', function() {
-			// ÃÊ±âÈ­(¸ğµÎ ¼û±è)
+			// ì´ˆê¸°í™”(ëª¨ë‘ ìˆ¨ê¹€)
 			$('#changedLoginIdLength').addClass('d-none');
 			$('#changedLoginIdCheckDuplicated').addClass('d-none');
 			$('#changedLoginIdCheckOk').addClass('d-none');
@@ -185,13 +185,13 @@
 			let changedLoginId = $('input[name=changedLoginId]').val().trim();
 			// alert(changedLoginId);
 			
-			// ÀÔ·Â Çß´Âµ¥(¼öÁ¤ ÀÇ»ç ÀÖÀ½) 4±ÛÀÚ ¹Ì¸¸ÀÏ ¶§
+			// ì…ë ¥ í–ˆëŠ”ë°(ìˆ˜ì • ì˜ì‚¬ ìˆìŒ) 4ê¸€ì ë¯¸ë§Œì¼ ë•Œ
 			if (changedLoginId.length > 0 && changedLoginId.length < 4) {
-				$('#changedLoginIdLength').removeClass('d-none'); // °æ°í¹®±¸ ³ëÃâ
+				$('#changedLoginIdLength').removeClass('d-none'); // ê²½ê³ ë¬¸êµ¬ ë…¸ì¶œ
 				return;
 			}
 
-			// AJAX Åë½Å - ¾ÆÀÌµğ Áßº¹È®ÀÎ
+			// AJAX í†µì‹  - ì•„ì´ë”” ì¤‘ë³µí™•ì¸
 			$.ajax({
 				// request
 				url : "/user/is_duplicated_id"
@@ -199,26 +199,26 @@
 
 				// response
 				, success : function(data) {
-					// ¼º°ø
+					// ì„±ê³µ
 					if (data.result) {
-						// Áßº¹
+						// ì¤‘ë³µ
 						$('#changedLoginIdCheckDuplicated').removeClass('d-none');
 					} else {
-						// »ç¿ë °¡´É
+						// ì‚¬ìš© ê°€ëŠ¥
 						$('#changedLoginIdCheckOk').removeClass('d-none');
 					}
 				}
 				,error:function(e){
-					alert("Áßº¹ È®ÀÎ¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+					alert("ì¤‘ë³µ í™•ì¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 				}
 			});
 		});
 		
-		// È¸¿ø Á¤º¸ ¼öÁ¤ 
+		// íšŒì› ì •ë³´ ìˆ˜ì • 
 		$('#userUpdateBtn').on('click', function(e) {
-			e.preventDefault(); // submit ±â´É ÁßÁö
+			e.preventDefault(); // submit ê¸°ëŠ¥ ì¤‘ì§€
 			
-			// ±âÁ¸ È¸¿øÁ¤º¸ ÅØ½ºÆ® Áö¿ì°í, ¼öÁ¤ °¡´ÉÇÑ input ³ëÃâ
+			// ê¸°ì¡´ íšŒì›ì •ë³´ í…ìŠ¤íŠ¸ ì§€ìš°ê³ , ìˆ˜ì • ê°€ëŠ¥í•œ input ë…¸ì¶œ
 			$('#textName').addClass('d-none');
 			$('#changedName').removeClass('d-none');
 			$('#changedNameCheckBtn').removeClass('d-none');
@@ -239,9 +239,9 @@
 			$('#userUpdateFinishBtn').removeClass('d-none');
 		});
 		
-		// È¸¿ø Á¤º¸ ¼öÁ¤ ¿Ï·á 
+		// íšŒì› ì •ë³´ ìˆ˜ì • ì™„ë£Œ 
 		$('#userUpdateFinishBtn').on('click', function(e) {
-			e.preventDefault(); // submit ±â´É ÁßÁö
+			e.preventDefault(); // submit ê¸°ëŠ¥ ì¤‘ì§€
 
 			let changedName = $('#changedName').val().trim();
 			let changedLoginId = $('#changedLoginId').val().trim();
@@ -250,29 +250,29 @@
 			let changedEmail = $('#changedEmail').val().trim();
 			let changedFile = $('#changedFile')[0].files[0];
 			
-			// ºñ¹Ğ¹øÈ£ º¯°æ ½Ã ºñ¹Ğ¹øÈ£ È®ÀÎ¸¸ ÀÏÄ¡ÇÏ´ÂÁö Ã¼Å©
-			// º¯°æÇÏÁö ¾Ê´Â °æ¿ì¿¡´Â ±×³É Á¦Ãâ °¡´ÉÇÏµµ·Ï ''ÀÌ ¾Æ´Ò °æ¿ì¿¡¸¸ Ã¼Å©ÇÑ´Ù.
+			// ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ì‹œ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ë§Œ ì¼ì¹˜í•˜ëŠ”ì§€ ì²´í¬
+			// ë³€ê²½í•˜ì§€ ì•ŠëŠ” ê²½ìš°ì—ëŠ” ê·¸ëƒ¥ ì œì¶œ ê°€ëŠ¥í•˜ë„ë¡ ''ì´ ì•„ë‹ ê²½ìš°ì—ë§Œ ì²´í¬í•œë‹¤.
 			if(changedPassword != changedPasswordConfirm
 				&& changedPassword != ''
 			){
-				alert("ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+				alert("ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				return false;
 			}
 			
-			// ¼öÁ¤ÇßÀ» °æ¿ì¿¡¸¸, Áßº¹È®ÀÎ ¿Ï·áµÆ´ÂÁö È®ÀÎ(d-noneÀÌ ¾ø´Â »óÅÂ)
-			// -> d-none ÀÖÀ¸¸é alert ¶ç¿ì±â
+			// ìˆ˜ì •í–ˆì„ ê²½ìš°ì—ë§Œ, ì¤‘ë³µí™•ì¸ ì™„ë£ŒëëŠ”ì§€ í™•ì¸(d-noneì´ ì—†ëŠ” ìƒíƒœ)
+			// -> d-none ìˆìœ¼ë©´ alert ë„ìš°ê¸°
 			if(changedName.length > 0 &&
 				$('#changedNameCheckOk').hasClass('d-none')){
-				alert("´Ğ³×ÀÓ Áßº¹È®ÀÎÀ» ´Ù½Ã ÇØÁÖ¼¼¿ä");
+				alert("ë‹‰ë„¤ì„ ì¤‘ë³µí™•ì¸ì„ ë‹¤ì‹œ í•´ì£¼ì„¸ìš”");
 				return false;
 			}
 			if(changedLoginId.length > 0 &&
 				$('#changedLoginIdCheckOk').hasClass('d-none')){
-				alert("¾ÆÀÌµğ Áßº¹È®ÀÎÀ» ´Ù½Ã ÇØÁÖ¼¼¿ä");
+				alert("ì•„ì´ë”” ì¤‘ë³µí™•ì¸ì„ ë‹¤ì‹œ í•´ì£¼ì„¸ìš”");
 				return false;
 			}
 			
-			// formÅÂ±×¸¦ ÀÚ¹Ù½ºÅ©¸³Æ®¿¡¼­ ¸¸µç´Ù.
+			// formíƒœê·¸ë¥¼ ìë°”ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ë§Œë“ ë‹¤.
 			let formData = new FormData();
 			formData.append("changedName", changedName);
 			formData.append("changedLoginId", changedLoginId);
@@ -280,22 +280,22 @@
 			formData.append("changedEmail", changedEmail);
 			formData.append("changedFile", changedFile);
 
-			// AJAX form µ¥ÀÌÅÍ Àü¼Û
+			// AJAX form ë°ì´í„° ì „ì†¡
 			$.ajax({
 				type:'POST'
 				,url:'/user/update_user'
 				, data: formData
-				, enctype: "multipart/form-data"    // ÆÄÀÏ ¾÷·Îµå¸¦ À§ÇÑ ÇÊ¼ö ¼³Á¤
-				, processData: false    // ÆÄÀÏ ¾÷·Îµå¸¦ À§ÇÑ ÇÊ¼ö ¼³Á¤
-				, contentType: false    // ÆÄÀÏ ¾÷·Îµå¸¦ À§ÇÑ ÇÊ¼ö ¼³Á¤
+				, enctype: "multipart/form-data"    // íŒŒì¼ ì—…ë¡œë“œë¥¼ ìœ„í•œ í•„ìˆ˜ ì„¤ì •
+				, processData: false    // íŒŒì¼ ì—…ë¡œë“œë¥¼ ìœ„í•œ í•„ìˆ˜ ì„¤ì •
+				, contentType: false    // íŒŒì¼ ì—…ë¡œë“œë¥¼ ìœ„í•œ í•„ìˆ˜ ì„¤ì •
 				, success: function(data) {
 					if (data.code == 1) {
-						// ¼º°ø
-						alert("È¸¿ø Á¤º¸ ¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù. \n ´Ù½Ã ·Î±×ÀÎÇØÁÖ¼¼¿ä");
+						// ì„±ê³µ
+						alert("íšŒì› ì •ë³´ ìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤. \n ë‹¤ì‹œ ë¡œê·¸ì¸í•´ì£¼ì„¸ìš”");
 						location.href="/user/sign_in_view";
 					} else{
-						// ½ÇÆĞ
-						alert("[error] Åë½Å ¹®Á¦·Î È¸¿ø Á¤º¸ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù. \n ´ã´çÀÚ¿¡°Ô ¹®ÀÇÇØÁÖ¼¼¿ä");
+						// ì‹¤íŒ¨
+						alert("[error] í†µì‹  ë¬¸ì œë¡œ íšŒì› ì •ë³´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. \n ë‹´ë‹¹ìì—ê²Œ ë¬¸ì˜í•´ì£¼ì„¸ìš”");
 					}
 				}
 			});
