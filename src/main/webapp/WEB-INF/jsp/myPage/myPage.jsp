@@ -33,24 +33,39 @@
 					<tr>
 						<td class="pr-3">닉네임(활동명)</td>
 						<td>
-							<span id="textName">${userInfo.name}</span>
-							<%-- 수정 클릭 시에만 보이기 --%>
-							<input type="text" id="changedName" name="changedName"
-							class="form-control d-none" placeholder="${userInfo.name}">
+							<%-- 중복확인 버튼 안 보이게 해도 d-flex로 붙여놓지 않으면 밑에 여백이 생기므로 여기까지 묶어준다. --%>
+							<div class="d-flex align-items-center">
+								<span id="textName">${userInfo.name}</span>
+								
+								<%-- 수정 클릭 시에만 보이기 --%>
+								<input type="text" id="changedName" name="changedName"
+								class="form-control d-none" placeholder="${userInfo.name}">
+								<button type="button" id="changedNameCheckBtn" class="btn btn-success d-none">중복확인</button>
+							</div>
+	
+							<%-- 아이디 중복 확인 결과 --%>
+							<div id="changedNameLength" class="small text-danger d-none">닉네임을 입력해주세요.</div>
+							<div id="changedNameCheckDuplicated" class="small text-danger d-none">이미 사용중인 닉네임 입니다.</div>
+							<div id="changedNameCheckOk" class="small text-success d-none">사용 가능한 닉네임 입니다.</div>
 						</td>
 					</tr>
 					<tr>
 						<td class="pr-3">아이디</td>
 						<td>
-							<span id="textLoginId">${userInfo.loginId}</span>
-							<%-- 수정 클릭 시에만 보이기 --%>
-							<input type="text" id="changedLoginId" name="changedLoginId"
-							class="form-control d-none" placeholder="${userInfo.loginId}">
-							
+							<%-- 중복확인 버튼 안 보이게 해도 d-flex로 붙여놓지 않으면 밑에 여백이 생기므로 여기까지 묶어준다. --%>
+							<div class="d-flex align-items-center">
+								<span id="textLoginId">${userInfo.loginId}</span>
+
+								<%-- 수정 클릭 시에만 보이기 --%>
+								<input type="text" id="changedLoginId" name="changedLoginId"
+								class="form-control d-none" placeholder="${userInfo.loginId}">
+								<button type="button" id="changedLoginIdCheckBtn" class="btn btn-success d-none">중복확인</button><br>
+							</div>
+
 							<%-- 아이디 중복 확인 결과 --%>
-							<div id="idCheckLength" class="small text-danger d-none">ID를 4자 이상 입력해주세요.</div>
-							<div id="idCheckDuplicated" class="small text-danger d-none">이미 사용중인 ID입니다.</div>
-							<div id="idCheckOk" class="small text-success d-none">사용 가능한 ID 입니다.</div>
+							<div id="changedLoginIdLength" class="small text-danger d-none">ID를 4자 이상 입력해주세요.</div>
+							<div id="changedLoginIdCheckDuplicated" class="small text-danger d-none">이미 사용중인 ID입니다.</div>
+							<div id="changedLoginIdCheckOk" class="small text-success d-none">사용 가능한 ID 입니다.</div>
 						</td>
 					</tr>
 					<%-- 해싱된 비밀번호가 나오기 때문에, 사용자가 보기에 좋지 않다. --%>
@@ -86,10 +101,11 @@
 					<button id="userUpdateFinishBtn" class="d-none btn btn-info mr-5">수정 완료</button>
 				</div>
 			</div>
-		</form>
 		</div>
+		</form>
 	</div>
-</div>
+	<hr>
+</div>	
 
 <script>
 	$(document).ready(function(){
@@ -122,6 +138,82 @@
 			$('#userProfileImage').addClass('d-none');
 		});
 		
+		// 닉네임 중복확인 버튼 클릭
+		$('#changedNameCheckBtn').on('click', function() {
+			// 초기화(모두 숨김)
+			$('#changedNameLength').addClass('d-none');
+			$('#changedNameCheckDuplicated').addClass('d-none');
+			$('#changedNameCheckOk').addClass('d-none');
+
+			let changedName = $('input[name=changedName]').val().trim();
+			// alert(changedName);
+			
+			if (changedName.length == '') {
+				$('#changedNameLength').removeClass('d-none'); // 경고문구 노출
+				return;
+			}
+			
+			// AJAX 통신 - 닉네임 중복확인
+			$.ajax({
+				// request
+				url : "/user/is_duplicated_name"
+				, data : {"name" : changedName}
+
+				// response
+				, success : function(data) {
+					// 성공
+					if (data.result) {
+						// 중복
+						$('#changedNameCheckDuplicated').removeClass('d-none');
+					} else {
+						// 사용 가능
+						$('#changedNameCheckOk').removeClass('d-none');
+					}
+				}
+				,error:function(e){
+					alert("중복 확인에 실패했습니다.");
+				}
+			});
+		});
+		
+		// Id 중복확인 버튼 클릭
+		$('#changedLoginIdCheckBtn').on('click', function() {
+			// 초기화(모두 숨김)
+			$('#changedLoginIdLength').addClass('d-none');
+			$('#changedLoginIdCheckDuplicated').addClass('d-none');
+			$('#changedLoginIdCheckOk').addClass('d-none');
+
+			let changedLoginId = $('input[name=changedLoginId]').val().trim();
+			// alert(changedLoginId);
+			
+			if (changedLoginId.length < 4) {
+				$('#changedLoginIdLength').removeClass('d-none'); // 경고문구 노출
+				return;
+			}
+
+			// AJAX 통신 - 아이디 중복확인
+			$.ajax({
+				// request
+				url : "/user/is_duplicated_id"
+				, data : {"loginId" : changedLoginId}
+
+				// response
+				, success : function(data) {
+					// 성공
+					if (data.result) {
+						// 중복
+						$('#changedLoginIdCheckDuplicated').removeClass('d-none');
+					} else {
+						// 사용 가능
+						$('#changedLoginIdCheckOk').removeClass('d-none');
+					}
+				}
+				,error:function(e){
+					alert("중복 확인에 실패했습니다.");
+				}
+			});
+		});
+		
 		// 회원 정보 수정 
 		$('#userUpdateBtn').on('click', function(e) {
 			e.preventDefault(); // submit 기능 중지
@@ -129,9 +221,11 @@
 			// 기존 회원정보 텍스트 지우고, 수정 가능한 input 노출
 			$('#textName').addClass('d-none');
 			$('#changedName').removeClass('d-none');
+			$('#changedNameCheckBtn').removeClass('d-none');
 
 			$('#textLoginId').addClass('d-none');
 			$('#changedLoginId').removeClass('d-none');
+			$('#changedLoginIdCheckBtn').removeClass('d-none');
 			
 			$('#changedPasswordLine').removeClass('d-none');
 			$('#changedPasswordConfirmLine').removeClass('d-none');
@@ -152,36 +246,44 @@
 			let changedName = $('#changedName').val().trim();
 			let changedLoginId = $('#changedLoginId').val().trim();
 			let changedPassword = $('#changedPassword').val();
-			let changedConfirmPassword = $('#confirmPassword').val();
+			let changedPasswordConfirm = $('#changedPasswordConfirm').val();
 			let changedEmail = $('#changedEmail').val().trim();
 			let changedFile = $('#changedFile')[0].files[0];
 			
 			// 비밀번호 변경 시 비밀번호 확인만 일치하는지 체크
-			// 변경하지 않아도 ''로 일치해야 함
-			if(changedPassword != changedConfirmPassword){
+			// 변경하지 않는 경우에는 그냥 제출 가능하도록 ''이 아닐 경우에만 체크한다.
+			if(changedPassword != changedPasswordConfirm
+				&& changedPassword != ''
+			){
 				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 				return false;
 			}
 			
-			// 아이디 중복확인 완료됐는지 확인(idCheckOk d-none이 없는 상태)
+			// 수정했을 경우에만, 중복확인 완료됐는지 확인(d-none이 없는 상태)
 			// -> d-none 있으면 alert 띄우기
-			if($('#changedLoginIdCheckOk').hasClass('d-none')){
+			if(changedName.length > 0 &&
+				$('#changedNameCheckOk').hasClass('d-none')){
+				alert("닉네임 중복확인을 다시 해주세요");
+				return false;
+			}
+			if(changedLoginId.length > 0 &&
+				$('#changedLoginIdCheckOk').hasClass('d-none')){
 				alert("아이디 중복확인을 다시 해주세요");
 				return false;
 			}
 			
 			// form태그를 자바스크립트에서 만든다.
 			let formData = new FormData();
-			formData.append("name", name);
-			formData.append("loginId", loginId);
-			formData.append("password", password);
-			formData.append("email", email);
-			formData.append("file", $('#file')[0].files[0]); // $('#file')[0]은 첫번째 input file 태그를 의미, files[0]는 업로드된 첫번째 파일
-			
+			formData.append("changedName", changedName);
+			formData.append("changedLoginId", changedLoginId);
+			formData.append("changedPassword", changedPassword);
+			formData.append("changedEmail", changedEmail);
+			formData.append("changedFile", changedFile);
+
 			// AJAX form 데이터 전송
 			$.ajax({
 				type:'POST'
-				,url:'/user/update'
+				,url:'/user/update_user'
 				, data: formData
 				, enctype: "multipart/form-data"    // 파일 업로드를 위한 필수 설정
 				, processData: false    // 파일 업로드를 위한 필수 설정
@@ -189,11 +291,11 @@
 				, success: function(data) {
 					if (data.code == 1) {
 						// 성공
-						alert("가입을 환영합니다! 로그인 해주세요.");
+						alert("회원 정보 수정이 완료되었습니다. \n 다시 로그인해주세요");
 						location.href="/user/sign_in_view";
 					} else{
 						// 실패
-						alert("[error] 통신 문제로 가입에 실패했습니다. \n 담당자에게 문의해주세요");
+						alert("[error] 통신 문제로 회원 정보 수정에 실패했습니다. \n 담당자에게 문의해주세요");
 					}
 				}
 			});

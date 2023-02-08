@@ -18,6 +18,15 @@
  			`user`
  	</select>
  	
+ 	<select id="existName" parameterType="String" resultType="boolean">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`name` = #{name}
+ 	</select>
+
  	<select id="existLoginId" parameterType="String" resultType="boolean">
  		SELECT
  			COUNT(1)
@@ -84,4 +93,32 @@
  		WHERE
  			`id` = #{userId}
  	</select>
+ 	
+ 	<update id="updateUserByUserId" parameterType="map">
+ 		UPDATE `user`
+		SET
+			<!-- 수정값이 들어와서 null이 아닐 때만 수정 -->
+			<if test="changedName != null">
+ 			`name` = #{changedName},
+			</if>
+			<!-- 이름 변경이 실행이 안 되면, ,때문에 에러가 날 수 있다. -->
+			<if test="changedLoginId != null">
+ 			`loginId` = #{changedLoginId},
+			</if>
+			<if test="changedPassword != null">
+ 			`password` = #{changedPassword},
+			</if>
+			<if test="changedEmail != null">
+ 			`email` = #{changedEmail},
+			</if>
+			
+			<!-- imagePath가 있을 때만 수정 -->
+			<if test="imagePath != null">
+			`profileImageUrl` = #{imagePath},
+			</if>
+			
+ 			`updatedAt` = Now()
+		WHERE
+			`id` = #{userId}
+ 	</update>
 </mapper>

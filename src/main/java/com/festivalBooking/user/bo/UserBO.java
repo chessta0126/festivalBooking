@@ -25,13 +25,18 @@ public class UserBO {
 		return userDAO.selectUserListTest();
 	}
 	
-	// 중복 확인
+	// name 중복 확인
+	public boolean existName(String name) {
+		return userDAO.existName(name);
+	}
+
+	// Id 중복 확인
 	public boolean existLoginId(String loginId) {
 		return userDAO.existLoginId(loginId);
 	}
 	
 	// 회원가입
-	public void addUser(String name, String loginId,String hashedPassword,String email, MultipartFile profileImageUrl) {
+	public void addUser(String name, String loginId, String hashedPassword, String email, MultipartFile profileImageUrl) {
 		
 		// 파일 업로드 => 경로
 		String imagePath = null;
@@ -54,4 +59,18 @@ public class UserBO {
 	public User getUserByUserId(Integer userId) {
 		return userDAO.selectUserByUserId(userId);
 	}
+	
+	// 회원정보 수정
+	public boolean updateUserByUserId(
+			Integer userId, String changedName, String changedLoginId
+			, String changedPassword, String changedEmail, MultipartFile changedFile) {
+		
+		// 파일 업로드 => 경로
+		String imagePath = null;
+		if(changedFile != null) {
+			imagePath = fileManager.saveFile(changedName, changedFile);
+		}
+				
+		return userDAO.updateUserByUserId(userId, changedName, changedLoginId, changedPassword, changedEmail, imagePath);
+	};
 }
