@@ -115,7 +115,7 @@ public class UserRestController {
 	}
 	
 	@PostMapping("/update_user")
-	public void updateUser(
+	public Map<String, Object> updateUser(
 		@RequestParam(value="changedName", required=false) String changedName
 		,@RequestParam(value="changedLoginId", required=false) String changedLoginId
 		,@RequestParam(value="changedPassword", required=false) String changedPassword
@@ -157,6 +157,15 @@ public class UserRestController {
 		boolean isUpdateSuccess = userBO.updateUserByUserId(userId, changedName, changedLoginId, hashedPassword, changedEmail, changedFile);
 		
 		Map<String, Object> result = new HashMap<>();
-				
+		
+		if(isUpdateSuccess) { // 수정 성공
+			result.put("code", 1);		
+			result.put("result", true);
+		} else { // 수정 실패
+			result.put("code", 1);		
+			result.put("result", false);
+		}
+		
+		return result;
 	}
 }

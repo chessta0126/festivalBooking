@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR"%>
 
 <div class="container">
-	<div class="pt-4 pb-4">
+	<div class="pt-4 pb-4 border-bottom">
 		<h1 class="bold">회원 정보</h1>
 		<form method="Post" action="/user/update">
 		<div class="mt-4 d-flex">
@@ -43,7 +43,7 @@
 								<button type="button" id="changedNameCheckBtn" class="btn btn-success d-none">중복확인</button>
 							</div>
 	
-							<%-- 아이디 중복 확인 결과 --%>
+							<%-- 닉네임 중복 확인 결과 --%>
 							<div id="changedNameLength" class="small text-danger d-none">닉네임을 입력해주세요.</div>
 							<div id="changedNameCheckDuplicated" class="small text-danger d-none">이미 사용중인 닉네임 입니다.</div>
 							<div id="changedNameCheckOk" class="small text-success d-none">사용 가능한 닉네임 입니다.</div>
@@ -104,7 +104,6 @@
 		</div>
 		</form>
 	</div>
-	<hr>
 </div>	
 
 <script>
@@ -186,7 +185,8 @@
 			let changedLoginId = $('input[name=changedLoginId]').val().trim();
 			// alert(changedLoginId);
 			
-			if (changedLoginId.length < 4) {
+			// 입력 했는데(수정 의사 있음) 4글자 미만일 때
+			if (changedLoginId.length > 0 && changedLoginId.length < 4) {
 				$('#changedLoginIdLength').removeClass('d-none'); // 경고문구 노출
 				return;
 			}

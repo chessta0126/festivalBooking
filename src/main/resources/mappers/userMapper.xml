@@ -98,10 +98,8 @@
  		UPDATE `user`
 		SET
 			<!-- 수정값이 들어와서 null이 아닐 때만 수정 -->
-			<if test="changedName != null">
+			<!-- changedName은 RestController에서 이미 null일 경우 기존 닉네임이 들어가도록 처리됨 -->
  			`name` = #{changedName},
-			</if>
-			<!-- 이름 변경이 실행이 안 되면, ,때문에 에러가 날 수 있다. -->
 			<if test="changedLoginId != null">
  			`loginId` = #{changedLoginId},
 			</if>

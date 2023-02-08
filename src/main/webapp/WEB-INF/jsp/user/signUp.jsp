@@ -14,7 +14,6 @@
 				<%-- default 이미지 --%>
 				<a href="#" id="fileUploadBtn">
 					<img width="200" src="\images\★default file/default profileImage.jpg">
-					<!-- <img width="200" src="\images\★default file/default profileImage.jpg"> -->
 				</a>
 				
 				<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
