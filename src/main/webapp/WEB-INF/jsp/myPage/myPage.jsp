@@ -95,7 +95,8 @@
 				<%-- button --%>
 				<div class="d-flex justify-content-center">
 					<button id="userUpdateBtn" class="btn btn-info mr-5">회원 정보 수정</button>
-					<button id="userDeleteBtn" class="btn btn-danger">회원 탈퇴</button>
+					<button id="userDeleteBtn" class="btn btn-danger"
+					 data-toggle="modal" data-target="#modal" data-user-id="${userInfo.id}">회원 탈퇴</button>
 					
 					<button id="userUpdateFinishBtn" class="d-none btn btn-info mr-5">수정 완료</button>
 					<button id="userUpdateCancelBtn" class="d-none btn btn-danger mr-5">
@@ -122,7 +123,26 @@
 			</button>
 		</div>
 	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal">
+<%-- modal-sm : 작은 모달 창 --%>
+<%-- modal-modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
+	<div class="modal-dialog modal-sm modal-dialog-centered">
+		<div class="modal-content text-center">
+      		<div class="py-3 border-bottom">
+      			<a href="#" id="userDeleteAgreeBtn">회원탈퇴</a>
+      		</div>
+      		<div class="py-3">
+      			<%-- data-dismiss="modal" : modal창 닫힘 --%>
+      			<a href="#" data-dismiss="modal">취소하기</a>
+      		</div>
+		</div>
+	</div>
 </div>	
+
 
 <script>
 	$(document).ready(function(){
@@ -320,6 +340,43 @@
 						alert("[error] 통신 문제로 회원 정보 수정에 실패했습니다. \n 담당자에게 문의해주세요");
 					}
 					
+				}
+			});
+		});
+		
+		// 회원 탈퇴 버튼(delete) -> modal 작동
+		$('#userDeleteBtn').on('click', function(e) {
+			e.preventDefault();
+			// getting
+			let userId = $(this).data("user-id");
+			
+			// setting : modal 태그에 data-user-id 심어줌
+			$('#modal').data("user-id", userId);
+		});
+
+		
+		// modal 안에 있는 삭제하기 버튼 클릭
+		$('#modal #userDeleteAgreeBtn').on('click',function(e){
+			e.preventDefault();
+			let postId = $('#modal').data('user-id');
+			
+			// AJAX - 회원 탈퇴
+			$.ajax({
+				// request
+				type:"DELETE"
+				,url:"/user/delete"
+			
+				// response
+				,success:function(data){
+					if(data.result == "성공"){
+						alert("회원 탈퇴가 정상적으로 완료되었습니다.");
+						location.href = "/user/sign_out_main";
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				,error:function(e){
+					alert("[error] 회원 탈퇴에 실패했습니다. 담당자에게 문의해주세요");
 				}
 			});
 		});

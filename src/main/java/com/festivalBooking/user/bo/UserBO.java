@@ -72,5 +72,10 @@ public class UserBO {
 		}
 				
 		return userDAO.updateUserByUserId(userId, changedName, changedLoginId, changedPassword, changedEmail, imagePath);
-	};
+	}
+	
+	// 회원 탈퇴
+	public boolean deleteUserByUserId(int userId) {
+		return userDAO.deleteUserByUserId(userId);
+	}
 }

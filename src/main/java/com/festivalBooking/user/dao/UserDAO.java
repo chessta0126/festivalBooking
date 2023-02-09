@@ -43,4 +43,7 @@ public interface UserDAO {
 			, @Param("changedPassword") String changedPassword
 			, @Param("changedEmail") String changedEmail
 			, @Param("imagePath") String imagePath);
+	
+	// 회원 탈퇴
+	public boolean deleteUserByUserId(int userId);
 }
