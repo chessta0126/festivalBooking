@@ -21,7 +21,17 @@
 				
 				<tr>
 					<th>* 닉네임(활동명)</th>
-					<td><input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요."></td>
+					<td>
+						<div class="d-flex">
+							<input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요.">
+							<button type="button" id="nameCheckBtn" class="btn btn-success">중복확인</button>
+						</div>
+						
+						<%-- 닉네임 중복 확인 결과 --%>
+						<div id="nameLength" class="small text-danger d-none">닉네임을 입력해주세요.</div>
+						<div id="nameCheckDuplicated" class="small text-danger d-none">이미 사용중인 닉네임 입니다.</div>
+						<div id="nameCheckOk" class="small text-success d-none">사용 가능한 닉네임 입니다.</div>
+					</td>
 				</tr>
 				<tr>
 					<th>* 아이디</th>
@@ -87,7 +97,45 @@
 			$('#fileUploadBtn').addClass('d-none');
 		});
 		
-		// 중복확인 버튼 클릭
+		// 닉네임 중복확인
+		$('#nameCheckBtn').on('click', function() {
+			// 초기화(모두 숨김)
+			$('#nameLength').addClass('d-none');
+			$('#nameCheckDuplicated').addClass('d-none');
+			$('#nameCheckOk').addClass('d-none');
+
+			let name = $('input[name=name]').val().trim();
+			// alert(changedName);
+			
+			if (name.length == '') {
+				$('#nameLength').removeClass('d-none'); // 경고문구 노출
+				return;
+			}
+			
+			// AJAX 통신 - 닉네임 중복확인
+			$.ajax({
+				// request
+				url : "/user/is_duplicated_name"
+				, data : {"name" : name}
+
+				// response
+				, success : function(data) {
+					// 성공
+					if (data.result) {
+						// 중복
+						$('#nameCheckDuplicated').removeClass('d-none');
+					} else {
+						// 사용 가능
+						$('#nameCheckOk').removeClass('d-none');
+					}
+				}
+				,error:function(e){
+					alert("중복 확인에 실패했습니다.");
+				}
+			});
+		});
+		
+		// 아이디 중복확인
 		$('#loginIdCheckBtn').on('click', function() {
 			// 초기화(모두 숨김)
 			$('#idCheckLength').addClass('d-none');
@@ -101,7 +149,7 @@
 				return;
 			}
 
-			// AJAX 통신 - 중복확인
+			// AJAX 통신 - 아이디 중복확인
 			$.ajax({
 				// request
 				url : "/user/is_duplicated_id"

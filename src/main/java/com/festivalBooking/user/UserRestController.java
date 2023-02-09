@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -132,7 +133,9 @@ public class UserRestController {
 		// 수정하지 않은 정보들은 null 처리
 		
 		// 이름은 파일이름 저장할 때 써야되므로 여기서 처리
-		if(changedName.equals("")) {
+		// 자료형 상관없이 null check 해주는(List 등) 방법
+		// .equals("")는 String만 가능하며, 미입력은 null로 보내지지도 않기 때문에 이 방법을 사용하는 것이 낫다.
+		if(ObjectUtils.isEmpty(changedName)) {
 			changedName = user.getName();
 		}
 		

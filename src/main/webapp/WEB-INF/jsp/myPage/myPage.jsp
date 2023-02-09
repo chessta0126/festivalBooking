@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <div class="container">
-	<div class="pt-4 pb-4 border-bottom">
+	<div class="pt-4 pb-4">
 		<h1 class="bold">회원 정보</h1>
 		<form method="Post" action="/user/update">
 		<div class="mt-4 d-flex">
@@ -105,6 +105,22 @@
 			</div>
 		</div>
 		</form>
+	</div>
+	<hr>
+	
+	<%-- 이동 버튼 --%>
+	<div class="container">
+		<button class="w-100 btn btn-dark mt-3 mb-3">
+			<a href="#" class="button">내가 작성한 글</a>
+		</button>
+		<div class="d-flex justify-content-between">
+			<button class="w-100 col-5 btn btn-warning">
+				<a href="#" class="button text-dark">공연 홍보하기</a>
+			</button>
+			<button class="w-100 col-5 btn btn-secondary">
+				<a href="#" class="button">예매 확인</a>
+			</button>
+		</div>
 	</div>
 </div>	
 
