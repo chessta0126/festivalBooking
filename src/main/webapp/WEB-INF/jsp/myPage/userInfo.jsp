@@ -99,7 +99,7 @@
 					
 					<button id="userUpdateFinishBtn" class="d-none btn btn-info mr-5">수정 완료</button>
 					<button id="userUpdateCancelBtn" class="d-none btn btn-danger mr-5">
-						<a href="/myPage/myPage_view" class="white-text">수정 취소</a>
+						<a href="/myPage/myPage_view" class="button">수정 취소</a>
 					</button>
 				</div>
 			</div>
@@ -297,7 +297,8 @@
 					if (data.code == 1) {
 						// 성공
 						alert("회원 정보 수정이 완료되었습니다. \n 다시 로그인해주세요");
-						location.href="/user/sign_in_view";
+						// 로그아웃 후 로그인 페이지로 이동됨(redirect)
+						location.href="/user/sign_out";
 					} else{
 						// 실패
 						alert("[error] 통신 문제로 회원 정보 수정에 실패했습니다. \n 담당자에게 문의해주세요");

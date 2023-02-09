@@ -1,32 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="pr-5 mr-5"></div>
 <div class="d-flex justify-content-center align-items-center">
 	<h1 class="white-text font-weight-bold">
-		<a href="/main/main_view" class="text-white">°ø¿¬ ¿¹¸Å</a>
+		<a href="/main/main_view" class="text-white">ê³µì—° ì˜ˆë§¤</a>
 	</h1>
 </div>
 
 <div class="login-info d-flex align-items-center mr-5">
-	<%-- ·Î±×ÀÎ Á¤º¸ ÀÖÀ» ¶§¸¸ ³ëÃâ --%>
+	<%-- ë¡œê·¸ì¸ ì •ë³´ ìžˆì„ ë•Œë§Œ ë…¸ì¶œ --%>
 	<c:if test="${not empty userName}">
-		<%-- ÇÁ·ÎÇÊ ÀÌ¹ÌÁö --%>
-		<img src="${userProfileImageUrl}" width="50px" alt="ÇÁ·ÎÇÊÀÌ¹ÌÁö" class="pr-3">
-		<%-- ´Ð³×ÀÓ Å¬¸¯ ½Ã ¸¶ÀÌÆäÀÌÁö·Î ÀÌµ¿ --%>
-		<span class="text-white"><a href="/myPage/myPage_view">${userName}</a>´Ô ¾È³çÇÏ¼¼¿ä</span>
-		<%-- ·Î±×¾Æ¿ô --%>
-		<a href="/user/sign_out" class="ml-2 text-white font-weight-bold">·Î±×¾Æ¿ô</a>
+		<%-- í”„ë¡œí•„ ì´ë¯¸ì§€ --%>
+		<img src="${userProfileImageUrl}" width="50px" alt="í”„ë¡œí•„ì´ë¯¸ì§€" class="pr-3">
+		<%-- ë‹‰ë„¤ìž„ í´ë¦­ ì‹œ ë§ˆì´íŽ˜ì´ì§€ë¡œ ì´ë™ --%>
+		<span class="text-white"><a href="/myPage/myPage_view">${userName}</a>ë‹˜ ì•ˆë…•í•˜ì„¸ìš”</span>
+		<%-- ë¡œê·¸ì•„ì›ƒ --%>
+		<a href="/user/sign_out" class="ml-2 text-white font-weight-bold">ë¡œê·¸ì•„ì›ƒ</a>
 	</c:if>
-	<%-- ºñ·Î±×ÀÎ ½Ã ·Î±×ÀÎ / È¸¿ø°¡ÀÔ ³ëÃâ --%>
+	<%-- ë¹„ë¡œê·¸ì¸ ì‹œ ë¡œê·¸ì¸ / íšŒì›ê°€ìž… ë…¸ì¶œ --%>
 	<c:if test="${empty userName}">
 		<div class="d-flex mr-3">
 			<button type="button" class="btn btn-danger mr-3">
-				<a href="/user/sign_in_view" id="loginBtn">·Î±×ÀÎ</a>
+				<a href="/user/sign_in_view" id="loginBtn">ë¡œê·¸ì¸</a>
 			</button>
 			<button type="button" class="btn btn-info">
-				<a href="/user/sign_up_view" id="joinBtn">È¸¿ø°¡ÀÔ</a>
+				<a href="/user/sign_up_view" id="joinBtn">íšŒì›ê°€ìž…</a>
 			</button>
 		</div>
 	</c:if>

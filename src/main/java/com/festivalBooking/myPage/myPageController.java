@@ -24,13 +24,13 @@ public class myPageController {
 		// 로그인 시 마이페이지로, 비로그인 시 로그인 페이지로 이동
 		if(userId != null) {
 			User userInfo = userBO.getUserByUserId(userId);
-			model.addAttribute("viewName","myPage/myPage");
+			model.addAttribute("viewName","myPage/userInfo");
 			model.addAttribute("userInfo",userInfo);
 		} else {
 			model.addAttribute("viewName","user/signIn");
 		}
 		
-		return "template/layout";
+		return "template/myPage";
 	}
 	
 }
