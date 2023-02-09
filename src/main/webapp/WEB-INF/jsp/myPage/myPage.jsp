@@ -12,18 +12,16 @@
 				<input type="file" id="changedFile" class="d-none"
 					accept=".gif, .jpg, .png, .jpeg">
 				
-				<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서로 변하도록 a 태그 사용 --%>
-				<a href="#" id="userProfileImage" class="fileChangeBtn">
-					<img src="${userProfileImageUrl}" id="profileImage" width="150px">
-				</a>
+				<%-- 기존 프로필 이미지 --%>
+				<img src="${userProfileImageUrl}" id="profileImage" width="150px">
 				
 				<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
 				<div id="changedFileName" class="ml-2"></div>
 
 				<div class="text-center mt-2 mb-2">프로필 이미지</div>
 
-				<%-- 버튼 눌러도 수정할 수 있게끔 한다. --%>
-				<button class="btn btn-secondary w-100 fileChangeBtn">수정하기</button>
+				<%-- 프로필 이미지 수정 버튼 --%>
+				<button id="fileChangeBtn" class="btn btn-secondary w-100 d-none">수정하기</button>
 				
 			</div>
 			
@@ -98,7 +96,11 @@
 				<div class="d-flex justify-content-center">
 					<button id="userUpdateBtn" class="btn btn-info mr-5">회원 정보 수정</button>
 					<button id="userDeleteBtn" class="btn btn-danger">회원 탈퇴</button>
+					
 					<button id="userUpdateFinishBtn" class="d-none btn btn-info mr-5">수정 완료</button>
+					<button id="userUpdateCancelBtn" class="d-none btn btn-danger mr-5">
+						<a href="/myPage/myPage_view" class="white-text">수정 취소</a>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -109,7 +111,7 @@
 <script>
 	$(document).ready(function(){
 		// 프로필 이미지 수정 
-		$('.fileChangeBtn').on('click', function(e) {
+		$('#fileChangeBtn').on('click', function(e) {
 			// alert("파일 선택");
 			e.preventDefault(); // a 태그의 올라가는 현상 방지
 			$('#changedFile').click(); // input file을 클릭한 것과 같은 효과
@@ -134,7 +136,7 @@
 			// $('#changedFileName').text(changedFileName);
 			
 			// 기존 이미지 숨기기
-			$('#userProfileImage').addClass('d-none');
+			$('#profileImage').addClass('d-none');
 		});
 		
 		// 닉네임 중복확인 버튼 클릭
@@ -219,6 +221,8 @@
 			e.preventDefault(); // submit 기능 중지
 			
 			// 기존 회원정보 텍스트 지우고, 수정 가능한 input 노출
+			$('#fileChangeBtn').removeClass('d-none');
+
 			$('#textName').addClass('d-none');
 			$('#changedName').removeClass('d-none');
 			$('#changedNameCheckBtn').removeClass('d-none');
@@ -237,6 +241,7 @@
 			$('#userDeleteBtn').addClass('d-none');
 			
 			$('#userUpdateFinishBtn').removeClass('d-none');
+			$('#userUpdateCancelBtn').removeClass('d-none');
 		});
 		
 		// 회원 정보 수정 완료 
@@ -297,6 +302,7 @@
 						// 실패
 						alert("[error] 통신 문제로 회원 정보 수정에 실패했습니다. \n 담당자에게 문의해주세요");
 					}
+					
 				}
 			});
 		});

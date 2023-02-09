@@ -123,34 +123,34 @@ public class UserRestController {
 		,@RequestParam(value="changedFile", required=false) MultipartFile changedFile
 		,HttpSession session
 			) {
-		// 모두 nullable하게 한다. null일 경우 기존 회원정보로 넘어가도록 설정
+		// 모두 비필수 파라미터로 설정. 비어있을 경우 null로 넘어가도록 설정(미입력은 null과 다르다)
 		
 		// DB select (session을 이용하여 회원정보 받아오기)
 		Integer userId = (Integer)session.getAttribute("userId");
 		User user = userBO.getUserByUserId(userId);
 
-		// 수정하지 않은 정보들은 기존 정보로 처리
+		// 수정하지 않은 정보들은 null 처리
 		
 		// 이름은 파일이름 저장할 때 써야되므로 여기서 처리
-		if(changedName == null) {
+		if(changedName.equals("")) {
 			changedName = user.getName();
 		}
 		
-//		if(changedLoginId == null) {
-//			changedLoginId = user.getLoginId();
-//		}
+		if(changedLoginId.equals("")) {
+			changedLoginId = null;
+		}
 
 		String hashedPassword = null;
-		if(changedPassword != null) {
+		if(!changedPassword.equals("")) {
 			// 비밀번호 해싱 - mb5
 			hashedPassword = EncryptUtils.md5(changedPassword);
 		}
 		
-//		if(changedEmail == null) {
-//			changedEmail = user.getEmail();
-//		}
+		if(changedEmail.equals("")) {
+			changedEmail = null;
+		}
 		
-//		// changedFile은 없으면 그냥 끝까지 null로 넣어서 DB에서 조건문으로 null이 아닐 경우에만 업데이트
+		// changedFile은 없으면 그냥 끝까지 null로 보내서 DB에서 조건문으로 null이 아닐 경우에만 업데이트
 		
 		// -> 쓸데없는 기존 정보 업데이트를 줄이기 위해 그냥 DB까지 null로 넘겨서 DB조건문으로 null이 아닌 것만 선별적 Update
 		
