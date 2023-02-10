@@ -1,1 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.festivalBooking.post.dao.PostDAO">
+	<select id="selectPostListByPostType" parameterType="String" resultType="map">
+ 		SELECT *
+ 		FROM `post`
+ 		WHERE `postType`=#{postType}
+ 	</select>
+ 	
+ 	<insert id="insertPost" parameterType="map">
+ 		INSERT INTO `post`
+ 		(
+ 			`userId`
+			,`postType`
+			,`postTitle`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+			#{userId}
+			,#{postType}
+			,#{postTitle}
+			,#{content}
+			,Now()
+			,Now()
+ 		)
+ 	</insert>
+</mapper>

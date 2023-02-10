@@ -22,13 +22,13 @@
 	
 	<div>
 		<li class="nav-item">
-			<a href="#" class="nav-link">공지사항</a>
+			<a href="/post/postList?postType=공지사항" class="nav-link">공지사항</a>
 		</li>
 	</div>
 
 	<div>
 		<li class="nav-item">
-			<a href="#" class="nav-link">자유게시판</a>
+			<a href="/post/postList?postType=자유게시판" class="nav-link">자유게시판</a>
 		</li>
 	</div>
 
