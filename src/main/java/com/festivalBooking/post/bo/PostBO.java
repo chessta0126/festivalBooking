@@ -21,5 +21,12 @@ public class PostBO {
 	
 	// 글 작성(insert)
 	public void addPost(int userId, String postType, String postTitle, String content) {
-		postDAO.insertPost(userId, postType, postTitle, content);;
-	}}
+		postDAO.insertPost(userId, postType, postTitle, content);
+	}
+	
+	// 글 가져오기(select)
+	public Post getPostByPostId(int postId) {
+		return postDAO.selectPostByPostId(postId);
+	}
+	
+}

@@ -129,7 +129,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal">
 <%-- modal-sm : 작은 모달 창 --%>
-<%-- modal-modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
+<%-- modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
 	<div class="modal-dialog modal-sm modal-dialog-centered">
 		<div class="modal-content text-center">
       		<div class="py-3 border-bottom">
@@ -358,13 +358,14 @@
 		// modal 안에 있는 삭제하기 버튼 클릭
 		$('#modal #userDeleteAgreeBtn').on('click',function(e){
 			e.preventDefault();
-			let postId = $('#modal').data('user-id');
+			let userId = $('#modal').data('user-id');
 			
 			// AJAX - 회원 탈퇴
 			$.ajax({
 				// request
 				type:"DELETE"
 				,url:"/user/delete"
+				, data:{"userId":userId}
 			
 				// response
 				,success:function(data){

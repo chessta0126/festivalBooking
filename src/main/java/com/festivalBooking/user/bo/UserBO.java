@@ -56,13 +56,13 @@ public class UserBO {
 	}
 	
 	// userId로 회원정보 꺼내기
-	public User getUserByUserId(Integer userId) {
+	public User getUserByUserId(int userId) {
 		return userDAO.selectUserByUserId(userId);
 	}
 	
 	// 회원정보 수정
 	public boolean updateUserByUserId(
-			Integer userId, String changedName, String changedLoginId
+			int userId, String changedName, String changedLoginId
 			, String changedPassword, String changedEmail, MultipartFile changedFile) {
 		
 		// 파일 업로드 => 경로

@@ -19,4 +19,7 @@ public interface PostDAO {
 			,@Param("postType") String postType
 			,@Param("postTitle") String postTitle
 			,@Param("content") String content);
+	
+	// 글 번호, userId로 글 가져오기(select)
+	public Post selectPostByPostId(int postId);
 }

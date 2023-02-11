@@ -127,8 +127,11 @@ public class UserRestController {
 			) {
 		// 모두 비필수 파라미터로 설정. 비어있을 경우 null로 넘어가도록 설정(미입력은 null과 다르다)
 		
+		// 회원 정보 수정에 접근했다는 것은, 마이페이지의 로그인여부 확인 조건을 뚫었다는 것 -> Integer가 아닌 int로 해도 에러날 일 없음
+		// 세션 만료 설정도 하지 않아 페이지에 접근된 상태로 중간에 로그아웃 될 일도 없다.
+		
 		// DB select (session을 이용하여 회원정보 받아오기)
-		Integer userId = (Integer)session.getAttribute("userId");
+		int userId = (int)session.getAttribute("userId");
 		User user = userBO.getUserByUserId(userId);
 
 		// 수정하지 않은 정보들은 null 처리
@@ -175,17 +178,9 @@ public class UserRestController {
 	
 	// 회원 탈퇴
 	@DeleteMapping("/delete")
-	public Map<String, Object> deleteUser(HttpSession session) {
+	public Map<String, Object> deleteUser(@RequestParam int userId) {
 
 		Map<String, Object> result = new HashMap<>();
-		
-		Integer userId = (Integer)session.getAttribute("userId");
-		if (userId == null) {
-			result.put("code", 500);
-			result.put("errorMessage", "로그인을 다시 해주세요.");
-		
-			return result;
-		}
 
 		boolean isDeleteUserSuccess = userBO.deleteUserByUserId(userId);
 		if(isDeleteUserSuccess) {

@@ -33,11 +33,11 @@ public interface UserDAO {
 			,@Param("password") String password);
 	
 	// userId로 회원정보 꺼내기
-	public User selectUserByUserId(Integer userId);
+	public User selectUserByUserId(int userId);
 	
 	// 회원정보 수정
 	public boolean updateUserByUserId(
-			@Param("userId") Integer userId
+			@Param("userId") int userId
 			, @Param("changedName") String changedName
 			, @Param("changedLoginId") String changedLoginId
 			, @Param("changedPassword") String changedPassword

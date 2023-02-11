@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="pt-4 d-flex justify-content-center">
-	<div class="w-50">
+	<div>
 		<div class="pb-3 d-flex justify-content-between align-items-center">
 			<h1 class="bold">${postType}</h1>
 			<button id="writePostBtn" class="btn btn-primary">
@@ -24,8 +24,8 @@
 				<c:forEach items="${postList}" var="post">
 				<tr>
 					<td>${post.id}</td>
-					<td><a href="/post/post_detail_view?postId=${post.id}">${post.subject}</a></td>
-					<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd a hh:mm:ss"/></td>
+					<td><a href="/post/post_detail_view?postType=${post.postType}&postId=${post.id}">${post.postTitle}</a></td>
+					<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd"/></td>
 					<td>조회수</td>
 				</tr>
 				</c:forEach>

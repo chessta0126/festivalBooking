@@ -17,19 +17,19 @@
 			
 			<%-- 작성자 --%>
 			<div class="d-flex align-items-center">
-				<h5 class="bold mr-3">작성자</h5>
+				<h5 class="bold col-6">작성자</h5>
 				<h5 class="bold mr-3">${user.name}</h5>
 			</div>
 		</div>
 		
 		<%-- 글 내용 --%>
 		<div class="pt-4">
-			<textarea rows="10" cols="100" class="form-control"></textarea>
+			<textarea rows="10" cols="100" id="content" class="form-control"></textarea>
 		</div>
 
 		<%-- 작성 완료(글쓰기 insert) 버튼 --%>
 		<div class="pt-4 d-flex justify-content-center">
-			<button id="postInsertBtn" class="btn btn-dark">작성 완료</button>
+			<button type="button" id="postInsertBtn" class="btn btn-dark">작성 완료</button>
 		</div>
 	</div>
 </div>
@@ -38,20 +38,37 @@
 	$(document).ready(function(){
 		$('#postInsertBtn').on('click', function(e) {
 			// validation check
+			let userId = ${user.id};
+			let postType = "${postType}";
+			let postTitle = $('#postTitle').val().trim();
+			let content = $('#content').val().trim();
+			alert("userId : " + userId + "\n"
+					+ "postType : " + postType + "\n" 
+					+ "postTitle : " + postTitle + "\n" 
+					+ "content : " + content);
 			
+			if(postTitle == ''){
+				alert("제목을 입력해주세요");
+				 return;
+			}
+			if(content == ''){
+				alert("내용을 입력해주세요");
+				 return;
+			}
+				
 			// AJAX 통신
 			$.ajax({
 				type:'POST'
 				,url:'/post/create'
-				, data: {"userId" : userId}
+				, data:{"userId":userId, "postType":postType, "postTitle":postTitle,"content":content}
 				, success: function(data) {
 					if (data.code == 1) {
 						// 성공
 						alert("게시글이 성공적으로 업로드 되었습니다.");
-						location.href="/post/post_create_view?postType=data.postType";
+						location.href="/post/postList?postType=data.postType";
 					} else{
 						// 실패
-						alert("[error] 통신 문제로 가입에 실패했습니다. \n 담당자에게 문의해주세요");
+						alert("[error] 웹 통신문제 : 게시글을 업로드 할 수 없습니다. \n 담당자에게 문의해주세요");
 					}
 				}
 			});

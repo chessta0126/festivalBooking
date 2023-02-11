@@ -58,4 +58,27 @@ public class PostController {
 		
 		return "template/layout";
 	}
+
+	// 글 상세 화면
+	// http://localhost:8080/post/post_detail_view?postType={postType}&postId=${postId}
+	@GetMapping("/post_detail_view")
+	public String postDetailView(
+			@RequestParam("postType") String postType
+			, @RequestParam("postId") int postId
+			, Model model, HttpSession session) {
+		
+		model.addAttribute("viewName","post/postDetail");
+		
+		// 어떤 글인지 알아야 함
+		Post post = postBO.getPostByPostId(postId);
+		model.addAttribute("post",post);
+
+		// 누가 작성한 글인지 알아야 함 (비로그인 상태일 수 있고, 내가 쓴게 아닐 수 있으므로-> session에서 뽑아오면 안 됨)
+		int userId = post.getUserId();
+		User user = userBO.getUserByUserId(userId);
+		model.addAttribute("user",user);
+		
+
+		return "template/layout";
+	}
 }
