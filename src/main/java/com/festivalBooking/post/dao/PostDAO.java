@@ -20,6 +20,6 @@ public interface PostDAO {
 			,@Param("postTitle") String postTitle
 			,@Param("content") String content);
 	
-	// 글 번호, userId로 글 가져오기(select)
+	// 글 번호로 글 가져오기(select)
 	public Post selectPostByPostId(int postId);
 }

@@ -30,6 +30,10 @@ nav .nav-item:hover{background-color: darkcyan;}
 
 .login-box {width:400px;}
 
+.title-font-size {font-size:25px;}
+.valueTitle-font-size {font-size:20px;}
+.value-font-size {font-size:17px;}
+
 .alert-box {width:400px; background-color:#ebebeb; margin-top:20px;}
 .book-confirm-box {width:400px; height:250px; background-color:darkcyan; margin-top:20px;}
 

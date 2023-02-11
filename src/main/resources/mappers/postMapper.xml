@@ -9,6 +9,12 @@
  		WHERE `postType`=#{postType}
  	</select>
  	
+ 	<select id="selectPostByPostId" parameterType="int" resultType="com.festivalBooking.post.model.Post">
+ 		SELECT *
+ 		FROM `post`
+ 		WHERE `id`=#{postId}
+ 	</select>
+ 	
  	<insert id="insertPost" parameterType="map">
  		INSERT INTO `post`
  		(
