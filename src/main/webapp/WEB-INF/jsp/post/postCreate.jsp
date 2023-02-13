@@ -17,7 +17,7 @@
 			
 			<%-- 작성자 --%>
 			<div class="d-flex align-items-center">
-				<h5 class="bold col-6">작성자</h5>
+				<h5 class="bold col-7">작성자</h5>
 				<h5 class="bold mr-3">${user.name}</h5>
 			</div>
 		</div>
@@ -42,10 +42,10 @@
 			let postType = "${postType}";
 			let postTitle = $('#postTitle').val().trim();
 			let content = $('#content').val().trim();
-			alert("userId : " + userId + "\n"
+			/* alert("userId : " + userId + "\n"
 					+ "postType : " + postType + "\n" 
 					+ "postTitle : " + postTitle + "\n" 
-					+ "content : " + content);
+					+ "content : " + content); */
 			
 			if(postTitle == ''){
 				alert("제목을 입력해주세요");
@@ -65,6 +65,8 @@
 					if (data.code == 1) {
 						// 성공
 						alert("게시글이 성공적으로 업로드 되었습니다.");
+						
+						// 방금 내가 작성한 글 상세 페이지(postDetail)로 이동해야 함 -> postId 필요
 						location.href="/post/postList?postType=data.postType";
 					} else{
 						// 실패

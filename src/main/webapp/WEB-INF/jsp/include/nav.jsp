@@ -4,13 +4,13 @@
 <ul class="nav w-100 justify-content-around">
 	<div>
 		<li class="nav-item">
-			<a href="#" class="nav-link">공연 예매</a>
+			<a href="/festival/festival_list_view" class="nav-link">공연 예매</a>
 		</li>
 	</div>
 	
 	<div>
 		<li class="nav-item">
-			<a href="homepage_공연정보.html" class="nav-link">공연 홍보</a>
+			<a href="#" class="nav-link">공연 홍보</a>
 		</li>
 	</div>
 	

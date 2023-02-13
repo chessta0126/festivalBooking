@@ -20,7 +20,7 @@
 		<%-- 작성자 --%>
 		<div class="d-flex align-items-center">
 			<span class="bold mr-3 valueTitle-font-size">작성자</span>
-			<span class="value-font-size">${postingUserName}</span>
+			<span class="value-font-size">${postUserName}</span>
 		</div>
 		<div class="d-flex">
 			<%-- 게시일 --%>

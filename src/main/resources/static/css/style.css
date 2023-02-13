@@ -19,7 +19,7 @@ nav .nav-item:hover{background-color: darkcyan;}
 #joinBtn{color: #fff; text-decoration: none;}
 .button, .button:hover{color: #fff; text-decoration: none;}
 
-.contents{height: 1600px;}
+.contents{minheight:700px;}
 .festival-title{
     color: blueviolet;
     font-weight: bold;
