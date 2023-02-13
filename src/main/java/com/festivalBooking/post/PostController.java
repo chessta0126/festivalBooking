@@ -1,5 +1,6 @@
 package com.festivalBooking.post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.festivalBooking.comment.bo.CommentBO;
+import com.festivalBooking.comment.model.CommentView;
 import com.festivalBooking.post.bo.PostBO;
 import com.festivalBooking.post.model.Post;
 import com.festivalBooking.user.bo.UserBO;
@@ -26,6 +29,9 @@ public class PostController {
 
 	@Autowired
 	private UserBO userBO;
+
+	@Autowired
+	private CommentBO commentBO;
 	
 	// 글 목록 화면
 	// http://localhost:8080/post/postList?postType={postType}
@@ -59,13 +65,13 @@ public class PostController {
 		return "template/layout";
 	}
 
-	// 글 상세 화면
+	// 글 상세 화면(글, 댓글 내려주기)
 	// http://localhost:8080/post/post_detail_view?postType={postType}&postId=${postId}
 	@GetMapping("/post_detail_view")
 	public String postDetailView(
 			@RequestParam("postType") String postType
 			, @RequestParam("postId") int postId
-			, Model model, HttpSession session) {
+			, Model model) {
 		
 		model.addAttribute("viewName","post/postDetail");
 		
@@ -79,7 +85,9 @@ public class PostController {
 		// 작성자 이름(그 외의 작성자 회원정보는 보안 우려가 있기 때문에, 내려주지 않는다.)
 		model.addAttribute("postUserName",postUser.getName());
 
-		// 댓글 가져오기
+		// 댓글 가져오기 (댓글쓴이-댓글이 매칭되어 있는 commentView 형태의 List)
+		List<CommentView> commentViewList = commentBO.generateCommentViewListByPostId(postId);
+		model.addAttribute("commentViewList",commentViewList);
 		
 		return "template/layout";
 	}

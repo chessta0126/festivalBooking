@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.festivalBooking.comment.dao.CommentDAO">
+	<insert id="insertComment" parameterType="map">
+		INSERT INTO `comment`
+		(
+			`userId`
+			, `postId`
+			, `comment`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{postId}
+			, #{comment}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+
+	<select id="selectCommentListByPostId" parameterType="int" resultType="com.festivalBooking.comment.model.Comment">
+		SELECT
+			`id`
+			,`postId`
+			,`userId`
+			,`comment`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+	</select>
+	
+	<delete id="deleteCommentsByPostId" parameterType="int">
+		DELETE
+		FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+	</delete>
+</mapper>

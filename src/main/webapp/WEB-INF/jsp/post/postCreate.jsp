@@ -12,12 +12,12 @@
 			<%-- 제목 --%>
 			<div class="w-75 d-flex align-items-center">
 				<h5 class="bold mr-3">제목</h5>
-				<input type="text" id="postTitle" class="col-8 form-control">
+				<input type="text" id="postTitle" class="col-9 form-control">
 			</div>
 			
 			<%-- 작성자 --%>
 			<div class="d-flex align-items-center">
-				<h5 class="bold col-7">작성자</h5>
+				<h5 class="bold mr-3">작성자</h5>
 				<h5 class="bold mr-3">${user.name}</h5>
 			</div>
 		</div>

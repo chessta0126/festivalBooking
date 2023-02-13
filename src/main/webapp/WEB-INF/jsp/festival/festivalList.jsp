@@ -169,6 +169,10 @@
 	</div>
 </div>
 
+<footer class="pt-5">
+	<jsp:include page="../include/footer.jsp" />
+</footer>
+
 <script>
 	$(document).ready(function() {
 		// datepicker 형식
