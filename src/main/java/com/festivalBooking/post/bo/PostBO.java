@@ -28,5 +28,10 @@ public class PostBO {
 	public Post getPostByPostId(int postId) {
 		return postDAO.selectPostByPostId(postId);
 	}
+
+	// 글 삭제(delete)
+	public void deletePostByPostIdUserId(int postId,int postUserId) {
+		postDAO.deletePostByPostIdUserId(postId, postUserId);
+	}
 	
 }

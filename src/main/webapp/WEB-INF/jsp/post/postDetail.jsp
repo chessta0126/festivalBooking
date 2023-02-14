@@ -13,7 +13,7 @@
 	<div class="pt-3 d-flex justify-content-between align-items-center">
 		<%-- 제목 --%>
 		<div class="w-75">
-			<span class="bold mr-3 title-font-size">제목</span>
+			<span id="postTitle" class="bold mr-3 title-font-size">제목</span>
 			<span class="value-font-size">${post.postTitle}</span>
 		</div>
 		
@@ -30,7 +30,7 @@
 		<%-- 작성자 --%>
 		<div class="d-flex align-items-center">
 			<span class="bold mr-3 valueTitle-font-size">작성자</span>
-			<span class="value-font-size">${postUserName}</span>
+			<span id="postUserName" class="value-font-size">${postUserName}</span>
 		</div>
 		<div class="d-flex">
 			<%-- 게시일 --%>
@@ -43,14 +43,14 @@
 			<%-- 조회수 --%>
 			<div class="d-flex align-items-center">
 				<span class="bold mr-3 valueTitle-font-size">조회수</span>
-				<span class="mr-3 value-font-size">조회수</span>
+				<span id="postLike" class="mr-3 value-font-size">조회수</span>
 			</div>
 		</div>
 	</div>
 	
 	<%-- 글 내용 --%>
 	<div class="pt-4">
-		<textarea rows="10" cols="100" id="content" class="form-control">${post.content}</textarea>
+		<textarea rows="10" cols="100" id="content" name="content" class="form-control">${post.content}</textarea>
 	</div>
 </div>
 
@@ -76,6 +76,7 @@
 			</div>
 		</div>
 	</div>
+	<hr>
 	</c:if>
 
 	<%-- 남의 댓글 보이기(반복문) --%>
@@ -88,8 +89,8 @@
 		
 		<%-- 댓글 내용 --%>
 		<span>${commentView.comment.comment}</span>
-		</div>
 	</div>
+	<hr>
 	</c:forEach>
 </div>
 
@@ -102,7 +103,26 @@
 
 		// 글 삭제하기
 		$('#postDeleteBtn').on('click', function(e) {
+			let postId = ${post.id};
+			let postUserId = ${postUserId};
+			// alert(postId);
+			// alert(postUserId);
 			
+			// AJAX
+			$.ajax({
+				type:'DELETE'
+				,url:'/post/delete'
+				,data: {"postId":postId, "postUserId":postUserId}
+				,success: function(data) {
+					if (data.result) {
+						location.href="/post/postList?postType="+ data.postType;
+					}
+				}
+				,error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
 		});
 		
 		// 댓글 쓰기
@@ -138,6 +158,5 @@
 				}
 			});
 		});
-		
 	});
 </script>

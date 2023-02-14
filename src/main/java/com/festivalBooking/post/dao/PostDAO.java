@@ -22,4 +22,9 @@ public interface PostDAO {
 	
 	// 글 번호로 글 가져오기(select)
 	public Post selectPostByPostId(int postId);
+	
+	// 글 삭제(delete)
+		public void deletePostByPostIdUserId(
+				@Param("postId") int postId
+				,@Param("postUserId") int postUserId);
 }

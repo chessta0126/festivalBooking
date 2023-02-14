@@ -82,8 +82,9 @@ public class PostController {
 		// 누가 작성한 글인지 알아야 함 (비로그인 상태일 수 있고, 내가 쓴게 아닐 수 있으므로-> session에서 뽑아오면 안 됨)
 		int postUserId = post.getUserId();
 		User postUser = userBO.getUserByUserId(postUserId);
-		// 작성자 이름(그 외의 작성자 회원정보는 보안 우려가 있기 때문에, 내려주지 않는다.)
+		// 작성자 이름,userId(그 외의 작성자 회원정보는 보안 우려가 있기 때문에, 내려주지 않는다.)
 		model.addAttribute("postUserName",postUser.getName());
+		model.addAttribute("postUserId",postUser.getId());
 
 		// 댓글 가져오기 (댓글쓴이-댓글이 매칭되어 있는 commentView 형태의 List)
 		List<CommentView> commentViewList = commentBO.generateCommentViewListByPostId(postId);
