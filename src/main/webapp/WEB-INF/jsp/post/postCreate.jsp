@@ -37,7 +37,6 @@
 <script>
 	$(document).ready(function(){
 		$('#postInsertBtn').on('click', function(e) {
-			// validation check
 			let userId = ${user.id};
 			let postType = "${postType}";
 			let postTitle = $('#postTitle').val().trim();
@@ -47,6 +46,7 @@
 					+ "postTitle : " + postTitle + "\n" 
 					+ "content : " + content); */
 			
+			// validation check
 			if(postTitle == ''){
 				alert("제목을 입력해주세요");
 				 return;
@@ -66,12 +66,16 @@
 						// 성공
 						alert("게시글이 성공적으로 업로드 되었습니다.");
 						
-						// 방금 내가 작성한 글 상세 페이지(postDetail)로 이동해야 함 -> postId 필요
-						location.href="/post/post_detail_view?postType="+data.addedPost.postType+"postId="+data.addedPost.postId;
-					} else{
-						// 실패
-						alert("[error] 웹 통신문제 : 게시글을 업로드 할 수 없습니다. \n 담당자에게 문의해주세요");
+						// 글 목록 페이지로 이동
+						// location.href="/post/postList?postType="+data.postType;
+						
+						// 방금 내가 작성한 글 상세 페이지(postDetail)로 이동 -> postId 필요
+						location.href="/post/post_detail_view?postType="+data.postType+"&postId="+data.postId;
 					}
+				}
+				,error: function(e) {
+					// 실패
+					alert("[error] 웹 통신문제 : 게시글을 업로드 할 수 없습니다. \n 담당자에게 문의해주세요");
 				}
 			});
 		});

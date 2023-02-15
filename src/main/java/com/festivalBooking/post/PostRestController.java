@@ -27,15 +27,16 @@ public class PostRestController {
 	
 	@PostMapping("/create")
 	public Map<String, Object> create(
-			@RequestParam("userId") int userId
-			,@RequestParam("postType") String postType
-			,@RequestParam("postTitle") String postTitle
-			,@RequestParam("content") String content
-			,@ModelAttribute Post post
+			/*
+			 * @RequestParam("userId") int userId ,@RequestParam("postType") String postType
+			 * ,@RequestParam("postTitle") String postTitle ,@RequestParam("content") String
+			 * content ,
+			 */@ModelAttribute Post post
 			){
 		
 		// DB에 insert
-		postBO.addPost(userId,postType,postTitle,content);
+		// postBO.addPost(userId,postType,postTitle,content);
+		postBO.addPost(post);
 		
 		// 여기까지 내려왔다는 것은 잘 들어갔다는 것
 		Map<String, Object> result = new HashMap<>();
@@ -43,8 +44,7 @@ public class PostRestController {
 		result.put("result", true);
 		
 		// 성공시 글 상세(postDetail) 화면으로 이동하기 위한 파라미터 Json으로 전송
-		// DB select
-		result.put("postType", postType);
+		result.put("postType", post.getPostType());
 		result.put("postId", post.getId());
 		
 		return result;

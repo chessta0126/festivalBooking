@@ -15,7 +15,7 @@
  		WHERE `id`=#{postId}
  	</select>
  	
- 	<insert id="insertPost" parameterType="map"
+ 	<insert id="insertPost" parameterType="com.festivalBooking.post.model.Post"
  	useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO `post`
  		(
