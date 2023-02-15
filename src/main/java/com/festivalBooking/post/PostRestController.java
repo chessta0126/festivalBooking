@@ -43,7 +43,7 @@ public class PostRestController {
 		result.put("code", 1);		
 		result.put("result", true);
 		
-		// 성공시 글 상세(postDetail) 화면으로 이동하기 위한 파라미터 Json으로 전송
+		// 성공 시 글 상세(postDetail) 화면으로 이동하기 위한 파라미터 Json으로 전송
 		result.put("postType", post.getPostType());
 		result.put("postId", post.getId());
 		

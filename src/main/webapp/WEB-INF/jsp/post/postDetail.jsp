@@ -52,6 +52,13 @@
 	<div class="pt-4">
 		<textarea rows="10" cols="100" id="content" name="content" class="form-control">${post.content}</textarea>
 	</div>
+	
+	<%-- 글 목록 버튼 --%>
+	<div class="pt-3 d-flex justify-content-end">
+		<button type="button" id="postListBtn" class="btn btn-dark">
+			<a href="/post/postList?postType=${post.postType}" class="button">글 목록</a>
+		</button>
+	</div>
 </div>
 
 <%-- 댓글 --%>
@@ -79,7 +86,7 @@
 	<hr>
 	</c:if>
 
-	<%-- 남의 댓글 보이기(반복문) --%>
+	<%-- 전체 댓글 보이기(반복문) --%>
 	<c:forEach items="${commentViewList}" var="commentView">
 	<div class="d-flex align-items-center">
 		<%-- 댓글 프로필 사진 --%>
@@ -89,6 +96,10 @@
 		
 		<%-- 댓글 내용 --%>
 		<span>${commentView.comment.comment}</span>
+	
+		<%-- 댓글 삭제 버튼 --%>
+		<button type="button" id="commentDeleteBtn" class="ml-5 btn btn-danger">댓글 삭제</button>
+		
 	</div>
 	<hr>
 	</c:forEach>
