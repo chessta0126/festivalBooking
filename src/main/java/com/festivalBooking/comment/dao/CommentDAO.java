@@ -20,4 +20,7 @@ public interface CommentDAO {
 	
 	// 글 번호로 -> 소속된 댓글 삭제
 	public void deleteCommentsByPostId(int postId);
+	
+	// 본인 댓글 1개 삭제
+	public boolean deleteCommentByCommentId(int commentId);
 }

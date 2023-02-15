@@ -97,9 +97,11 @@
 		<%-- 댓글 내용 --%>
 		<span>${commentView.comment.comment}</span>
 	
-		<%-- 댓글 삭제 버튼 --%>
-		<button type="button" id="commentDeleteBtn" class="ml-5 btn btn-danger">댓글 삭제</button>
-		
+		<%-- 댓글 삭제 버튼 : 여러 개이므로, class로 부여 --%>
+		<%-- 내 댓글일 때만 나타나기, commentId 심어두기 --%>
+		<c:if test="${commentView.user.name eq userName}">
+			<button type="button" class="commentDeleteBtn ml-5 btn btn-danger" data-comment-id="${commentView.comment.id}">댓글 삭제</button>
+		</c:if>
 	</div>
 	<hr>
 	</c:forEach>
@@ -161,6 +163,31 @@
 					} else if (data.code == 500) {
 						alert("로그인을 해주세요.");
 						location.href = "/user/sign_in_view";
+					}
+				}
+				,error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+		});
+		
+		// 댓글 삭제
+		$('.commentDeleteBtn').on('click', function(e) {
+			// 댓글 번호
+			let commentId = $(this).data('comment-id');
+			// alert(commentId);
+			
+			// AJAX
+			$.ajax({
+				type:'DELETE'
+				,url:'/comment/delete'
+				,data: {"commentId":commentId}
+				,success: function(data) {
+					if (data.code == 1) {
+						location.reload(); // 새로고침
+					} else if (data.code == 500) {
+						alert("삭제 실패!");
 					}
 				}
 				,error: function(jqXHR, textStatus, errorThrown) {

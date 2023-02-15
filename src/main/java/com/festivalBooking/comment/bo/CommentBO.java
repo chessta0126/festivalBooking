@@ -62,4 +62,10 @@ public class CommentBO {
 	public void deleteCommentsByPostId(int postId) {
 		commentDAO.deleteCommentsByPostId(postId);
 	}
+	
+	// 본인 댓글 1개 삭제
+	public boolean deleteCommentByCommentId(int commentId) {
+		return commentDAO.deleteCommentByCommentId(commentId);
+	}
+	
 }
