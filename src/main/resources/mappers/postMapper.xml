@@ -37,6 +37,17 @@
  		)
  	</insert>
  	
+ 	<update id="updatePost" parameterType="map">
+ 		UPDATE `post`
+		SET
+			`postTitle` = #{postUpdatedTitle}
+			,`content` = #{updatedContent}
+			,`updatedAt` = NOW()
+			
+		WHERE
+			`id` = #{postId}
+ 	</update>
+ 	
  	<delete id="deletePostByPostIdUserId" parameterType="map">
  		DELETE
 		FROM

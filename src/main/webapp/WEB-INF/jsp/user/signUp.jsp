@@ -13,7 +13,7 @@
 				<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서로 변하도록 a 태그 사용 --%>
 				<%-- default 이미지 --%>
 				<a href="#" id="fileUploadBtn">
-					<img width="200" src="\images\★default file/default profileImage.jpg">
+					<img width="200" src="\images\★default file/default profileImage.jpg" id="signUpImg">
 				</a>
 				
 				<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
@@ -93,8 +93,8 @@
 			
 			// 유효성 통과한 이미지는 상자에 업로드 된 파일 이름 노출
 			$('#fileName').text(fileName);
-			// 기본 이미지 숨기기
-			$('#fileUploadBtn').addClass('d-none');
+			// 기본 이미지 -> 선택한 이미지로 변경
+			$("#signUpImg").attr("src","/images/chessta_1676015887904/sunny.jpg");
 		});
 		
 		// 닉네임 중복확인

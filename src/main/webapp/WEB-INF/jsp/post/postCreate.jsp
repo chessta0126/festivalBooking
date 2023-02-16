@@ -12,7 +12,7 @@
 			<%-- 제목 --%>
 			<div class="w-75 d-flex align-items-center">
 				<h5 class="bold mr-3">제목</h5>
-				<input type="text" id="postTitle" class="col-9 form-control">
+				<input type="text" id="postTitle" class="col-9 form-control" placeholder="제목을 입력하세요">
 			</div>
 			
 			<%-- 작성자 --%>
@@ -31,11 +31,22 @@
 		<div class="pt-4 d-flex justify-content-center">
 			<button type="button" id="postInsertBtn" class="btn btn-dark">작성 완료</button>
 		</div>
+		<%-- 수정 완료(update) 버튼 : isUpdate = true에만 드러남 --%>
+		<div class="d-flex justify-content-center">
+			<button type="button" id="postUpdateBtn" class="btn btn-dark d-none">수정 완료</button>
+		</div>
 	</div>
 </div>
 
 <script>
 	$(document).ready(function(){
+		// 페이지에 접근했을 때, 글쓰기(insert)/ 글 수정(update) 여부 파악
+		if(${isUpdate}){
+			$('#postInsertBtn').addClass("d-none");
+			$('#postUpdateBtn').removeClass("d-none");
+		}
+		
+		// 글 쓰기
 		$('#postInsertBtn').on('click', function(e) {
 			let userId = ${user.id};
 			let postType = "${postType}";
@@ -76,6 +87,41 @@
 				,error: function(e) {
 					// 실패
 					alert("[error] 웹 통신문제 : 게시글을 업로드 할 수 없습니다. \n 담당자에게 문의해주세요");
+				}
+			});
+		});
+		
+		// 글 수정하기
+		$('#postUpdateBtn').on('click', function(e) {
+			// 어떤 글(postId) / 제목(postTitle) / 내용(content) 수정
+			let postId = ${postId};
+			let postUpdatedTitle = $('#postTitle').val().trim();
+			let updatedContent = $('#content').val().trim();
+			
+			// validation check
+			if(postUpdatedTitle == ''){
+				alert("제목을 입력해주세요");
+				 return;
+			}
+			if(updatedContent == ''){
+				alert("내용을 입력해주세요");
+				 return;
+			}
+			
+			// AJAX
+			$.ajax({
+				type:'PUT'
+				,url:'/post/update'
+				,data: {"postId":postId, "postUpdatedTitle":postUpdatedTitle, "updatedContent":updatedContent}
+				,success: function(data) {
+					if (data.result) {
+						// 방금 내가 수정한 글 상세 페이지(postDetail)로 이동 -> postId 필요
+						location.href="/post/post_detail_view?postType="+data.postType+"&postId="+data.postId;
+					}
+				}
+				,error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
 				}
 			});
 		});

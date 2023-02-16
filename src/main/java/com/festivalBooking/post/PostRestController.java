@@ -3,10 +3,12 @@ package com.festivalBooking.post;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +46,28 @@ public class PostRestController {
 		result.put("result", true);
 		
 		// 성공 시 글 상세(postDetail) 화면으로 이동하기 위한 파라미터 Json으로 전송
+		result.put("postType", post.getPostType());
+		result.put("postId", post.getId());
+		
+		return result;
+	}
+	
+	@PutMapping("/update")
+	public Map<String, Object> update(
+			@RequestParam("postId") int postId
+			,@RequestParam("postUpdatedTitle") String postUpdatedTitle
+			,@RequestParam("updatedContent") String updatedContent
+			){
+		
+		// DB Update
+		postBO.updatePost(postId, postUpdatedTitle, updatedContent);
+		
+		// 여기까지 내려왔다는 것은 잘 수정됐다는 것
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", true);
+		
+		// 글 수정 성공 시 글 상세(postDetail) 화면으로 이동하기 위한 파라미터 Json으로 전송
+		Post post = postBO.getPostByPostId(postId);
 		result.put("postType", post.getPostType());
 		result.put("postId", post.getId());
 		

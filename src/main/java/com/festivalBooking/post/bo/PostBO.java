@@ -36,6 +36,11 @@ public class PostBO {
 		return postDAO.selectPostByPostId(postId);
 	}
 
+	// 글 수정(Update)
+	public void updatePost(int postId, String postUpdatedTitle, String updatedContent) {
+		postDAO.updatePost(postId, postUpdatedTitle, updatedContent);
+	}
+	
 	// 글 삭제(delete)
 	public void deletePostByPostIdUserId(int postId,int postUserId) {
 		postDAO.deletePostByPostIdUserId(postId, postUserId);

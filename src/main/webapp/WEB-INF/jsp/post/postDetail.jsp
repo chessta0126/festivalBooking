@@ -20,7 +20,12 @@
 		<%-- 수정 / 삭제 버튼 : 작성자와 session 닉네임이 일치할 경우에만 보임 --%>
 		<c:if test="${postUserName eq userName}">
 		<div class="d-flex">
-			<button type="button" id="postChangeBtn" class="btn btn-info mr-3">수정하기</button>
+		<%-- 수정 : postCreate로 넘어가기 --%>
+			<button type="button" id="postChangeBtn" class="btn btn-info mr-3">
+				<a href="/post/post_create_view?postType=${post.postType}&isUpdate=true&postId=${post.id}" class="button">
+					수정하기
+				</a>
+			</button>
 			<button type="button" id="postDeleteBtn" class="btn btn-danger">삭제하기</button>
 		</div>
 		</c:if>
@@ -109,12 +114,7 @@
 
 <script>
 	$(document).ready(function(){
-		// 글 수정하기
-		$('#postChangeBtn').on('click', function(e) {
-			
-		});
-
-		// 글 삭제하기
+		// 글 삭제
 		$('#postDeleteBtn').on('click', function(e) {
 			let postId = ${post.id};
 			let postUserId = ${postUserId};

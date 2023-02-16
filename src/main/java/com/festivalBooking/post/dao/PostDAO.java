@@ -25,6 +25,12 @@ public interface PostDAO {
 	// 글 번호로 글 가져오기(select)
 	public Post selectPostByPostId(int postId);
 	
+	// 글 수정(Update)
+	public void updatePost(
+			@Param("postId") int postId
+			, @Param("postUpdatedTitle") String postUpdatedTitle
+			, @Param("updatedContent") String updatedContent);
+	
 	// 글 삭제(delete)
 		public void deletePostByPostIdUserId(
 				@Param("postId") int postId

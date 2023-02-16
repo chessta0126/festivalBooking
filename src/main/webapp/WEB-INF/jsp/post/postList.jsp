@@ -7,9 +7,11 @@
 	<div>
 		<div class="pb-3 d-flex justify-content-between align-items-center">
 			<h1 class="bold">${postType}</h1>
-			<button id="writePostBtn" class="btn btn-primary">
-				<a href="/post/post_create_view?postType=${postType}" class="button">글쓰기</a>
-			</button>
+			<c:if test="${userId != null}">
+				<button id="writePostBtn" class="btn btn-primary">
+					<a href="/post/post_create_view?postType=${postType}&isUpdate=false" class="button">글쓰기</a>
+				</button>
+			</c:if>
 		</div>
 		<table class="table">
 			<thead>

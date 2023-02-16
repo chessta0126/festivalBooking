@@ -47,11 +47,13 @@ public class PostController {
 		return "template/layout";
 	}
 	
-	// 글쓰기 화면
-	// http://localhost:8080/post/post_create_view?postType={postType}
+	// 글쓰기, 수정 화면
+	// http://localhost:8080/post/post_create_view?postType={postType}&isUpdate=${isUpdate}&postId=${postId}
 	@GetMapping("/post_create_view")
 	public String postCreateView(
 			@RequestParam("postType") String postType
+			, @RequestParam("isUpdate") boolean isUpdate
+			, @RequestParam(value="postId", required=false) Integer postId
 			, Model model, HttpSession session) {
 		
 		model.addAttribute("viewName","post/postCreate");
@@ -62,6 +64,16 @@ public class PostController {
 		User user = userBO.getUserByUserId(userId);
 		model.addAttribute("user",user);
 		
+		// 글 수정(update)인지, 글 작성(insert)인지 파악(화면 공유)
+		if(isUpdate) { // 글 수정일 경우
+			model.addAttribute("isUpdate",true);			
+			model.addAttribute("postId",postId);			
+		} else {
+			model.addAttribute("isUpdate",false);
+			// 그냥 글쓰기로 접근했을 때, ${postId}가 존재하지 않으므로 에러가 떠버림 -> 일단 0으로 둔다.
+			// insert할 때 postId는 넘기지 않으니 괜찮다.
+			model.addAttribute("postId",0);		
+		}
 		return "template/layout";
 	}
 
