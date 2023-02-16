@@ -24,7 +24,7 @@
 		
 		<%-- 글 내용 --%>
 		<div class="pt-4">
-			<textarea rows="10" cols="100" id="content" class="form-control"></textarea>
+			<textarea rows="10" cols="100" id="content" class="form-control" placeholder="내용을 입력하세요"></textarea>
 		</div>
 
 		<%-- 작성 완료(글쓰기 insert) 버튼 --%>
@@ -44,6 +44,9 @@
 		if(${isUpdate}){
 			$('#postInsertBtn').addClass("d-none");
 			$('#postUpdateBtn').removeClass("d-none");
+			
+			$('#postTitle').attr('placeholder',"${post.postTitle}");
+			$('#content').attr('placeholder',"${post.content}");
 		}
 		
 		// 글 쓰기
@@ -100,12 +103,12 @@
 			
 			// validation check
 			if(postUpdatedTitle == ''){
-				alert("제목을 입력해주세요");
-				 return;
+				postUpdatedTitle = $('#postTitle').attr("placeholder");
+				// alert(postUpdatedTitle);
 			}
 			if(updatedContent == ''){
-				alert("내용을 입력해주세요");
-				 return;
+				updatedContent = $('#content').attr("placeholder");
+				// alert(updatedContent);
 			}
 			
 			// AJAX
@@ -116,6 +119,7 @@
 				,success: function(data) {
 					if (data.result) {
 						// 방금 내가 수정한 글 상세 페이지(postDetail)로 이동 -> postId 필요
+						alert("글 수정이 완료되었습니다.");
 						location.href="/post/post_detail_view?postType="+data.postType+"&postId="+data.postId;
 					}
 				}

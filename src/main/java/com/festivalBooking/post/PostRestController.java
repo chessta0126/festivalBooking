@@ -27,14 +27,10 @@ public class PostRestController {
 	@Autowired
 	private CommentBO commentBO;
 	
+	// 글 쓰기
 	@PostMapping("/create")
 	public Map<String, Object> create(
-			/*
-			 * @RequestParam("userId") int userId ,@RequestParam("postType") String postType
-			 * ,@RequestParam("postTitle") String postTitle ,@RequestParam("content") String
-			 * content ,
-			 */@ModelAttribute Post post
-			){
+			@ModelAttribute Post post){
 		
 		// DB에 insert
 		// postBO.addPost(userId,postType,postTitle,content);
@@ -74,6 +70,7 @@ public class PostRestController {
 		return result;
 	}
 	
+	// 글 삭제
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
 			@RequestParam("postId") int postId
