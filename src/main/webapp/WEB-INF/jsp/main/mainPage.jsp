@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
 <div class="container">
 	<%-- 최신 공연 정보 --%>
@@ -25,10 +27,7 @@
 				<%-- 반복문으로 최근(createdAt) 공지(desc) 3건 노출 --%>
 				<c:forEach items="${postList}" var="post">
 					<tr>
-						<td>${post.id}</td>
-						<td><a href="/post/post_detail_view?postType=${post.postType}&postId=${post.id}">${post.postTitle}</a></td>
-						<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd"/></td>
-						<td>조회수</td>
+						<td></td>
 					</tr>
 				</c:forEach>
 				</tbody>
