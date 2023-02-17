@@ -42,11 +42,15 @@
 	$(document).ready(function(){
 		// 페이지에 접근했을 때, 글쓰기(insert)/ 글 수정(update) 여부 파악
 		if(${isUpdate}){
+			// 버튼 toggle
 			$('#postInsertBtn').addClass("d-none");
 			$('#postUpdateBtn').removeClass("d-none");
 			
-			$('#postTitle').attr('placeholder',"${post.postTitle}");
-			$('#content').attr('placeholder',"${post.content}");
+			// 기존 정보 수정할 수 있도록 value로 넣어줌
+			$('#postTitle').attr('value',"${post.postTitle}");
+			// textarea는 value로 안 들어간다.
+			// $('#content').attr('value',"${post.content}");
+			document.getElementById("content").value ="${post.content}"; 
 		}
 		
 		// 글 쓰기
@@ -102,13 +106,15 @@
 			let updatedContent = $('#content').val().trim();
 			
 			// validation check
+			// 제목이 없으면 원래 제목으로 출력
 			if(postUpdatedTitle == ''){
-				postUpdatedTitle = $('#postTitle').attr("placeholder");
+				postUpdatedTitle = $('#postTitle').attr("value");
 				// alert(postUpdatedTitle);
 			}
+			// 내용이 없으면 입력하라고 alert
 			if(updatedContent == ''){
-				updatedContent = $('#content').attr("placeholder");
-				// alert(updatedContent);
+				alert("내용을 입력해 주세요");
+				return;
 			}
 			
 			// AJAX

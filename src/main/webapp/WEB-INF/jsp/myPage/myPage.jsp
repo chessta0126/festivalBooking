@@ -171,8 +171,9 @@
 			// 유효성 통과 후 파일 이름 확인
 			// $('#changedFileName').text(changedFileName);
 			
-			// 기존 이미지 숨기기
-			$('#profileImage').addClass('d-none');
+			// 기존 이미지 -> 선택한 이미지로 변경
+			let filePath = URL.createObjectURL(event.target.files[0]);
+			$("#profileImage").attr("src",filePath);
 		});
 		
 		// 닉네임 중복확인 버튼 클릭

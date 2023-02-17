@@ -17,8 +17,8 @@ public class FileManagerService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// 실제 이미지가 저장될 경로(서버)
-	// public static final String FILE_UPLOAD_PATH = "D:\\chessta\\6_Spring Project\\festivalBooking\\workspace\\images/";
-	public static final String FILE_UPLOAD_PATH = "D:\\Spring 프로젝트\\festivalBooking\\workspace\\images/";
+	public static final String FILE_UPLOAD_PATH = "D:\\chessta\\6_Spring Project\\festivalBooking\\workspace\\images/";
+	// public static final String FILE_UPLOAD_PATH = "D:\\Spring 프로젝트\\festivalBooking\\workspace\\images/";
 	
 	// input : MultipartFile, userLoginId
 	// output : imagePath
