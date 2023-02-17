@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.festivalBooking.comment.bo.CommentBO;
 import com.festivalBooking.post.dao.PostDAO;
 import com.festivalBooking.post.model.Post;
 
@@ -14,6 +15,9 @@ public class PostBO {
 
 	@Autowired
 	private PostDAO postDAO;
+
+	@Autowired
+	private CommentBO commentBO;
 	
 	// 글 목록 가져오기(postType)
 	public List<Post> getPostListByPostType(String postType){
@@ -43,7 +47,15 @@ public class PostBO {
 	
 	// 글 삭제(delete)
 	public void deletePostByPostIdUserId(int postId,int postUserId) {
+		// 글(post) 삭제 - DAO 메서드를 통해
 		postDAO.deletePostByPostIdUserId(postId, postUserId);
+
+		// 댓글(comment) 전체 삭제
+		commentBO.deleteCommentsByPostId(postId);
+		
+		// 좋아요(like) 삭제
+		
+		// 조회수(view) 삭제
 	}
 	
 }

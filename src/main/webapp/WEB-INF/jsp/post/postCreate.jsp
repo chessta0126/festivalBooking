@@ -49,8 +49,7 @@
 			// 기존 정보 수정할 수 있도록 value로 넣어줌
 			$('#postTitle').attr('value',"${post.postTitle}");
 			// textarea는 value로 안 들어간다.
-			// $('#content').attr('value',"${post.content}");
-			document.getElementById("content").value ="${post.content}"; 
+			document.getElementById("content").value =`${post.content}`; 
 		}
 		
 		// 글 쓰기

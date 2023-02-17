@@ -23,16 +23,14 @@
 				</thead>
 				<tbody>
 				<%-- 반복문으로 최근(createdAt) 공지(desc) 3건 노출 --%>
+				<c:forEach items="${postList}" var="post">
 					<tr>
-						<td>1</td>
-						<td>제목인데 EL로 받아올거임</td>
-						<td>게시일도 EL로 받아올거</td>
+						<td>${post.id}</td>
+						<td><a href="/post/post_detail_view?postType=${post.postType}&postId=${post.id}">${post.postTitle}</a></td>
+						<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd"/></td>
+						<td>조회수</td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td>제목인데 EL로 받아올거임</td>
-						<td>게시일도 EL로 받아올거</td>
-					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>

@@ -23,9 +23,6 @@ public class PostRestController {
 
 	@Autowired
 	private PostBO postBO;
-
-	@Autowired
-	private CommentBO commentBO;
 	
 	// 글 쓰기
 	@PostMapping("/create")
@@ -84,13 +81,6 @@ public class PostRestController {
 		
 		// 글(post) 삭제
 		postBO.deletePostByPostIdUserId(postId,postUserId);
-		
-		// 댓글(comment) 전체 삭제
-		commentBO.deleteCommentsByPostId(postId);
-		
-		// 좋아요(like) 삭제
-		
-		// 조회수(view) 삭제
 		
 		// 삭제 시 에러가 없으면 성공한 것
 		Map<String, Object> result = new HashMap<>();
