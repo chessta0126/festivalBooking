@@ -94,7 +94,8 @@
 			// 유효성 통과한 이미지는 상자에 업로드 된 파일 이름 노출
 			$('#fileName').text(fileName);
 			// 기본 이미지 -> 선택한 이미지로 변경
-			$("#signUpImg").attr("src","/images/chessta_1676015887904/sunny.jpg");
+			let filePath = URL.createObjectURL(event.target.files[0]);
+			$("#signUpImg").attr("src",filePath);
 		});
 		
 		// 닉네임 중복확인
