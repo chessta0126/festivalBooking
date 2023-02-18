@@ -15,7 +15,7 @@
 			<div class="col-3">
 				<input type="text" id="endDate" value="끝 기한(선택)" class="form-control">
 			</div>
-			<button type="button" id="dateLimit" class="btn btn-dark">검색</button>
+			<button type="button" id="dateLimitBtn" class="btn btn-dark">검색</button>
 		</div>
 	
 		<div class="pt-1">
@@ -181,15 +181,13 @@
 			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ]
 
 			// 연도-월-일 형식
-			,
-			dateFormat : "yy년 mm월 dd일"
+			, dateFormat : "yy년 mm월 dd일"
 		});
 
 		$('#startDate').datepicker({
 			minDate : 0
 			// 시작일(mindate) 이전은 선택 불가
-			,
-			onSelect : function(dateText) {
+			, onSelect : function(dateText) {
 				// alert(dateText);
 				$('#endDate').datepicker('option', 'minDate', dateText);
 			}
@@ -201,7 +199,7 @@
 		});
 
 		// 원하는 기한 내 공연 필터링(미완)
-		$("#dateLimit").on("click", function() {
+		$("#dateLimitBtn").on("click", function() {
 			// alert($('#startDate').val());
 			let startDate = $('#startDate').val();
 			let endDate = $('#endDate').val();

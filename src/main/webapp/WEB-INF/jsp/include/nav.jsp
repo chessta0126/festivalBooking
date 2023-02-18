@@ -10,7 +10,7 @@
 	
 	<div>
 		<li class="nav-item">
-			<a href="#" class="nav-link">공연 홍보</a>
+			<a href="/festival/festival_myList_view" class="nav-link">공연 홍보</a>
 		</li>
 	</div>
 	

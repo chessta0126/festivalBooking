@@ -95,7 +95,13 @@ public class PostController {
 		return "template/layout";
 	}
 
-	// 글 상세 화면(글, 댓글 내려주기)
+	/**
+	 * 글 상세 화면 API (글, 댓글 내려주기)
+	 * @param postType
+	 * @param postId
+	 * @param model
+	 * @return
+	 */
 	// http://localhost:8080/post/post_detail_view?postType={postType}&postId=${postId}
 	@GetMapping("/post_detail_view")
 	public String postDetailView(
