@@ -68,7 +68,7 @@
 		<div>
 			<%-- 공연 라인업 --%>
 			<h2 class="bold pt-5 pb-2">공연 라인업</h2>
-			<div>
+			<div class="festival-info-box border border-info">
 				<c:if test="">
 					${festival.lineUp}
 				</c:if>
@@ -76,7 +76,7 @@
 			
 			<%-- 공연 설명 --%>
 			<h2 class="bold pt-5 pb-2">공연 설명</h2>
-			<div>
+			<div class="festival-info-box border border-success">
 				<c:if test="">
 					${festival.explain}
 				</c:if>
@@ -84,7 +84,7 @@
 			
 			<%-- 주의사항 --%>
 			<h2 class="bold pt-5 pb-2">주의사항</h2>
-			<div>
+			<div class="festival-info-box border border-danger">
 				<c:if test="">
 					${festival.warning}
 				</c:if>
