@@ -17,70 +17,48 @@
 		<div class="d-flex">
 			<%-- 공연 포스터 --%>
 			<div class="pr-5">
-				<%-- 이미지를 클릭하면 file 태그 클릭됨 --%>
-				<input type="file" id="poster" class="d-none"
-					accept=".gif, .jpg, .png, .jpeg">
-				
-				<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서로 변하도록 a 태그 사용 --%>
-				<%-- default 이미지 --%>
-				<div>
-					<a href="#" class="posterUploadBtn">
-						<img width="200" src="\images\★default file/no-image-found-360x250-1-300x208.png" id="posterImg">
-					</a>
-					<div class="pt-3 d-flex justify-content-center">
-						<button type="button" class="posterUploadBtn btn btn-secondary">공연 포스터</button>
-					</div>
-				</div>
-				
-				<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
-				<div id="posterFileName" class="ml-2"></div>
+				<img width="200" src="${festival.imagePath}" id="posterImg">
 			</div>
 			
 			<%-- 공연 정보 --%>
 			<table class="table table-bordered">
 				<tr>
 					<th>공연 제목</th>
-					<td>
-						<input type="text" id="title" class="form-control" placeholder="공연 제목을 입력하세요.">
-					</td>
+					<td>${festival.title}</td>
 				</tr>
 				<tr>
 					<th>공연 날짜</th>
-					<td>
-						<input type="text" id="date" class="form-control" placeholder="공연 날짜 (클릭)">
-					</td>
+					<td>${festival.date}</td>
 				</tr>
 				<tr>
 					<th>공연 시간</th>
 					<td class="d-flex align-items-center">
-						<input type="text" id="startTime" class="form-control" placeholder="공연 시작 시간">
+						${festival.startTime}
 						<span class="bold ml-4 mr-4">~</span>
-						<input type="text" id="endTime" class="form-control" placeholder="공연 끝나는 시간">
+						${festival.endTime}
 					</td>
 				</tr>
 				<tr>
 					<th>공연 장소</th>
-					<td class="d-flex input-group">
-						<div class="input-group-prepend">
-							<input type="text" id="place" class="form-control" placeholder="직접 입력">
+					<td>
+						${festival.place}
+						<c:if test="">
+						<div>
+							${festival.address}
 						</div>
-						<div class="input-group-append">
-							<button class="btn btn-dark">주소 찾기</button>
-						</div>
+						</c:if>
 					</td>
 				</tr>
 				<tr>
 					<th>예매 가격</th>
 					<td class="d-flex align-items-center">
-						<input type="text" id="price" class="mr-2 form-control" placeholder="예매 가격">
-						원
+						${festival.price} 원
 					</td>
 				</tr>
 				<tr>
 					<th>현장 가격</th>
 					<td class="d-flex align-items-center">
-						<input type="text" id="priceOffline" class="mr-2 form-control" placeholder="현장 가격">
-						원
+						${festival.priceOffline} 원
 					</td>
 				</tr>
 			</table>
@@ -90,26 +68,38 @@
 		<div>
 			<%-- 공연 라인업 --%>
 			<h2 class="bold pt-5 pb-2">공연 라인업</h2>
-			<textarea rows="5" id="lineUp" class="form-control"></textarea>
+			<div>
+				<c:if test="">
+					${festival.lineUp}
+				</c:if>
+			</div>
 			
 			<%-- 공연 설명 --%>
 			<h2 class="bold pt-5 pb-2">공연 설명</h2>
-			<textarea rows="5" id="explain" class="form-control"></textarea>
+			<div>
+				<c:if test="">
+					${festival.explain}
+				</c:if>
+			</div>
 			
 			<%-- 주의사항 --%>
 			<h2 class="bold pt-5 pb-2">주의사항</h2>
-			<textarea rows="10" id="warning" class="form-control"></textarea>
+			<div>
+				<c:if test="">
+					${festival.warning}
+				</c:if>
+			</div>
 			
 			<%-- 공연 담당자 --%>
 			<h2 class="bold pt-5 pb-2">공연 담당자</h2>
 			<table class="table">
 				<tr>
 					<th>담당자 이름</th>
-					<td><input type="text" id="festivalMaster" class="form-control" placeholder="담당자 이름"></td>
+					<td>${festival.festivalMaster}</td>
 				</tr>
 				<tr>
 					<th>연락처</th>
-					<td><input type="text" id="askRoot" class="form-control" placeholder="전화번호, 이메일, 인스타그램 등"></td>
+					<td>${festival.askRoot}</td>
 				</tr>
 			</table>
 		</div>

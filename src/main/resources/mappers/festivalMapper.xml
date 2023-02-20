@@ -12,6 +12,8 @@
 			, `startTime`
 			, `endTime`
 			, `place`
+			, `address`
+			, `price`
 			, `priceOffline`
 			, `imagePath`
 			, `lineUp`
@@ -31,6 +33,8 @@
 			, #{startTime}
 			, #{endTime}
 			, #{place}
+			, #{address}
+			, #{price}
 			, #{priceOffline}
 			, #{imagePath}
 			, #{lineUp}
@@ -43,4 +47,14 @@
 			, NOW()
 		)
 	</insert>
+	
+	<select id="getFestivalList" resultType="map">
+		SELECT * FROM `festival`
+	</select>
+
+	<select id="getFestivalByFestivalId" parameterType="int"
+	resultType="com.festivalBooking.festival.model.Festival">
+		SELECT * FROM `festival`
+		WHERE `id` = #{festivalId}
+	</select>
 </mapper>

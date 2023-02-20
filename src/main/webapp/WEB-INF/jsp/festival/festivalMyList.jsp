@@ -7,8 +7,6 @@
 	<div>
 		<div class="pb-3 d-flex justify-content-between align-items-center">
 			<h1 class="bold">내가 등록한 공연</h1>
-			<c:if test="${userId eq null}">
-			</c:if>
 		</div>
 		
 		<table class="table">
@@ -24,7 +22,7 @@
 				<c:forEach items="${festivalList}" var="festival">
 				<tr>
 					<td>${festival.id}</td>
-					<td><a href="#"></a></td>
+					<td><a href="/festival/festival_detail_view?festivalId=${festival.id}">${festival.title}</a></td>
 					<td><fmt:formatDate value="${festival.createdAt}" pattern="yyyy-MM-dd"/></td>
 					<td>조회수</td>
 				</tr>
