@@ -3,4 +3,44 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.festivalBooking.festival.dao.FestivalDAO">
+	<insert id="insertFestival" parameterType="com.festivalBooking.festival.model.Festival">
+		INSERT INTO `festival`
+		(
+			`userId`
+			, `title`
+			, `date`
+			, `startTime`
+			, `endTime`
+			, `place`
+			, `priceOffline`
+			, `imagePath`
+			, `lineUp`
+			, `explain`
+			, `warning`
+			, `festivalMaster`
+			, `askRoot`
+			, `isTimeOver`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{title}
+			, #{date}
+			, #{startTime}
+			, #{endTime}
+			, #{place}
+			, #{priceOffline}
+			, #{imagePath}
+			, #{lineUp}
+			, #{explain}
+			, #{warning}
+			, #{festivalMaster}
+			, #{askRoot}
+			, #{isTimeOver}
+			, NOW()
+			, NOW()
+		)
+	</insert>
 </mapper>

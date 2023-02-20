@@ -17,7 +17,7 @@ public class FestivalController {
 		return "template/layout";
 	}
 
-	// 내가 등록한 공연
+	// 내가 등록한 공연 목록
 	@GetMapping("/festival_myList_view")
 	public String festivalMyListView(Model model) {
 		model.addAttribute("viewName","festival/festivalMyList");
