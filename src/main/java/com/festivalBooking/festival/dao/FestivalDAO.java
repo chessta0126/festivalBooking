@@ -13,23 +13,7 @@ import com.festivalBooking.festival.model.Festival;
 public interface FestivalDAO {
 	// 공연 추가
 	// public boolean insertFestival(Festival festival);
-	public boolean insertFestival(
-			@Param("userId") int userId
-			, @Param("title") String title
-			, @Param("date") String date
-			, @Param("startTime") String startTime
-			, @Param("endTime") String endTime
-			, @Param("place") String place
-			, @Param("address") String address
-			, @Param("price") int price
-			, @Param("priceOffline") int priceOffline
-			, @Param("imagePath") String imagePath
-			, @Param("lineUp") String lineUp
-			, @Param("explain") String explain
-			, @Param("warning") String warning
-			, @Param("festivalMaster") String festivalMaster
-			, @Param("askRoot") String askRoot
-			, @Param("isTimeOver") boolean isTimeOver);
+	public boolean insertFestival(Festival festival);
 	
 	// 공연 목록 가져오기
 	public List<Festival> getFestivalList();

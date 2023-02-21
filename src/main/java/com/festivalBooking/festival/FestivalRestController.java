@@ -27,34 +27,14 @@ public class FestivalRestController {
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@ModelAttribute Festival festival
-			,@RequestParam("userId") int userId
-			,@RequestParam("title") String title
-			,@RequestParam("date") String date
-			,@RequestParam("startTime") String startTime
-			,@RequestParam("endTime") String endTime
-			,@RequestParam("place") String place
-			,@RequestParam(value="address",required = false) String address
-			,@RequestParam("price") int price
-			,@RequestParam("priceOffline") int priceOffline
 			,@RequestParam(value="imagePath",required = false) MultipartFile imagePath
-			,@RequestParam(value="lineUp",required = false) String lineUp
-			,@RequestParam(value="explain",required = false) String explain
-			,@RequestParam(value="warning",required = false) String warning
-			,@RequestParam("festivalMaster") String festivalMaster
-			,@RequestParam("askRoot") String askRoot
-			,@RequestParam("isTimeOver") String isTimeOver
 			,HttpSession session){
+		
+		// 파일 이름 만들 때 BO 에서 필요
 		String name = (String)session.getAttribute("userName");
-		boolean isTimeOver2 = true;
-		if(isTimeOver.equals(true)) {
-			isTimeOver2 = true;
-		} else{
-			isTimeOver2 = false;
-		}
+		
 		Map<String, Object> result = new HashMap<>();
-		boolean isfestivalCreateSuccess = festivalBO.addFestival(
-				userId, title, date, startTime, endTime, place, address, price, priceOffline, 
-				imagePath, lineUp, explain, warning, festivalMaster, askRoot, isTimeOver2, name);
+		boolean isfestivalCreateSuccess = festivalBO.addFestival(festival, imagePath, name);
 		if(isfestivalCreateSuccess) {
 			result.put("code", 1);		
 			result.put("result", true);

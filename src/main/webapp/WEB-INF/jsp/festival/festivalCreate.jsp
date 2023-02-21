@@ -202,7 +202,7 @@
 			let address = $('#address').val();
 			let price = $('#price').val().trim();
 			let priceOffline = $('#priceOffline').val().trim();
-			let imagePath = $('#posterImg').val();
+			let imagePath = $('#poster').val();
 			let lineUp = $('#lineUp').val().trim();
 			let explain = $('#explain').val().trim();
 			let warning = $('#warning').val().trim();
@@ -282,7 +282,7 @@
 					if (data.code == 1) {
 						// 성공
 						alert("공연이 등록되었습니다.");
-						location.href="/book/festival_detail_view";
+						location.href="/festival/festival_detail_view?festivalId="+data.festivalId;
 					} else{
 						// 실패
 						alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
