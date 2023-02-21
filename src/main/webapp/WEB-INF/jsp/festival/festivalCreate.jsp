@@ -3,14 +3,18 @@
 	
 <div class="pt-5 d-flex justify-content-center">
 	<div>
-		<h2 class="bold pb-5">공연 등록하기</h2>
-		
-		<label class="switch">
-			<input type="checkbox">
-			<span class="slider round"></span>
-		</label>
-		<p id="timeOver">OFF</p>
-		<p id="notTimeOver" class="d-none">ON</p>
+		<div class="d-flex justify-content-between">
+			<h2 class="bold pb-3">공연 등록하기</h2>
+			
+			<div>
+				<label class="switch">
+					<input type="checkbox">
+					<span class="slider round"></span>
+				</label>
+				<p id="timeOver" class="text-danger">예매 중지</p>
+				<p id="notTimeOver" class="d-none text-success">예매 가능</p>
+			</div>
+		</div>
 
 		<form id="festivalCreateForm" method="post" action="/festival/create">
 		<%-- 공연 예매 정보 --%>
@@ -25,7 +29,7 @@
 				<%-- default 이미지 --%>
 				<div>
 					<a href="#" class="posterUploadBtn">
-						<img width="200" src="\images\★default file/no-image-found-360x250-1-300x208.png" id="posterImg">
+						<img width="250" src="\images\★default file/no-image-found-360x250-1-300x208.png" id="posterImg">
 					</a>
 					<div class="pt-3 d-flex justify-content-center">
 						<button type="button" class="posterUploadBtn btn btn-secondary">공연 포스터</button>
@@ -141,6 +145,7 @@
 				return;				
 			}
 		});
+		check.click();
 		
 		// datepicker 형식
 		$.datepicker.setDefaults({

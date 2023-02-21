@@ -24,7 +24,7 @@ nav .nav-item:hover{background-color: darkcyan;}
     color: blueviolet;
     font-weight: bold;
 }
-.festival-info-box {height:100px;}
+.festival-info-box {minheight:100px;}
 .book-font-size {font-size: 18px;}
 
 
