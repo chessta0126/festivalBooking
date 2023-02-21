@@ -3,7 +3,8 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.festivalBooking.festival.dao.FestivalDAO">
-	<insert id="insertFestival" parameterType="com.festivalBooking.festival.model.Festival">
+	<insert id="insertFestival" parameterType="com.festivalBooking.festival.model.Festival"
+	useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO `festival`
 		(
 			`userId`
