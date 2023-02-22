@@ -13,7 +13,7 @@
 				</button>
 			</c:if>
 		</div>
-		<table class="table">
+		<table class="table text-center">
 			<thead>
 				<tr>
 					<th>No.</th>

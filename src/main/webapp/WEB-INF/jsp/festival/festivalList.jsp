@@ -19,7 +19,7 @@
 		</div>
 	
 		<div class="pt-1">
-			<article class="festival1 mt-3 pr-4 d-flex bg-dark">
+			<article class="festival1 mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
 				<div class="m-3">
 					<a href="#">
@@ -48,7 +48,7 @@
 				</div>
 			</article>
 	
-			<article class="festival2 mt-3 pr-4 d-flex bg-dark">
+			<article class="festival2 mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
 				<div class="m-3">
 					<a href="#">
@@ -78,7 +78,7 @@
 				</div>
 			</article>
 	
-			<article class="festival3 mt-3 pr-4 d-flex bg-dark">
+			<article class="festival3 mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
 				<div class="m-3">
 					<a href="#">
@@ -107,7 +107,7 @@
 				</div>
 			</article>
 	
-			<article class="festival4 mt-3 pr-4 d-flex bg-dark">
+			<article class="festival4 mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
 				<div class="m-3">
 					<a href="#">
@@ -137,7 +137,7 @@
 				</div>
 			</article>
 	
-			<article class="festival5 mt-3 pr-4 d-flex bg-dark">
+			<article class="festival5 mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
 				<div class="m-3">
 					<a href="#">
