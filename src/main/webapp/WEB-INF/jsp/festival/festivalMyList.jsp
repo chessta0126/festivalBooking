@@ -9,26 +9,36 @@
 			<h1 class="bold">내가 등록한 공연</h1>
 		</div>
 		
-		<table class="table">
-			<thead>
-				<tr>
-					<th>No.</th>
-					<th>공연명</th>
-					<th>게시일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${festivalList}" var="festival">
-				<tr>
-					<td>${festival.id}</td>
-					<td><a href="/festival/festival_detail_view?festivalId=${festival.id}">${festival.title}</a></td>
-					<td><fmt:formatDate value="${festival.createdAt}" pattern="yyyy-MM-dd"/></td>
-					<td>조회수</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<c:choose>
+			<c:when test="${festivalList[0] != null}">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>공연명</th>
+						<th>게시일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${festivalList}" var="festival">
+					<tr>
+						<td>${festival.id}</td>
+						<td><a href="/festival/festival_detail_view?festivalId=${festival.id}">${festival.title}</a></td>
+						<td><fmt:formatDate value="${festival.createdAt}" pattern="yyyy-MM-dd"/></td>
+						<td>조회수</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			</c:when>
+			
+			<c:otherwise>
+			<div class="p-3 d-flex justify-content-center">
+				<img width="250" src="\images\★default file/no-image-found-360x250-1-300x208.png" alt="thereIsNoFestival">
+			</div>
+			</c:otherwise>
+		</c:choose>
 
 		<button id="writePostBtn" class="w-100 btn btn-primary">
 			<a href="/festival/festival_create_view" class="button">새로운 공연 등록</a>
