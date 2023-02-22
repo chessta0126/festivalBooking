@@ -27,7 +27,9 @@
 				<%-- 반복문으로 최근(createdAt) 공지(desc) 3건 노출 --%>
 				<c:forEach items="${postList}" var="post">
 					<tr>
-						<td></td>
+						<td>${post.id}</td>
+						<td>${post.postTitle}</td>
+						<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				</c:forEach>
 				</tbody>

@@ -23,6 +23,10 @@ public class PostBO {
 	public List<Post> getPostListByPostType(String postType){
 		return postDAO.selectPostListByPostType(postType);
 	}
+	// 글 목록 가져오기(postType, limit)
+	public List<Post> getPostListByPostTypeLimit(String postType, int limit){
+		return postDAO.selectPostListByPostTypeLimit(postType,limit);
+	}
 	
 	/*
 	 * // 글 작성(insert) public void addPost(int userId, String postType, String

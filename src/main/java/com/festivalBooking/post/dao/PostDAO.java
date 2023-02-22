@@ -11,6 +11,11 @@ import com.festivalBooking.post.model.Post;
 public interface PostDAO {
 	// 글 목록 가져오기(postType)
 	public List<Post> selectPostListByPostType(String postType);
+
+	// 글 목록 가져오기(postType,limit)
+	public List<Post> selectPostListByPostTypeLimit(
+			@Param("postType") String postType
+			,@Param("limit")  int limit);
 	
 	/*
 	 * // 글 작성(insert) public void insertPost(

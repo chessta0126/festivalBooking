@@ -23,10 +23,10 @@ public class MainController {
 		public String signUpView(Model model) {
 			
 			String postType = "공지사항";
-			List<Post> postList = postBO.getPostListByPostType(postType);
+			List<Post> postList = postBO.getPostListByPostTypeLimit(postType,3);
 			
 			model.addAttribute("viewName","main/mainPage");
-			model.addAttribute("postList","postList");
+			model.addAttribute("postList",postList);
 			
 			return "template/layout";
 		}

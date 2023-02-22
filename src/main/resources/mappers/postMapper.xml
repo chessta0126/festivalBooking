@@ -7,6 +7,15 @@
  		SELECT *
  		FROM `post`
  		WHERE `postType`=#{postType}
+ 		order by `id` DESC
+ 	</select>
+	
+	<select id="selectPostListByPostTypeLimit" parameterType="map" resultType="map">
+ 		SELECT *
+ 		FROM `post`
+ 		WHERE `postType`=#{postType}
+ 		order by `id` DESC
+ 		LIMIT 3
  	</select>
  	
  	<select id="selectPostByPostId" parameterType="int" resultType="com.festivalBooking.post.model.Post">

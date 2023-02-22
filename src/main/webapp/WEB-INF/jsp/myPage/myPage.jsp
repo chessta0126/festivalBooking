@@ -116,7 +116,7 @@
 		</button>
 		<div class="d-flex justify-content-between">
 			<button class="w-100 col-5 btn btn-warning">
-				<a href="#" class="button text-dark">공연 홍보하기</a>
+				<a href="/festival/festival_myList_view" class="button text-dark">공연 홍보하기</a>
 			</button>
 			<button class="w-100 col-5 btn btn-secondary">
 				<a href="#" class="button">예매 확인</a>
