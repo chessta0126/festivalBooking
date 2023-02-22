@@ -41,6 +41,10 @@ public class FestivalBO {
 	public List<Festival> getFestivalList() {
 		return festivalDAO.getFestivalList();
 	}
+	// 내 공연 목록 가져오기
+	public List<Festival> getFestivalListByUserId(int userId) {
+		return festivalDAO.getFestivalListByUserId(userId);
+	}
 
 	// 공연 가져오기 (festivalId)
 	public Festival getFestivalByFestivalId(int festivalId) {

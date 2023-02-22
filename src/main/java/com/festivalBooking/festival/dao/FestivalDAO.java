@@ -17,6 +17,9 @@ public interface FestivalDAO {
 	
 	// 공연 목록 가져오기
 	public List<Festival> getFestivalList();
+
+	// 내 공연 목록 가져오기
+	public List<Festival> getFestivalListByUserId(int userId);
 	
 	// 공연 가져오기 (festivalId)
 	public Festival getFestivalByFestivalId(int festivalId);

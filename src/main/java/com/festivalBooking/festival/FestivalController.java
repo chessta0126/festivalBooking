@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/festival")
 @Controller
 public class FestivalController {
@@ -32,9 +34,10 @@ public class FestivalController {
 
 	// 내가 등록한 공연 목록
 	@GetMapping("/festival_myList_view")
-	public String festivalMyListView(Model model) {
+	public String festivalMyListView(Model model, HttpSession session) {
 		
-		List<Festival> festivalList = festivalBO.getFestivalList();
+		Integer userId = (Integer)session.getAttribute("userId");
+		List<Festival> festivalList = festivalBO.getFestivalListByUserId(userId);
 		
 		model.addAttribute("viewName","festival/festivalMyList");
 		model.addAttribute("festivalList",festivalList);

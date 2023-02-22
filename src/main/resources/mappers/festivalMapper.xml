@@ -53,6 +53,11 @@
 		SELECT * FROM `festival`
 	</select>
 
+	<select id="getFestivalListByUserId" parameterType="int" resultType="com.festivalBooking.festival.model.Festival">
+		SELECT * FROM `festival`
+		WHERE `userId` = #{userId}
+	</select>
+
 	<select id="getFestivalByFestivalId" parameterType="int"
 	resultType="com.festivalBooking.festival.model.Festival">
 		SELECT * FROM `festival`
