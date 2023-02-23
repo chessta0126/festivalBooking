@@ -1,6 +1,7 @@
 package com.festivalBooking.festival;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class FestivalRestController {
 	@Autowired
 	private FestivalBO festivalBO;
 	
+	// 공연 등록
 	@PostMapping(value="/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	public Map<String, Object> create(
 			@ModelAttribute Festival festival

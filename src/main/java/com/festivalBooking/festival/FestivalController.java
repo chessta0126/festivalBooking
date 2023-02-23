@@ -31,6 +31,20 @@ public class FestivalController {
 		
 		return "template/layout";
 	}
+	// 공연 기간 검색 -> 기간 내 공연 다시 뿌리기
+	// http://localhost:8080/festival/festival_list_view_limit?startDate={startDate}&endDate={endDate}
+	@GetMapping("/festival_list_view_limit")
+	public String festivalListLimitView(
+			@RequestParam("startDate") String startDate
+			,@RequestParam("endDate") String endDate
+			,Model model) {
+		List<Festival> festivalListByLimit = festivalBO.getFestivalListByLimit(startDate,endDate);
+		
+		model.addAttribute("viewName","festival/festivalList");
+		model.addAttribute("festivalList",festivalListByLimit);
+		
+		return "template/layout";
+	}
 
 	// 내가 등록한 공연 목록
 	@GetMapping("/festival_myList_view")

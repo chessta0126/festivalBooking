@@ -17,7 +17,12 @@ public interface FestivalDAO {
 	
 	// 공연 목록 가져오기
 	public List<Festival> getFestivalList();
-
+	
+	// 기간 내 공연 목록 가져오기
+	public List<Festival> getFestivalListByLimit(
+			@Param("startDate") String startDate
+			, @Param("endDate") String endDate);
+	
 	// 내 공연 목록 가져오기
 	public List<Festival> getFestivalListByUserId(int userId);
 	
