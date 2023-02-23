@@ -27,14 +27,14 @@ public class FestivalRestController {
 	@PostMapping(value="/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	public Map<String, Object> create(
 			@ModelAttribute Festival festival
-			,@RequestParam(value="imagePath",required = false) MultipartFile imagePath
+			,@RequestParam(value="posterImg",required = false) MultipartFile posterImg
 			,HttpSession session){
 		
 		// 파일 이름 만들 때 BO 에서 필요
 		String name = (String)session.getAttribute("userName");
 		
 		// DB insert
-		boolean isfestivalCreateSuccess = festivalBO.addFestival(festival, imagePath, name);
+		boolean isfestivalCreateSuccess = festivalBO.addFestival(festival, posterImg, name);
 
 		Map<String, Object> result = new HashMap<>();
 		if(isfestivalCreateSuccess) {

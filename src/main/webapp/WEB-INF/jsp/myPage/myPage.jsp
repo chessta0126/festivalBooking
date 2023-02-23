@@ -112,7 +112,7 @@
 	<%-- 이동 버튼 --%>
 	<div class="container">
 		<button class="w-100 btn btn-dark mt-3 mb-3">
-			<a href="#" class="button">내가 작성한 글</a>
+			<a href="/myPage/myPost_myFestival_view" class="button">내가 작성한 글</a>
 		</button>
 		<div class="d-flex justify-content-between">
 			<button class="w-100 col-5 btn btn-warning">

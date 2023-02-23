@@ -19,6 +19,10 @@ public class PostBO {
 	@Autowired
 	private CommentBO commentBO;
 	
+	// 내가 작성한 글 목록(userId, postType)
+	public List<Post> getPostListByUserIdPostType(int userId, String postType){
+		return postDAO.selectPostListByUserIdPostType(userId, postType);
+	}
 	// 글 목록 가져오기(postType)
 	public List<Post> getPostListByPostType(String postType){
 		return postDAO.selectPostListByPostType(postType);

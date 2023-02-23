@@ -9,6 +9,11 @@ import com.festivalBooking.post.model.Post;
 
 @Repository
 public interface PostDAO {
+	// 내가 작성한 글 목록 가져오기
+	public List<Post> selectPostListByUserIdPostType(
+			@Param("userId") int userId
+			, @Param("postType") String postType);
+	
 	// 글 목록 가져오기(postType)
 	public List<Post> selectPostListByPostType(String postType);
 

@@ -3,6 +3,14 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.festivalBooking.post.dao.PostDAO">
+	<select id="selectPostListByUserIdPostType" parameterType="map" resultType="map">
+ 		SELECT *
+ 		FROM `post`
+ 		WHERE `userId` = #{userId}
+ 		AND `postType` = #{postType}
+ 		order by `id` DESC
+ 	</select>
+
 	<select id="selectPostListByPostType" parameterType="String" resultType="map">
  		SELECT *
  		FROM `post`

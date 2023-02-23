@@ -202,7 +202,7 @@
 			let address = $('#address').val();
 			let price = $('#price').val().trim();
 			let priceOffline = $('#priceOffline').val().trim();
-			let imagePath = $('#poster').val();
+			let posterImg = $('#poster')[0].files[0];
 			let lineUp = $('#lineUp').val().trim();
 			let explain = $('#explain').val().trim();
 			let warning = $('#warning').val().trim();
@@ -262,7 +262,7 @@
 			formData.append("address", address);
 			formData.append("price", price);
 			formData.append("priceOffline", priceOffline);
-			formData.append("imagePath", imagePath);
+			formData.append("posterImg", posterImg);
 			formData.append("lineUp", lineUp);
 			formData.append("explain", explain);
 			formData.append("warning", warning);
