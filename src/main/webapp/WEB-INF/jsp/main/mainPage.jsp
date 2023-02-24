@@ -77,7 +77,7 @@
 			<div class="d-flex justify-content-center pt-3 mb-3">
 				<div class="mr-5">
 					<label for="notMember" class="mr-1">비회원</label>
-					<input type="radio" id="notMember" name="isMember" value="false">
+					<input type="radio" id="memberNot" name="isMember" value="false" checked>
 				</div>
 				<div>
 					<label for="member" class="mr-1">회원</label>
@@ -86,9 +86,23 @@
 			</div>
 			
 			<%-- 비회원일 경우 : 이름, 전화번호 --%>
-			<div class="container">
+			<div id="memberNotBox" class="container">
 				<div class="d-flex align-items-center mb-3">
 					<label for="bookName" class="ml-3 col-4">이름</label>
+					<input type="text" id="bookName" name="bookName" class="form-control" placeholder="예약자 이름">
+				</div>
+				<div class="d-flex align-items-center mb-4">
+					<label for="phoneNumber" class="ml-3 col-4">전화번호</label>
+					<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="전화번호">
+				</div>
+				
+				<button class="w-100 btn btn-dark">확인하기</button>
+			</div>
+			
+			<%-- 회원일 경우 : 이름, 전화번호 --%>
+			<div id="memberBox" class="container d-none">
+				<div class="d-flex align-items-center mb-3">
+					<label for="bookName" class="ml-3 col-4">apaqj</label>
 					<input type="text" id="bookName" name="bookName" class="form-control" placeholder="예약자 이름">
 				</div>
 				<div class="d-flex align-items-center mb-4">
@@ -102,3 +116,28 @@
 	</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		// 회원/ 비회원 상자 toggle
+        $('#member').on('click',function(){
+            // 선택창 체크 토글
+            $('#memberNot').prop("checked",false);
+            $('#member').prop("checked",true);
+
+            // 입력창 박스 토글
+            $('#memberNotBox').addClass("d-none");
+            $('#memberBox').removeClass("d-none");
+        });
+		
+        $('#memberNot').on('click',function(){
+            // 선택창 체크 토글
+            $('#member').prop("checked",false);
+            $('#memberNot').prop("checked",true);
+
+            // 입력창 박스 토글
+            $('#memberBox').addClass("d-none");
+            $('#memberNotBox').removeClass("d-none");
+        });
+	});
+</script>
