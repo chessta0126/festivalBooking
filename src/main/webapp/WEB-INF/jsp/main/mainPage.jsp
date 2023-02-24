@@ -71,7 +71,7 @@
 	
 	<%-- 예약 확인 --%>
 	<div class="pl-3 pt-4 pb-4">
-		<h1 class="bold">예약 확인</h1>
+		<h1 class="bold">예매 확인</h1>
 		<div class="book-confirm-box white-text bold">
 			<%-- 회원 / 비회원 선택 --%>
 			<div class="d-flex justify-content-center pt-3 mb-3">
@@ -99,18 +99,11 @@
 				<button class="w-100 btn btn-dark">확인하기</button>
 			</div>
 			
-			<%-- 회원일 경우 : 이름, 전화번호 --%>
+			<%-- 회원일 경우 : 예매 확인 페이지로 넘어가는 버튼 --%>
 			<div id="memberBox" class="container d-none">
-				<div class="d-flex align-items-center mb-3">
-					<label for="bookName" class="ml-3 col-4">apaqj</label>
-					<input type="text" id="bookName" name="bookName" class="form-control" placeholder="예약자 이름">
-				</div>
-				<div class="d-flex align-items-center mb-4">
-					<label for="phoneNumber" class="ml-3 col-4">전화번호</label>
-					<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="전화번호">
-				</div>
-				
-				<button class="w-100 btn btn-dark">확인하기</button>
+				<button class="w-100 btn btn-dark">
+					<a href="" class="button">확인하기</a>
+				</button>
 			</div>
 		</div>
 	</div>
