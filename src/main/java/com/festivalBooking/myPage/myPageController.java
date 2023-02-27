@@ -29,6 +29,13 @@ public class myPageController {
 	@Autowired
 	private FestivalBO festivalBO;
 
+	/**
+	 * 마이페이지 API
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	// http://localhost:8080/myPage/myPage_view
 	@GetMapping("/myPage_view")
 	public String myPageView(Model model, HttpSession session) {
 		Integer userId = (Integer)session.getAttribute("userId");
@@ -44,7 +51,13 @@ public class myPageController {
 		return "template/layout";
 	}
 
-	// 내가 작성한 글, 등록한 공연
+	/**
+	 * 내가 작성한 글, 등록한 공연 API
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	// http://localhost:8080/myPage/myPost_myFestival_view
 	@GetMapping("/myPost_myFestival_view")
 	public String myPostMyFestivalView(Model model, HttpSession session) {
 		Integer userId = (Integer)session.getAttribute("userId");

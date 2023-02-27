@@ -4,14 +4,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="pt-3 d-flex justify-content-center">
-	<div>
+	<div class="pt-3">
 		<div>
 			<%-- 예매 마감 됐을 경우에만 --%>
-			<c:if test="">
-				<button type="button" id="expired" class="mb-3 btn btn-danger bold">
-					예약 마감
-				</button>
-			</c:if>
+			<c:choose>
+				<c:when test="${isTimeOver}">
+					<button type="button" id="expired" class="mb-3 btn btn-danger bold">
+						예매 마감
+					</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" id="expired" class="mb-3 btn btn-success bold">
+						예매중
+					</button>
+				</c:otherwise>
+			</c:choose>
 			
 			<%-- 예매 완료 됐을 경우에만 보이기 --%>
 			<button type="button" id="bookingOK" class="mb-3 btn btn-warning bold button d-none"
@@ -47,7 +54,7 @@
 						<th>공연 장소</th>
 						<td>
 							${festival.place}
-							<button type="button" id="placeMapBtn" class="btn btn-dark">지도</button>
+							<button type="button" id="placeMapBtn" class="ml-2 btn btn-dark">지도</button>
 							<c:if test="${ObjectUtils.isEmpty(festival.address)}">
 							<div>
 								${festival.address}
@@ -224,9 +231,14 @@
 			e.preventDefault();
 			let festivalId = ${festival.id};
 			let userId = ${userId};
-			let headCount = $('#headCount').val();
+			let headCount = $('#headCount option:selected').val();
 			let payMoney = $('#payMoney').text();
 			let isMember = true;
+			if(isMember){
+				isMember = 1;
+			} else{
+				isMember = 0;
+			}
 			
 			// AJAX 전송
 			$.ajax({

@@ -30,7 +30,7 @@
 		)
 	</insert>
 
-	<select id="selectMyBookList" parameterType="int" resultType="com.festivalBooking.comment.model.Comment">
+	<select id="selectMyBookList" parameterType="int" resultType="com.festivalBooking.book.model.Book">
 		SELECT
 			`id`
 			,`festivalId`

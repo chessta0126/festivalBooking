@@ -21,7 +21,12 @@ public class FestivalController {
 	@Autowired
 	private FestivalBO festivalBO;
 	
-	// 공연 예매 (공연 정보 리스트)
+	/**
+	 * 공연 예매 (공연 정보 리스트) API
+	 * @param model
+	 * @return
+	 */
+	// http://localhost:8080/festival/festival_list_view
 	@GetMapping("/festival_list_view")
 	public String festivalListView(Model model) {
 		List<Festival> festivalList = festivalBO.getFestivalList();
@@ -31,7 +36,13 @@ public class FestivalController {
 		
 		return "template/layout";
 	}
-	// 공연 기간 검색 -> 기간 내 공연 다시 뿌리기
+	/**
+	 * 공연 기간 검색 후 기간 내 공연 다시 뿌리기 API
+	 * @param startDate
+	 * @param endDate
+	 * @param model
+	 * @return
+	 */
 	// http://localhost:8080/festival/festival_list_view_limit?startDate={startDate}&endDate={endDate}
 	@GetMapping("/festival_list_view_limit")
 	public String festivalListLimitView(
@@ -46,7 +57,13 @@ public class FestivalController {
 		return "template/layout";
 	}
 
-	// 내가 등록한 공연 목록
+	/**
+	 * 내가 등록한 공연 목록 API
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	// http://localhost:8080/festival/festival_myList_view
 	@GetMapping("/festival_myList_view")
 	public String festivalMyListView(Model model, HttpSession session) {
 		
@@ -59,7 +76,12 @@ public class FestivalController {
 		return "template/layout";
 	}
 	
-	// 공연 홍보 글쓰기
+	/**
+	 * 공연 홍보 글쓰기 API
+	 * @param model
+	 * @return
+	 */
+	// http://localhost:8080/festival/festival_create_view
 	@GetMapping("/festival_create_view")
 	public String festivalCreateView(Model model) {
 		model.addAttribute("viewName","festival/festivalCreate");
@@ -67,7 +89,12 @@ public class FestivalController {
 		return "template/layout";
 	}
 
-	// 공연 홍보 글 상세
+	/**
+	 * 공연 홍보 글 상세 API
+	 * @param festivalId
+	 * @param model
+	 * @return
+	 */
 	// http://localhost:8080/festival/festival_detail_view?festivalId={festivalId}
 	@GetMapping("/festival_detail_view")
 	public String festivalDetailView(
@@ -78,6 +105,7 @@ public class FestivalController {
 		
 		model.addAttribute("viewName","festival/festivalDetail");
 		model.addAttribute("festival",festival);
+		model.addAttribute("isTimeOver",festival.isTimeOver());
 		
 		return "template/layout";
 	}

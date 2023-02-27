@@ -23,7 +23,7 @@ public class BookRestController {
 	public Map<String, Object> addBooking(
 			@ModelAttribute Book book){
 		
-		// DB에 insert
+		// DB insert
 		bookBO.addBooking(book);
 		
 		// 여기까지 내려왔다는 것은 잘 들어갔다는 것

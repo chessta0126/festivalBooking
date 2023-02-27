@@ -236,7 +236,7 @@
 			maxDate : 31
 		});
 
-		// 원하는 기한 내 공연 필터링(미완)
+		// 원하는 기한 내 공연 필터링
 		$("#dateLimitBtn").on("click", function() {
 			// alert($('#startDate').val());
 			let startDate = $('#startDate').val();
