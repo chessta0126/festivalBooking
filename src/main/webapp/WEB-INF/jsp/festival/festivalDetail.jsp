@@ -3,9 +3,22 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="pt-5 d-flex justify-content-center">
+<div class="pt-3 d-flex justify-content-center">
 	<div>
-		<h2 class="bold pb-5">공연 등록하기</h2>
+		<div>
+			<%-- 예매 마감 됐을 경우에만 --%>
+			<c:if test="">
+				<button type="button" id="expired" class="mb-3 btn btn-danger bold">
+					예약 마감
+				</button>
+			</c:if>
+			
+			<%-- 예매 완료 됐을 경우에만 보이기 --%>
+			<button type="button" id="bookingOK" class="mb-3 btn btn-warning bold button d-none"
+			data-toggle="modal" data-target="#modalBookingCancel" data-festival-id="${festival.id}">
+				예매 완료
+			</button>
+		</div>
 
 		<%-- 공연 예매 정보 --%>
 		<div class="d-flex">
@@ -76,12 +89,17 @@
 				</div>
 				
 				<%-- 로그인 중 나타나는 회원 예매 버튼 --%>
-				
+				<c:if test="${userId ne null}">
+					<div class="pt-3 d-flex justify-content-end">
+						<button type="button" id="memberBookingBtn" class="btn btn-primary"
+						data-festival-id="${festival.id}">예매하기</button>
+					</div>
+				</c:if>
 				
 				<%-- 비로그인 시 나타나는 비회원 예매 버튼 --%>
 				<c:if test="${userId eq null}">
 					<div class="pt-3 d-flex justify-content-end">
-						<button type="button" id="notMemberBooking" class="btn btn-primary"
+						<button type="button" id="notMemberBookingBtn" class="btn btn-primary"
 						data-toggle="modal" data-target="#modal" data-festival-id="${festival.id}">예매하기</button>
 					</div>
 				</c:if>
@@ -144,7 +162,7 @@
 </footer>
 
 
-<!-- Modal -->
+<!-- 예매 Modal -->
 <div class="modal fade" id="modal">
 <%-- modal-sm : 작은 모달 창 --%>
 <%-- modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
@@ -159,6 +177,26 @@
       		<div class="py-3">
       			<%-- data-dismiss="modal" : modal창 닫힘 --%>
       			<a href="#" data-dismiss="modal">취소하기</a>
+      		</div>
+		</div>
+	</div>
+</div>	
+
+<!-- 예매 취소 Modal -->
+<div class="modal fade" id="modalBookingCancel">
+<%-- modal-sm : 작은 모달 창 --%>
+<%-- modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
+	<div class="modal-dialog modal-sm modal-dialog-centered">
+		<div class="modal-content text-center">
+      		<div class="py-3 border-bottom">
+      			<a href="#" id="myBookList">예매 목록 확인</a>
+      		</div>
+      		<div class="py-3 border-bottom">
+      			<a href="#" id="bookCancel">예매 취소</a>
+      		</div>
+      		<div class="py-3">
+      			<%-- data-dismiss="modal" : modal창 닫힘 --%>
+      			<a href="#" data-dismiss="modal">창 닫기</a>
       		</div>
 		</div>
 	</div>
@@ -182,7 +220,36 @@
 		});
 
 		// 로그인 상태일 경우 바로 AJAX로 예매 정보 넘기기
-		
+		$('#memberBookingBtn').on('click', function(e) {
+			e.preventDefault();
+			let festivalId = ${festival.id};
+			let userId = ${userId};
+			let headCount = $('#headCount').val();
+			let payMoney = $('#payMoney').text();
+			let isMember = true;
+			
+			// AJAX 전송
+			$.ajax({
+				type:'POST'
+				,url:'/book/addBooking'
+				, data: {"festivalId":festivalId, "userId":userId, "payMoney":payMoney, "headCount":headCount, "isMember":isMember}
+				, success: function(data) {
+					if (data.code == 1) {
+						// 성공
+						alert("예약이 완료되었습니다.");
+						// 예매 완료 버튼 보이기 (클릭 시 예매 취소하기 modal) -> reload
+						$('#bookingOK').removeClass("d-none");
+					} else{
+						// 실패
+						alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
+					}
+				}
+				, error : function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+		});
 		
 		// 비로그인 상태 : 예매하기 버튼 클릭 -> modal 작동
 		$('#notMemberBookingBtn').on('click', function(e) {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.festivalBooking.book.dao.BookDAO">
+	<insert id="insertBooking" parameterType="com.festivalBooking.book.model.Book">
+		INSERT INTO `book`
+		(
+			`festivalId`
+			,`userId`
+			, `headCount`
+			, `payMoney`
+			, `isMember`
+			, `bookName`
+			, `phoneNumber`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{festivalId}
+			, #{userId}
+			, #{headCount}
+			, #{payMoney}
+			, #{isMember}
+			, #{bookName}
+			, #{phoneNumber}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+
+	<select id="selectMyBookList" parameterType="int" resultType="com.festivalBooking.comment.model.Comment">
+		SELECT
+			`id`
+			,`festivalId`
+			,`userId`
+			, `headCount`
+			, `payMoney`
+			, `isMember`
+			, `bookName`
+			, `phoneNumber`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`book`
+		WHERE
+			`userId` = #{userId}
+	</select>
+</mapper>
