@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.festivalBooking.book.bo.BookBO;
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
 
@@ -20,6 +22,9 @@ public class FestivalController {
 
 	@Autowired
 	private FestivalBO festivalBO;
+
+	@Autowired
+	private BookBO bookBO;
 	
 	/**
 	 * 공연 예매 (공연 정보 리스트) API
@@ -99,13 +104,28 @@ public class FestivalController {
 	@GetMapping("/festival_detail_view")
 	public String festivalDetailView(
 			@RequestParam("festivalId") int festivalId
-			,Model model) {
+			,Model model, HttpSession session) {
 		
-		Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
-		
+		// 이동 페이지
 		model.addAttribute("viewName","festival/festivalDetail");
+
+		// 어떤 공연 상세
+		Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
 		model.addAttribute("festival",festival);
+
+		// 예매 중지 여부
 		model.addAttribute("isTimeOver",festival.isTimeOver());
+		
+		// 예매 여부(회원 / 비회원)
+		// 비로그인 시 아예 session이 없으므로 에러-> 예외처리
+		try{ // 회원(로그인)
+			int userId = (int)session.getAttribute("userId");
+			boolean isBooked = bookBO.isBookedByUserIdFestivalId(userId, festivalId);
+			model.addAttribute("isBooked",isBooked);			
+		}catch(Exception e){
+			// 비회원(비로그인)일 때는 예매 완료 버튼은 띄우지 않는다(false)
+			model.addAttribute("isBooked",false);			
+		}
 		
 		return "template/layout";
 	}

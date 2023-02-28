@@ -31,6 +31,16 @@ public class BookBO {
 		return bookDAO.selectMyBookList(userId);
 	}
 	
+	// 회원 예매 여부 확인(userId, festivalId)
+	public boolean isBookedByUserIdFestivalId(int userId, int festivalId) {
+		return bookDAO.isBookedByUserIdFestivalId(userId,festivalId);
+	}
+
+	// 비회원 예매 여부 확인(bookName,phoneNumber / festivalId)
+	public boolean isBookedNotMember(int bookName, int phoneNumber, int festivalId) {
+		return bookDAO.isBookedNotMember(bookName,phoneNumber,festivalId);
+	}
+	
 	// 공연과 예약 정보 매칭
 	public List<BookView> generateBookViewListByFestivalId(int userId) {
 		// 결과물

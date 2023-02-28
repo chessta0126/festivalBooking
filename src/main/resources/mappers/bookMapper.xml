@@ -47,4 +47,46 @@
 		WHERE
 			`userId` = #{userId}
 	</select>
+
+	<select id="isBookedByUserIdFestivalId" parameterType="map" resultType="boolean">
+		SELECT
+			`id`
+			,`festivalId`
+			,`userId`
+			, `headCount`
+			, `payMoney`
+			, `isMember`
+			, `bookName`
+			, `phoneNumber`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`book`
+		WHERE
+			`userId` = #{userId}
+		AND
+			`festivalId` = #{festivalId}
+	</select>
+
+	<select id="isBookedNotMember" parameterType="map" resultType="boolean">
+		SELECT
+			`id`
+			,`festivalId`
+			,`userId`
+			, `headCount`
+			, `payMoney`
+			, `isMember`
+			, `bookName`
+			, `phoneNumber`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`book`
+		WHERE
+			`bookName` = #{bookName}
+		AND
+			`phoneNumber` = #{phoneNumber}
+		AND
+			`festivalId` = #{festivalId}
+	</select>
 </mapper>

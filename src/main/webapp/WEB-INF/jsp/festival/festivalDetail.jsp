@@ -20,11 +20,13 @@
 				</c:otherwise>
 			</c:choose>
 			
-			<%-- 예매 완료 됐을 경우에만 보이기 --%>
-			<button type="button" id="bookingOK" class="mb-3 btn btn-warning bold button d-none"
-			data-toggle="modal" data-target="#modalBookingCancel" data-festival-id="${festival.id}">
-				예매 완료
-			</button>
+			<%-- 예매 완료 됐을 경우에만 보이기 : 클릭 시 예매 취소하기 modal --%>
+			<c:if test="${isBooked}">
+				<button type="button" id="bookingOK" class="mb-3 btn btn-warning bold button"
+				data-toggle="modal" data-target="#modalBookingCancel" data-festival-id="${festival.id}">
+					예매 완료
+				</button>
+			</c:if>
 		</div>
 
 		<%-- 공연 예매 정보 --%>
@@ -196,7 +198,7 @@
 	<div class="modal-dialog modal-sm modal-dialog-centered">
 		<div class="modal-content text-center">
       		<div class="py-3 border-bottom">
-      			<a href="#" id="myBookList">예매 목록 확인</a>
+      			<a href="/book/myBooking_view" id="myBookList">예매 목록 확인</a>
       		</div>
       		<div class="py-3 border-bottom">
       			<a href="#" id="bookCancel">예매 취소</a>
@@ -249,8 +251,6 @@
 					if (data.code == 1) {
 						// 성공
 						alert("예약이 완료되었습니다.");
-						// 예매 완료 버튼 보이기 (클릭 시 예매 취소하기 modal) -> reload
-						$('#bookingOK').removeClass("d-none");
 					} else{
 						// 실패
 						alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
@@ -274,12 +274,12 @@
 			
 		});
 		
-		// modal -> 로그인 클릭
+		// 비로그인 modal -> 로그인 클릭
 		$('#modal #loginForBooking').on('click',function(e){
 			e.preventDefault();
 		});
 
-		// modal -> 비회원 예매 클릭
+		// 비로그인 modal -> 비회원 예매 클릭
 		$('#modal #notMemberBooking').on('click',function(e){
 			e.preventDefault();
 		});
