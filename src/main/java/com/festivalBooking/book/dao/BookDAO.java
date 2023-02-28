@@ -15,6 +15,11 @@ public interface BookDAO {
 	
 	// 내 예매 내역 가져오기(select)
 	public List<Book> selectMyBookList(int userId);
+
+	// 내 예매 정보 1개 가져오기(select)
+	public Book selectMyBook(
+			@Param("userId") int userId
+			, @Param("festivalId") int festivalId);
 	
 	// 회원 예매 여부 확인(festivalId)
 	public boolean isBookedByUserIdFestivalId(

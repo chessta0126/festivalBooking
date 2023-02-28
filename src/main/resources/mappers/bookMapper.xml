@@ -30,6 +30,26 @@
 		)
 	</insert>
 
+	<select id="selectMyBook" parameterType="map" resultType="com.festivalBooking.book.model.Book">
+		SELECT
+			`id`
+			,`festivalId`
+			,`userId`
+			, `headCount`
+			, `payMoney`
+			, `isMember`
+			, `bookName`
+			, `phoneNumber`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`book`
+		WHERE
+			`userId` = #{userId}
+		AND
+			`festivalId` = #{festivalId}
+	</select>
+
 	<select id="selectMyBookList" parameterType="int" resultType="com.festivalBooking.book.model.Book">
 		SELECT
 			`id`

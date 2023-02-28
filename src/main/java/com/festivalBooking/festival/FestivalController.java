@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.festivalBooking.book.bo.BookBO;
+import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
 
@@ -121,7 +121,10 @@ public class FestivalController {
 		try{ // 회원(로그인)
 			int userId = (int)session.getAttribute("userId");
 			boolean isBooked = bookBO.isBookedByUserIdFestivalId(userId, festivalId);
-			model.addAttribute("isBooked",isBooked);			
+			model.addAttribute("isBooked",isBooked);
+			
+			BookView bookView = bookBO.generateBookViewByUserIdFestivalId(userId, festivalId);
+			model.addAttribute("bookView",bookView);
 		}catch(Exception e){
 			// 비회원(비로그인)일 때는 예매 완료 버튼은 띄우지 않는다(false)
 			model.addAttribute("isBooked",false);			

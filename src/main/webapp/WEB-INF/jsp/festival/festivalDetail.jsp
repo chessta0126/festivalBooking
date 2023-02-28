@@ -231,6 +231,35 @@
 		// 로그인 상태일 경우 바로 AJAX로 예매 정보 넘기기
 		$('#memberBookingBtn').on('click', function(e) {
 			e.preventDefault();
+			// 이미 예매한 경우 다중 insert 방지
+			// book 정보 수정(update) 창 뜨기
+			if(${isBooked}){
+				let alreadyHeadCount = ${bookView.book.headCount};
+				let addHeadCount = $('#headCount option:selected').val();
+				let finalHeadCount = parseInt(alreadyHeadCount) + parseInt(addHeadCount);
+				
+				Swal.fire({
+		            title: '이미 예매한 공연입니다. <br> 추가 예매 하시겠습니까?',
+		            text: alreadyHeadCount + "매 -> " + finalHeadCount + "매",
+		            icon: 'warning',
+		            showCancelButton: true,
+		            confirmButtonColor: '#3085d6',
+		            cancelButtonColor: '#d33',
+		            confirmButtonText: '승인',
+		            cancelButtonText: '취소'
+		        }).then((result) => {
+		            if (result.isConfirmed) {
+		                Swal.fire(
+		                    '추가 예매가 완료되었습니다.',
+		                    '예매완료 버튼 / 마이페이지 > 예매 확인 탭 등에서 예약을 수정하실 수 있습니다.',
+		                    'success'
+		                )
+		            }
+		        })
+				
+				return;
+			}
+			
 			let festivalId = ${festival.id};
 			let userId = ${userId};
 			let headCount = $('#headCount option:selected').val();

@@ -31,7 +31,7 @@ public class BookController {
 		int userId = (int)session.getAttribute("userId");
 		// DB select
 	
-		List<BookView> myBookingList = bookBO.generateBookViewListByFestivalId(userId);
+		List<BookView> myBookingList = bookBO.generateBookViewListByUserId(userId);
 		model.addAttribute("myBookingList",myBookingList);
 				
 		model.addAttribute("viewName","book/myBooking");

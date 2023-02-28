@@ -30,6 +30,11 @@ public class BookBO {
 	public List<Book> getMyBookList(int userId) {
 		return bookDAO.selectMyBookList(userId);
 	}
+
+	// 내 예매 정보 1개 가져오기(select)
+	public Book getMyBook(int userId, int festivalId) {
+		return bookDAO.selectMyBook(userId,festivalId);
+	}
 	
 	// 회원 예매 여부 확인(userId, festivalId)
 	public boolean isBookedByUserIdFestivalId(int userId, int festivalId) {
@@ -42,7 +47,7 @@ public class BookBO {
 	}
 	
 	// 공연과 예약 정보 매칭
-	public List<BookView> generateBookViewListByFestivalId(int userId) {
+	public List<BookView> generateBookViewListByUserId(int userId) {
 		// 결과물
 		List<BookView> bookViewList = new ArrayList<>();
 		// 예매 내역(위에서 만든 메서드)
@@ -64,5 +69,22 @@ public class BookBO {
 	
 		// 결과물 리턴
 		return bookViewList;
+	}
+
+	// 공연과 예약 정보 매칭 1건
+	public BookView generateBookViewByUserIdFestivalId(int userId,int festivalId) {
+		// 결과물
+		BookView bookView = new BookView();
+		
+		// 예매 정보(위에서 만든 메서드)
+		Book book = getMyBook(userId, festivalId);
+		bookView.setBook(book);
+		
+		// 공연 정보
+		Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
+		bookView.setFestival(festival);
+			
+		// 결과물 리턴
+		return bookView;
 	}
 }
