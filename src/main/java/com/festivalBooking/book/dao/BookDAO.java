@@ -16,6 +16,12 @@ public interface BookDAO {
 	// 내 예매 내역 가져오기(select)
 	public List<Book> selectMyBookList(int userId);
 
+	// 기간 내 예매 내역 가져오기(select)
+	public List<Book> selectMyBookListByLimit(
+			@Param("startDate") String startDate
+			, @Param("endDate") String endDate
+			, @Param("userId") int userId);
+	
 	// 내 예매 정보 1개 가져오기(select)
 	public Book selectMyBook(
 			@Param("userId") int userId

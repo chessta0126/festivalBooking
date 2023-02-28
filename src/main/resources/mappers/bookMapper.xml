@@ -68,6 +68,14 @@
 			`userId` = #{userId}
 	</select>
 
+	<select id="selectMyBookListByLimit" parameterType="map" resultType="com.festivalBooking.book.model.Book">
+		SELECT * FROM `book`
+		WHERE `userId` = #{userId} 
+		AND `date` >= #{startDate}
+		AND `date` &lt;= #{endDate}
+		order by `id` DESC
+	</select>
+
 	<select id="isBookedByUserIdFestivalId" parameterType="map" resultType="boolean">
 		SELECT
 			`id`

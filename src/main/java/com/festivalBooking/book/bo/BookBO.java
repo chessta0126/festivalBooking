@@ -31,6 +31,12 @@ public class BookBO {
 		return bookDAO.selectMyBookList(userId);
 	}
 
+	// 기간 내 예매 내역 가져오기(select)
+	public List<Book> getMyBookListByLimit(
+			String startDate, String endDate, int userId) {
+		return bookDAO.selectMyBookListByLimit(startDate,endDate,userId);
+	}
+
 	// 내 예매 정보 1개 가져오기(select)
 	public Book getMyBook(int userId, int festivalId) {
 		return bookDAO.selectMyBook(userId,festivalId);
@@ -67,6 +73,33 @@ public class BookBO {
 			bookViewList.add(bookView);
 		}
 	
+		// 결과물 리턴
+		return bookViewList;
+	}
+
+	// 공연과 예약 정보 매칭(Limit으로 제한해서 가져오기)
+	public List<BookView> generateBookViewListByLimit(
+			String startDate, String endDate, int userId) {
+		// 결과물
+		List<BookView> bookViewList = new ArrayList<>();
+		
+		// 예매 내역(위에서 만든 메서드)
+		List<Book> bookList = getMyBookListByLimit(startDate, endDate, userId);
+		
+		// 반복문 => 각 BookView(공연-예매 내역이 한 쌍) => 결과물에 넣는다.
+		for(Book book : bookList) {
+			BookView bookView = new BookView();
+			
+			// 예매내역
+			bookView.setBook(book);
+			
+			Festival festival = festivalBO.getFestivalByFestivalId(book.getFestivalId());
+			bookView.setFestival(festival);
+			
+			// 공연-예매 내역 1쌍 담기
+			bookViewList.add(bookView);
+		}
+		
 		// 결과물 리턴
 		return bookViewList;
 	}

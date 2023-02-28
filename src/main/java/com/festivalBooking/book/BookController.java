@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.festivalBooking.book.bo.BookBO;
 import com.festivalBooking.book.model.BookView;
@@ -29,11 +30,30 @@ public class BookController {
 	public String myBookingView(Model model, HttpSession session) {
 
 		int userId = (int)session.getAttribute("userId");
+		
 		// DB select
-	
 		List<BookView> myBookingList = bookBO.generateBookViewListByUserId(userId);
 		model.addAttribute("myBookingList",myBookingList);
 				
+		model.addAttribute("viewName","book/myBooking");
+		
+		return "template/layout";
+	}
+
+	// 공연 기간 검색 후 기간 내 예매 내역 다시 뿌리기 API
+	// http://localhost:8080/book/myBooking_view_limit?startDate={startDate}&endDate={endDate}
+	@GetMapping("/myBooking_view_limit")
+	public String myBookingViewLimit(
+			@RequestParam("startDate") String startDate
+			,@RequestParam("endDate") String endDate
+			,Model model, HttpSession session) {
+		
+		int userId = (int)session.getAttribute("userId");
+		
+		// DB select
+		List<BookView> myBookingList = bookBO.generateBookViewListByLimit(startDate,endDate,userId);
+		model.addAttribute("myBookingList",myBookingList);
+		
 		model.addAttribute("viewName","book/myBooking");
 		
 		return "template/layout";
