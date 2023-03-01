@@ -97,21 +97,27 @@
 					</div>
 				</div>
 				
-				<%-- 로그인 중 나타나는 회원 예매 버튼 --%>
-				<c:if test="${userId ne null}">
-					<div class="pt-3 d-flex justify-content-end">
-						<button type="button" id="memberBookingBtn" class="btn btn-primary"
-						data-festival-id="${festival.id}">예매하기</button>
-					</div>
-				</c:if>
-				
-				<%-- 비로그인 시 나타나는 비회원 예매 버튼 --%>
-				<c:if test="${userId eq null}">
-					<div class="pt-3 d-flex justify-content-end">
-						<button type="button" id="notMemberBookingBtn" class="btn btn-primary"
-						data-toggle="modal" data-target="#modal" data-festival-id="${festival.id}">예매하기</button>
-					</div>
-				</c:if>
+				<div class="pt-3 d-flex justify-content-end">
+					<c:choose>
+						<%-- 로그인 중 나타나는 회원 예매 버튼 --%>
+						<c:when test="${userId ne null}">
+							<button type="button" id="memberBookingBtn" class="btn btn-primary"
+							data-festival-id="${festival.id}">예매하기</button>
+						</c:when>
+					
+						<%-- 비로그인 시 나타나는 비회원 예매 버튼 --%>
+						<c:otherwise>
+							<button type="button" id="notMemberBookingBtn" class="btn btn-primary"
+							data-toggle="modal" data-target="#modal" data-festival-id="${festival.id}">예매하기</button>
+						</c:otherwise>
+					</c:choose>
+
+					<%-- 예매 완료 시 나타나는 예매 취소 버튼 --%>
+					<c:if test="${isBooked}">
+						<button type="button" id="bookCancelBtn" class="ml-3 btn btn-danger"
+						data-festival-id="${festival.id}">예매 취소</button>
+					</c:if>
+				</div>
 			</div>
 		</div>
 		
@@ -214,6 +220,11 @@
 
 <script>
 	$(document).ready(function() {
+		if(${isBooked}){
+			let memberBookingBtn = document.getElementById("memberBookingBtn");
+			memberBookingBtn.innerText = "추가 예매";
+		}
+		
 		// 가격 동적 변경 (티켓 매수에 따라)
 		$('#headCount').on('change', function(e) {
 			let headCount = $('#headCount').val();
