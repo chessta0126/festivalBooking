@@ -126,4 +126,9 @@ public class BookBO {
 	public void updateBooking(int headCount, int festivalId, int userId, int payMoney) {
 		bookDAO.updateBooking(headCount, festivalId, userId, payMoney);
 	}
+	
+	// 예매 취소 (delete)
+	public void deleteBooking(int festivalId, int userId) {
+		bookDAO.deleteBooking(festivalId, userId);
+	}
 }

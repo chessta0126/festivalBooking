@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,7 +37,6 @@ public class BookRestController {
 		return result;
 	}
 	
-	// http://localhost:8080/book/updateBooking
 	@PutMapping("/updateBooking")
 	public Map<String, Object> updateBooking(
 			@RequestParam("headCount") int headCount
@@ -50,7 +50,22 @@ public class BookRestController {
 		
 		// 여기까지 내려왔다는 것은 잘 수정됐다는 것
 		Map<String, Object> result = new HashMap<>();
-		result.put("code", 1);		
+		result.put("result", true);
+		
+		return result;
+	}
+	
+	@DeleteMapping("/deleteBooking")
+	public Map<String, Object> deleteBooking(
+			@RequestParam("festivalId") int festivalId
+			,@RequestParam("userId") int userId
+			){
+		
+		// DB update
+		bookBO.deleteBooking(festivalId, userId);
+		
+		// 여기까지 내려왔다는 것은 잘 수정됐다는 것
+		Map<String, Object> result = new HashMap<>();
 		result.put("result", true);
 		
 		return result;

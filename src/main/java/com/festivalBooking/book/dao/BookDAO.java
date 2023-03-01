@@ -46,4 +46,9 @@ public interface BookDAO {
 			,@Param("userId") int userId
 			,@Param("payMoney") int payMoney
 			);
+	
+	// 예매 취소 (delete)
+		public void deleteBooking(
+				@Param("festivalId") int festivalId
+				,@Param("userId") int userId);
 }

@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="pt-3 d-flex justify-content-center">
+<div class=" container pt-3 d-flex justify-content-center">
 	<div class="pt-3">
 		<div>
 			<%-- 예매 마감 됐을 경우에만 --%>
@@ -33,6 +33,8 @@
 		<div class="d-flex">
 			<%-- 공연 포스터 --%>
 			<div class="pr-5">
+				<%-- 여백을 맞추기 위한 공백 --%>
+				<h3 class="bold">&nbsp;</h3>
 				<img width="200" src="${festival.imagePath}" id="posterImg">
 			</div>
 			
@@ -114,8 +116,7 @@
 
 					<%-- 예매 완료 시 나타나는 예매 취소 버튼 --%>
 					<c:if test="${isBooked}">
-						<button type="button" id="bookCancelBtn" class="ml-3 btn btn-danger"
-						data-festival-id="${festival.id}">예매 취소</button>
+						<button type="button" id="bookCancelBtn" class="ml-3 btn btn-danger">예매 취소</button>
 					</c:if>
 				</div>
 			</div>
@@ -288,7 +289,7 @@
 		    				}
 		    			});
 		            }
-		        })
+		        });
 				
 				return;
 			}
@@ -337,14 +338,49 @@
 			
 		});
 		
-		// 비로그인 modal -> 로그인 클릭
-		$('#modal #loginForBooking').on('click',function(e){
-			e.preventDefault();
-		});
-
 		// 비로그인 modal -> 비회원 예매 클릭
 		$('#modal #notMemberBooking').on('click',function(e){
 			e.preventDefault();
+		});
+		
+		// 예매 취소(delete)
+		$('#bookCancelBtn').on('click',function(e){
+			e.preventDefault();
+			
+			Swal.fire({
+	            title: '예매를 취소 하시겠습니까?',
+	            icon: 'warning',
+	            showCancelButton: true,
+	            confirmButtonColor: '#3085d6',
+	            cancelButtonColor: '#d33',
+	            confirmButtonText: '예',
+	            cancelButtonText: '아니오'
+	        }).then((result) => { 
+	            if (result.isConfirmed) { // 예매 취소(delete) 확정
+	            	let festivalId = ${festival.id};
+	            	let userId = "${userId}" // 비로그인 시 세션 없을 수도 있으므로 "" 사용
+
+	            	// AJAX
+	    			$.ajax({
+	    				type:'DELETE'
+	    				,url:'/book/deleteBooking'
+	    				,data: {"festivalId":festivalId, "userId":userId}
+	    				,success: function(data) {
+	    					if (data.result) {
+				            	Swal.fire(
+				                    '예매 취소가 완료되었습니다.',
+				                    'success'
+				                )
+				                location.reload();
+	    					}
+	    				}
+	    				,error: function(jqXHR, textStatus, errorThrown) {
+	    					var errorMsg = jqXHR.responseJSON.status;
+	    					alert(errorMsg + ":" + textStatus);
+	    				}
+	    			});
+	            }
+			});
 		});
 	});
 </script>
