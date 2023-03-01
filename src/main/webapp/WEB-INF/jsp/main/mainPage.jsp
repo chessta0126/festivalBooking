@@ -69,7 +69,7 @@
 		</div>
 	</div>
 	
-	<%-- 예약 확인 --%>
+	<%-- 예매 확인 --%>
 	<div class="pl-3 pt-4 pb-4">
 		<h1 class="bold">예매 확인</h1>
 		<div class="book-confirm-box white-text bold">
@@ -88,7 +88,7 @@
 			<%-- 비회원일 경우 : 이름, 전화번호 --%>
 			<div id="memberNotBox" class="container">
 				<div class="d-flex align-items-center mb-3">
-					<label for="bookName" class="ml-3 col-4">이름</label>
+					<label for="bookName" class="ml-3 col-4">예약자</label>
 					<input type="text" id="bookName" name="bookName" class="form-control" placeholder="예약자 이름">
 				</div>
 				<div class="d-flex align-items-center mb-4">
@@ -102,7 +102,7 @@
 			<%-- 회원일 경우 : 예매 확인 페이지로 넘어가는 버튼 --%>
 			<div id="memberBox" class="container d-none">
 				<button class="w-100 btn btn-dark">
-					<a href="" class="button">확인하기</a>
+					<a href="/book/myBooking_view" class="button">예매 목록</a>
 				</button>
 			</div>
 		</div>

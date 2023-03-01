@@ -234,7 +234,7 @@
 			// 이미 예매한 경우 다중 insert 방지
 			// book 정보 수정(update) 창 뜨기
 			if(${isBooked}){
-				let alreadyHeadCount = ${bookView.book.headCount};
+				let alreadyHeadCount = "${bookView.book.headCount}";
 				let addHeadCount = $('#headCount option:selected').val();
 				let finalHeadCount = parseInt(alreadyHeadCount) + parseInt(addHeadCount);
 				
@@ -280,6 +280,7 @@
 					if (data.code == 1) {
 						// 성공
 						alert("예약이 완료되었습니다.");
+						location.reload();
 					} else{
 						// 실패
 						alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
