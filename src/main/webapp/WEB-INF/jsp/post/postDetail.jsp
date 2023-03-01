@@ -116,26 +116,44 @@
 	$(document).ready(function(){
 		// 글 삭제
 		$('#postDeleteBtn').on('click', function(e) {
-			let postId = ${post.id};
-			let postUserId = ${postUserId};
-			// alert(postId);
-			// alert(postUserId);
-			
-			// AJAX
-			$.ajax({
-				type:'DELETE'
-				,url:'/post/delete'
-				,data: {"postId":postId, "postUserId":postUserId}
-				,success: function(data) {
-					if (data.result) {
-						location.href="/post/postList?postType="+ data.postType;
-					}
-				}
-				,error: function(jqXHR, textStatus, errorThrown) {
-					var errorMsg = jqXHR.responseJSON.status;
-					alert(errorMsg + ":" + textStatus);
-				}
-			});
+			Swal.fire({
+	            title: '게시글을 삭제 하시겠습니까?',
+	            text: "다시 되돌릴 수 없습니다. 신중하세요.",
+	            icon: 'warning',
+	            showCancelButton: true,
+	            confirmButtonColor: '#3085d6',
+	            cancelButtonColor: '#d33',
+	            confirmButtonText: '삭제',
+	            cancelButtonText: '취소'
+	        }).then((result) => { // 최종 삭제를 눌렀을 경우 Delete AJAX 실행
+	            if (result.isConfirmed) {
+					let postId = ${post.id};
+					let postUserId = ${postUserId};
+					// alert(postId);
+					// alert(postUserId);
+					
+					// AJAX
+					$.ajax({
+						type:'DELETE'
+						,url:'/post/delete'
+						,data: {"postId":postId, "postUserId":postUserId}
+						,success: function(data) {
+							if (data.result) {
+								Swal.fire({
+						            icon: 'success',
+						            title: '게시글이 삭제되었습니다.',
+						        }).then((value)=>{
+									location.href="/post/postList?postType="+ data.postType;
+						        });
+							}
+						}
+						,error: function(jqXHR, textStatus, errorThrown) {
+							var errorMsg = jqXHR.responseJSON.status;
+							alert(errorMsg + ":" + textStatus);
+						}
+					});
+	            }
+	        });
 		});
 		
 		// 댓글 쓰기

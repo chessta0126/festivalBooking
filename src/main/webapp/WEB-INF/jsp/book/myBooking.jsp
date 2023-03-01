@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="d-flex justify-content-center">
-	<div>
+	<div class="container">
 		<!-- 공연 기한 설정 -->
 		<h2 class="pt-4 font-weight-bold">공연 예매 내역</h2>
 		<div class="pt-2 d-flex align-items-center">
@@ -23,9 +23,9 @@
 	
 		<div class="pt-1">
 			<c:forEach items="${myBookingList}" var="BookView">
-			<article class="festivalCard mt-3 pr-4 pb-3 d-flex bg-dark">
+			<article class="w-100 festivalCard mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
-				<div class="m-3">
+				<div class="m-3 pt-3 pl-2">
 					<a href="/festival/festival_detail_view?festivalId=${BookView.festival.id}">
 						<img src="${BookView.festival.imagePath}" alt="공연 팜플렛" width="250" height="250">
 					</a>
@@ -38,7 +38,7 @@
 						</h4>
 					</div>
 					<div class="pt-2 white-text"></div>
-					<div class="white-text">${BookView.festival.explain}</div>
+					<div class="white-text festival-explain">${BookView.festival.explain}</div>
 					<div class="pt-3 yellow-text">일시 : ${BookView.festival.date}</div>
 					<div class="pt-2 text-info">
 						장소 : ${BookView.festival.place}

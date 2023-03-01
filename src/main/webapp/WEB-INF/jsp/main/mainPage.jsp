@@ -9,9 +9,9 @@
 	<div class="pt-4 pb-4">
 		<h1 class="bold">최신 공연 정보</h1>
 		<c:forEach items="${festivalList}" var="festival">
-			<article class="festivalCard mt-3 pr-4 pb-3 d-flex bg-dark">
+			<article class="w-100 festivalCard mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
-				<div class="m-3">
+				<div class="m-3 pt-3 pl-2">
 					<a href="/festival/festival_detail_view?festivalId=${festival.id}">
 						<img src="${festival.imagePath}" alt="공연 팜플렛" width="250" height="250">
 					</a>
@@ -24,7 +24,7 @@
 						</h4>
 					</div>
 					<div class="pt-2 white-text"></div>
-					<div class="white-text">${festival.explain}</div>
+					<div class="white-text festival-explain">${festival.explain}</div>
 					<div class="pt-3 yellow-text">일시 : ${festival.date}</div>
 					<div class="pt-2 text-info">
 						장소 : ${festival.place}
@@ -44,7 +44,7 @@
 			</c:forEach>
 	</div>
 	
-	<div class="d-flex justify-content-around">
+	<div class="d-flex justify-content-between">
 	<%-- 공지사항 --%>
 	<div class="pt-4 pb-4">
 		<h1 class="bold">공지사항</h1>
