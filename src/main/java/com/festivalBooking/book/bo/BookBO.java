@@ -120,4 +120,10 @@ public class BookBO {
 		// 결과물 리턴
 		return bookView;
 	}
+	
+	
+	// 추가 예매 (update)
+	public void updateBooking(int headCount, int festivalId, int userId, int payMoney) {
+		bookDAO.updateBooking(headCount, festivalId, userId, payMoney);
+	}
 }

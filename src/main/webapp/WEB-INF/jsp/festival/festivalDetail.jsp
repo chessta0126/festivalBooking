@@ -177,7 +177,7 @@
 </footer>
 
 
-<!-- 예매 Modal -->
+<!-- 예매하기 Modal -->
 <div class="modal fade" id="modal">
 <%-- modal-sm : 작은 모달 창 --%>
 <%-- modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
@@ -197,7 +197,7 @@
 	</div>
 </div>	
 
-<!-- 예매 취소 Modal -->
+<!-- 예매 완료 버튼 Modal -->
 <div class="modal fade" id="modalBookingCancel">
 <%-- modal-sm : 작은 모달 창 --%>
 <%-- modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
@@ -239,32 +239,54 @@
 			
 		});
 
-		// 로그인 상태일 경우 바로 AJAX로 예매 정보 넘기기
+		// 로그인 예매 : 로그인 상태일 경우 바로 AJAX로 예매 정보 넘기기
 		$('#memberBookingBtn').on('click', function(e) {
 			e.preventDefault();
-			// 이미 예매한 경우 다중 insert 방지
+			// 추가 예매 상태 : 이미 예매한 경우 다중 insert 방지
 			// book 정보 수정(update) 창 뜨기
 			if(${isBooked}){
 				let alreadyHeadCount = "${bookView.book.headCount}";
 				let addHeadCount = $('#headCount option:selected').val();
-				let finalHeadCount = parseInt(alreadyHeadCount) + parseInt(addHeadCount);
+				let totalHeadCount = parseInt(alreadyHeadCount) + parseInt(addHeadCount);
 				
 				Swal.fire({
 		            title: '이미 예매한 공연입니다. <br> 추가 예매 하시겠습니까?',
-		            text: alreadyHeadCount + "매 -> " + finalHeadCount + "매",
+		            text: alreadyHeadCount + "매 -> " + totalHeadCount + "매",
 		            icon: 'warning',
 		            showCancelButton: true,
 		            confirmButtonColor: '#3085d6',
 		            cancelButtonColor: '#d33',
-		            confirmButtonText: '승인',
+		            confirmButtonText: '추가 예매',
 		            cancelButtonText: '취소'
-		        }).then((result) => {
-		            if (result.isConfirmed) {
-		                Swal.fire(
-		                    '추가 예매가 완료되었습니다.',
-		                    '예매완료 버튼 / 마이페이지 > 예매 확인 탭 등에서 예약을 수정하실 수 있습니다.',
-		                    'success'
-		                )
+		        }).then((result) => { 
+		            if (result.isConfirmed) { // 추가 예매(Update) 확정
+		            	let festivalId = ${festival.id};
+		            	let userId = "${userId}" // 비로그인 시 세션 없을 수도 있으므로 "" 사용
+
+		            	let alreadyPayMoney = "${bookView.book.payMoney}";
+						let addPayMoney = $('#payMoney').text();
+						let totalPayMoney = parseInt(alreadyPayMoney) + parseInt(addPayMoney);
+		            	
+		            	// AJAX
+		    			$.ajax({
+		    				type:'PUT'
+		    				,url:'/book/updateBooking'
+		    				,data: {"headCount":totalHeadCount, "festivalId":festivalId, "userId":userId, "payMoney":totalPayMoney}
+		    				,success: function(data) {
+		    					if (data.result) {
+					            	Swal.fire(
+					                    '추가 예매가 완료되었습니다.',
+					                    '예매완료 버튼 / 마이페이지 > 예매 확인 탭 등에서 예약을 수정하실 수 있습니다.',
+					                    'success'
+					                )
+					                location.reload();
+		    					}
+		    				}
+		    				,error: function(jqXHR, textStatus, errorThrown) {
+		    					var errorMsg = jqXHR.responseJSON.status;
+		    					alert(errorMsg + ":" + textStatus);
+		    				}
+		    			});
 		            }
 		        })
 				

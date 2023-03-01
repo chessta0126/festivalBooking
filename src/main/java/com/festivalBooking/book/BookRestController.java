@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.festivalBooking.book.bo.BookBO;
@@ -31,8 +33,25 @@ public class BookRestController {
 		result.put("code", 1);		
 		result.put("result", true);
 		
-		// 성공 시 공연 상세(festivalDetail) 화면으로 이동하기 위한 파라미터 Json으로 전송
-		// -> 어떤 공연 (festivalId) 예약한 건지
+		return result;
+	}
+	
+	// http://localhost:8080/book/updateBooking
+	@PutMapping("/updateBooking")
+	public Map<String, Object> updateBooking(
+			@RequestParam("headCount") int headCount
+			,@RequestParam("festivalId") int festivalId
+			,@RequestParam("userId") int userId
+			,@RequestParam("payMoney") int payMoney
+			){
+		
+		// DB update
+		bookBO.updateBooking(headCount, festivalId, userId, payMoney);
+		
+		// 여기까지 내려왔다는 것은 잘 수정됐다는 것
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 1);		
+		result.put("result", true);
 		
 		return result;
 	}

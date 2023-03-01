@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.festivalBooking.book.model.Book;
+import com.festivalBooking.book.model.BookView;
 
 @Repository
 public interface BookDAO {
@@ -37,4 +38,12 @@ public interface BookDAO {
 			@Param("bookName") int bookName
 			, @Param("phoneNumber") int phoneNumber
 			, @Param("festivalId") int festivalId);
+	
+	// 추가 예매 (update) : 회원용
+	public void updateBooking(
+			@Param("headCount") int headCount
+			,@Param("festivalId") int festivalId
+			,@Param("userId") int userId
+			,@Param("payMoney") int payMoney
+			);
 }

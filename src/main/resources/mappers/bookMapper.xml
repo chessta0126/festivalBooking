@@ -120,4 +120,13 @@
 		AND
 			`festivalId` = #{festivalId}
 	</select>
+	
+	<update id="updateBooking" parameterType="map">
+		UPDATE `book`
+		SET `headCount` = #{headCount}
+			,`payMoney` = #{payMoney}
+			,`updatedAt` = now()
+		WHERE `festivalId` = #{festivalId}
+		AND `userId` = #{userId}
+	</update>
 </mapper>
