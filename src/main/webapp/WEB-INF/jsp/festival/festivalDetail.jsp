@@ -33,8 +33,19 @@
 		<div class="d-flex">
 			<%-- 공연 포스터 --%>
 			<div class="pr-5">
-				<%-- 여백을 맞추기 위한 공백 --%>
-				<h3 class="bold">&nbsp;</h3>
+				<c:choose>
+					<c:when test="${isBooked}">
+						<div class="d-flex align-items-center">
+							<span class="text-info bold">${bookView.book.headCount}매 예매 중</span>
+							<%-- 여백을 맞추기 위한 공백 --%>
+							<h3 id="afterBookHeadCountAlert" class="bold">&nbsp;</h3>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<%-- 여백을 맞추기 위한 공백 --%>
+						<h3 class="bold">&nbsp;</h3>
+					</c:otherwise>
+				</c:choose>
 				<img width="200" src="${festival.imagePath}" id="posterImg">
 			</div>
 			
@@ -207,9 +218,6 @@
       		<div class="py-3 border-bottom">
       			<a href="/book/myBooking_view" id="myBookList">예매 목록 확인</a>
       		</div>
-      		<div class="py-3 border-bottom">
-      			<a href="#" id="bookCancel">예매 취소</a>
-      		</div>
       		<div class="py-3">
       			<%-- data-dismiss="modal" : modal창 닫힘 --%>
       			<a href="#" data-dismiss="modal">창 닫기</a>
@@ -275,12 +283,15 @@
 		    				,data: {"headCount":totalHeadCount, "festivalId":festivalId, "userId":userId, "payMoney":totalPayMoney}
 		    				,success: function(data) {
 		    					if (data.result) {
-					            	Swal.fire(
-					                    '추가 예매가 완료되었습니다.',
-					                    '예매완료 버튼 / 마이페이지 > 예매 확인 탭 등에서 예약을 수정하실 수 있습니다.',
-					                    'success'
-					                )
-					                location.reload();
+		    						Swal.fire({
+						                title : '추가 예매가 완료되었습니다.',
+						                text : '예매완료 버튼 / 마이페이지 > 예매 확인 탭 등에서 예약을 수정하실 수 있습니다.',
+						                icon: 'success'
+									}).then((result) => { 
+							            if (result.isConfirmed) {
+											location.reload();
+							            }
+									});
 		    					}
 		    				}
 		    				,error: function(jqXHR, textStatus, errorThrown) {
@@ -294,6 +305,7 @@
 				return;
 			}
 			
+			// 예매하기(insert)
 			let festivalId = ${festival.id};
 			let userId = ${userId};
 			let headCount = $('#headCount option:selected').val();
@@ -304,26 +316,46 @@
 			} else{
 				isMember = 0;
 			}
-			
-			// AJAX 전송
-			$.ajax({
-				type:'POST'
-				,url:'/book/addBooking'
-				, data: {"festivalId":festivalId, "userId":userId, "payMoney":payMoney, "headCount":headCount, "isMember":isMember}
-				, success: function(data) {
-					if (data.code == 1) {
-						// 성공
-						alert("예약이 완료되었습니다.");
-						location.reload();
-					} else{
-						// 실패
-						alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
-					}
-				}
-				, error : function(jqXHR, textStatus, errorThrown) {
-					var errorMsg = jqXHR.responseJSON.status;
-					alert(errorMsg + ":" + textStatus);
-				}
+
+			Swal.fire({
+	            title: '예매 하시겠습니까?',
+	            text: "수량 : " + headCount + "매 , 가격 : " + payMoney + "원",
+	            icon: 'warning',
+	            showCancelButton: true,
+	            confirmButtonColor: '#3085d6',
+	            cancelButtonColor: '#d33',
+	            confirmButtonText: '예',
+	            cancelButtonText: '아니오'
+	        }).then((result) => { 
+	            if (result.isConfirmed) { // 예매 확정(insert)
+					// AJAX 전송
+					$.ajax({
+						type:'POST'
+						,url:'/book/addBooking'
+						, data: {"festivalId":festivalId, "userId":userId, "payMoney":payMoney, "headCount":headCount, "isMember":isMember}
+						, success: function(data) {
+							if (data.code == 1) {
+								// 성공
+								Swal.fire({
+					                title : '예매가 완료되었습니다.',
+					                text : '예매완료 버튼 / 마이페이지 > 예매 확인 탭 등에서 예약을 수정하실 수 있습니다.',
+					                icon: 'success'
+								}).then((result) => { 
+						            if (result.isConfirmed) {
+										location.reload();
+						            }
+								});
+							} else{
+								// 실패
+								alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
+							}
+						}
+						, error : function(jqXHR, textStatus, errorThrown) {
+							var errorMsg = jqXHR.responseJSON.status;
+							alert(errorMsg + ":" + textStatus);
+						}
+					});
+	            }
 			});
 		});
 		
@@ -367,11 +399,14 @@
 	    				,data: {"festivalId":festivalId, "userId":userId}
 	    				,success: function(data) {
 	    					if (data.result) {
-				            	Swal.fire(
-				                    '예매 취소가 완료되었습니다.',
-				                    'success'
-				                )
-				                location.reload();
+	    						Swal.fire({
+					                title : '예매 취소가 완료되었습니다.',
+					                icon: 'success'
+								}).then((result) => { 
+						            if (result.isConfirmed) {
+										location.reload();
+						            }
+								});
 	    					}
 	    				}
 	    				,error: function(jqXHR, textStatus, errorThrown) {
