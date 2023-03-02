@@ -5,33 +5,51 @@
 
 <div class="pt-4 d-flex justify-content-center">
 	<div>
-		<div class="pb-3 d-flex justify-content-between align-items-center">
-			<h1 class="bold">${postType}</h1>
-			<c:if test="${userId != null}">
-				<button id="writePostBtn" class="btn btn-primary">
-					<a href="/post/post_create_view?postType=${postType}&isUpdate=false" class="button">글쓰기</a>
-				</button>
-			</c:if>
+		<div>
+			<div class="pb-3 d-flex justify-content-between align-items-center">
+				<h1 class="bold">${postType}</h1>
+				<c:if test="${userId != null}">
+					<button id="writePostBtn" class="btn btn-primary">
+						<a href="/post/post_create_view?postType=${postType}&isUpdate=false" class="button">글쓰기</a>
+					</button>
+				</c:if>
+			</div>
+			<table class="table text-center">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>제목</th>
+						<th>게시일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${postList}" var="post">
+					<tr>
+						<td>${post.id}</td>
+						<td><a href="/post/post_detail_view?postType=${post.postType}&postId=${post.id}">${post.postTitle}</a></td>
+						<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd"/></td>
+						<td>조회수</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
-		<table class="table text-center">
-			<thead>
-				<tr>
-					<th>No.</th>
-					<th>제목</th>
-					<th>게시일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${postList}" var="post">
-				<tr>
-					<td>${post.id}</td>
-					<td><a href="/post/post_detail_view?postType=${post.postType}&postId=${post.id}">${post.postTitle}</a></td>
-					<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd"/></td>
-					<td>조회수</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		
+		<%-- 페이징 --%>
+		<div class="pt-3 d-flex justify-content-center">
+			<c:choose>
+				<c:when test="${needPage <= 5}">
+					<c:forEach begin="1" end="${needPage}" step="1" var="page">
+					<span class="pr-3">
+						<a href="/post/postList?postType=${postType}&page=${page}">${page}</a>
+					</span>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+			
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 </div>

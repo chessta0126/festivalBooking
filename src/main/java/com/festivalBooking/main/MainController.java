@@ -35,7 +35,7 @@ public class MainController {
 			
 			// 공지사항
 			String postType = "공지사항";
-			List<Post> postList = postBO.getPostListByPostTypeLimit(postType,3);
+			List<Post> postList = postBO.getPostListByPostTypeFromLimit(postType,0,3);
 			model.addAttribute("postList",postList);
 			
 			return "template/layout";

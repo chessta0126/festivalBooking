@@ -17,17 +17,14 @@ public interface PostDAO {
 	// 글 목록 가져오기(postType)
 	public List<Post> selectPostListByPostType(String postType);
 
-	// 글 목록 가져오기(postType,limit)
-	public List<Post> selectPostListByPostTypeLimit(
+	// 페이징 - 글 목록 가져오기(postType,from,limit)
+	public List<Post> selectPostListByPostTypeFromLimit(
 			@Param("postType") String postType
+			,@Param("from") int from
 			,@Param("limit")  int limit);
 	
-	/*
-	 * // 글 작성(insert) public void insertPost(
-	 * 
-	 * @Param("userId") int userId ,@Param("postType") String postType
-	 * ,@Param("postTitle") String postTitle ,@Param("content") String content);
-	 */
+	// 페이징 - 글의 총 개수(postType)
+	public int selectPostCountByPostType(String postType);
 	
 	// 글 작성 post 형태로 보내기(insert)
 		public void insertPost(Post post);

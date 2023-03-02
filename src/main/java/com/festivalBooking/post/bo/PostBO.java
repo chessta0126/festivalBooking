@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.festivalBooking.comment.bo.CommentBO;
@@ -27,17 +28,16 @@ public class PostBO {
 	public List<Post> getPostListByPostType(String postType){
 		return postDAO.selectPostListByPostType(postType);
 	}
-	// 글 목록 가져오기(postType, limit)
-	public List<Post> getPostListByPostTypeLimit(String postType, int limit){
-		return postDAO.selectPostListByPostTypeLimit(postType,limit);
+	// 페이징 - 글 목록 가져오기(postType, limit)
+	public List<Post> getPostListByPostTypeFromLimit(String postType, int from, int limit){
+		return postDAO.selectPostListByPostTypeFromLimit(postType, from, limit);
 	}
 	
-	/*
-	 * // 글 작성(insert) public void addPost(int userId, String postType, String
-	 * postTitle, String content) { postDAO.insertPost(userId, postType, postTitle,
-	 * content); }
-	 */
-
+	// 페이징 - 글의 총 개수(postType)
+	public int getPostCountByPostType(String postType) {
+		return postDAO.selectPostCountByPostType(postType);
+	};
+		
 	// 글 작성 post 형태로 보내기(insert)
 	public void addPost(@ModelAttribute Post post) {
 		postDAO.insertPost(post);

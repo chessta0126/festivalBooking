@@ -18,12 +18,18 @@
  		order by `id` DESC
  	</select>
 	
-	<select id="selectPostListByPostTypeLimit" parameterType="map" resultType="map">
+	<select id="selectPostListByPostTypeFromLimit" parameterType="map" resultType="map">
  		SELECT *
  		FROM `post`
  		WHERE `postType`=#{postType}
  		order by `id` DESC
- 		LIMIT 3
+ 		LIMIT ${from},${limit}
+ 	</select>
+
+	<select id="selectPostCountByPostType" parameterType="String" resultType="int">
+ 		SELECT COUNT(*)
+ 		FROM `post`
+ 		WHERE `postType`=#{postType}
  	</select>
  	
  	<select id="selectPostByPostId" parameterType="int" resultType="com.festivalBooking.post.model.Post">

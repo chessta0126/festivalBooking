@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,22 +34,38 @@ public class PostController {
 	@Autowired
 	private CommentBO commentBO;
 	
-	/**
-	 * 글 목록 API
-	 * @param postType
-	 * @param model
-	 * @return
-	 */
-	// http://localhost:8080/post/postList?postType={postType}
+	// 글 목록 API
+	// http://localhost:8080/post/postList?postType={postType}&page={page}
 	@RequestMapping(value="/postList", method=RequestMethod.GET)
-	public String postList(String postType, Model model) {
+	public String postList(
+			@RequestParam("postType") String postType
+			,@RequestParam(value="page", required = false) Integer page	
+			, Model model) {
 		
 		// DB select
-		List<Post> postList = postBO.getPostListByPostType(postType);
+		// 페이징
+		// limit from,limit -> from + 1부터 limit개
+		int from = 0; // page 파라미터가 없을 경우, 1페이지로 간주
+		try { // page 파라미터가 없을 경우, 예외 처리
+			from = (page-1) * 10; // 1page: 0(1부터), 2page:10(11부터)...
+		} catch(Exception e) { 
+			
+		}
+		int limit = 10; // 10개씩 보여줌
+
+		List<Post> postList = postBO.getPostListByPostTypeFromLimit(postType, from, limit);
 		
 		model.addAttribute("viewName","post/postList");
-		model.addAttribute("postList",postList);
 		model.addAttribute("postType",postType);
+		model.addAttribute("postList",postList);
+		
+		// 글의 개수에 따라 필요한 페이지 수 전달
+		int postCount = postBO.getPostCountByPostType(postType);
+		int needPage = postCount / 10;
+		if(postCount % 10 > 0) {
+			needPage += 1;
+		}
+		model.addAttribute("needPage",needPage);
 		
 		return "template/layout";
 	}
