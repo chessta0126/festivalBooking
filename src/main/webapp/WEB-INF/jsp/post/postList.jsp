@@ -38,18 +38,16 @@
 		
 		<%-- 페이징 --%>
 		<div class="pt-3 d-flex justify-content-center">
-			<c:choose>
-				<c:when test="${needPage <= 5}">
-					<c:forEach begin="1" end="${needPage}" step="1" var="page">
-					<span class="pr-3">
-						<a href="/post/postList?postType=${postType}&page=${page}">${page}</a>
-					</span>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-			
-				</c:otherwise>
-			</c:choose>
+			<c:forEach begin="1" end="${needPage}" step="1" var="page">
+				<span class="pr-3">
+					<a href="/post/postList?postType=${postType}&page=${page}">${page}</a>
+				</span>
+			</c:forEach>
+	
+			<%-- 다음 페이지 : 새로운 5개 --%>
+			<c:if test="${currentPage + 1 >= needPage}">
+				<a href="/post/postList?postType=${postType}&page=${currentPage+1}">>></a>
+			</c:if>
 		</div>
 	</div>
 </div>

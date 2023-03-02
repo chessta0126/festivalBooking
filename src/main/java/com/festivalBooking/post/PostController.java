@@ -48,8 +48,12 @@ public class PostController {
 		int from = 0; // page 파라미터가 없을 경우, 1페이지로 간주
 		try { // page 파라미터가 없을 경우, 예외 처리
 			from = (page-1) * 10; // 1page: 0(1부터), 2page:10(11부터)...
-		} catch(Exception e) { 
 			
+			// 이전, 다음을 위한 현재 페이지 전달
+			model.addAttribute("currentPage",page);
+		} catch(Exception e) { 
+			// 이전, 다음을 위한 현재 페이지 전달
+			model.addAttribute("currentPage",1);			
 		}
 		int limit = 10; // 10개씩 보여줌
 
