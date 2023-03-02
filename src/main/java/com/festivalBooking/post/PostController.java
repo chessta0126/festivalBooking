@@ -46,8 +46,10 @@ public class PostController {
 		// 페이징
 		// limit from,limit -> from + 1부터 limit개
 		int from = 0; // page 파라미터가 없을 경우, 1페이지로 간주
+		int limit = 3; // 3개씩 보여줌
+		
 		try { // page 파라미터가 없을 경우, 예외 처리
-			from = (page-1) * 10; // 1page: 0(1부터), 2page:10(11부터)...
+			from = (page-1) * limit; // 1page: 0(1부터), 2page:10(11부터)...
 			
 			// 이전, 다음을 위한 현재 페이지 전달
 			model.addAttribute("currentPage",page);
@@ -55,7 +57,6 @@ public class PostController {
 			// 이전, 다음을 위한 현재 페이지 전달
 			model.addAttribute("currentPage",1);			
 		}
-		int limit = 10; // 10개씩 보여줌
 
 		List<Post> postList = postBO.getPostListByPostTypeFromLimit(postType, from, limit);
 		
@@ -65,8 +66,8 @@ public class PostController {
 		
 		// 글의 개수에 따라 필요한 페이지 수 전달
 		int postCount = postBO.getPostCountByPostType(postType);
-		int needPage = postCount / 10;
-		if(postCount % 10 > 0) {
+		int needPage = postCount / limit;
+		if(postCount % limit > 0) {
 			needPage += 1;
 		}
 		model.addAttribute("needPage",needPage);

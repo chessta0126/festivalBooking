@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class=" container pt-3 d-flex justify-content-center">
+<div class="container pt-3 d-flex justify-content-center">
 	<div class="pt-3">
 		<div>
 			<%-- 예매 마감 됐을 경우에만 --%>
@@ -46,7 +46,7 @@
 						<h3 class="bold">&nbsp;</h3>
 					</c:otherwise>
 				</c:choose>
-				<img width="200" src="${festival.imagePath}" id="posterImg">
+				<img width="300" height="320" src="${festival.imagePath}" id="posterImg">
 			</div>
 			
 			<%-- 공연 정보 --%>

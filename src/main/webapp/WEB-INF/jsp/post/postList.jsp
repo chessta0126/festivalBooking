@@ -38,15 +38,20 @@
 		
 		<%-- 페이징 --%>
 		<div class="pt-3 d-flex justify-content-center">
-			<c:forEach begin="1" end="${needPage}" step="1" var="page">
-				<span class="pr-3">
+			<%-- 현재 페이지 > 페이징 기준 경우에만 이전 표시 --%>
+			<c:if test="${currentPage > 3}">
+				<a href="/post/postList?postType=${postType}&page=${currentPage-1}">&lt;&lt;</a>
+			</c:if>
+
+			<c:forEach begin="1" end="3" step="1" var="page">
+				<span class="pl-3 pr-3">
 					<a href="/post/postList?postType=${postType}&page=${page}">${page}</a>
 				</span>
 			</c:forEach>
 	
-			<%-- 다음 페이지 : 새로운 5개 --%>
-			<c:if test="${currentPage + 1 >= needPage}">
-				<a href="/post/postList?postType=${postType}&page=${currentPage+1}">>></a>
+			<%-- 다음 페이지 <= 마지막 페이지 경우에만 다음 표시 --%>
+			<c:if test="${currentPage + 1 <= needPage}">
+				<a href="/post/postList?postType=${postType}&page=${currentPage + 1}">>></a>
 			</c:if>
 		</div>
 	</div>
