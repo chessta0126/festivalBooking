@@ -46,23 +46,9 @@ public class PostController {
 		// 페이징
 		// limit from,limit -> from + 1부터 limit개
 		int from = 0; // page 파라미터가 없을 경우, 1페이지로 간주
-		int limit = 3; // 3개씩 보여줌
-		
-		try { // page 파라미터가 없을 경우, 예외 처리
-			from = (page-1) * limit; // 1page: 0(1부터), 2page:10(11부터)...
-			
-			// 이전, 다음을 위한 현재 페이지 전달
-			model.addAttribute("currentPage",page);
-		} catch(Exception e) { 
-			// 이전, 다음을 위한 현재 페이지 전달
-			model.addAttribute("currentPage",1);			
-		}
-
-		List<Post> postList = postBO.getPostListByPostTypeFromLimit(postType, from, limit);
-		
-		model.addAttribute("viewName","post/postList");
-		model.addAttribute("postType",postType);
-		model.addAttribute("postList",postList);
+		int limit = 3; // 한 페이지에 글 몇 개씩 보여줌?
+		int pagingStandard = 3; // 몇 페이지씩 끊을 건지 결정
+		model.addAttribute("pagingStandard",pagingStandard);
 		
 		// 글의 개수에 따라 필요한 페이지 수 전달
 		int postCount = postBO.getPostCountByPostType(postType);
@@ -71,6 +57,47 @@ public class PostController {
 			needPage += 1;
 		}
 		model.addAttribute("needPage",needPage);
+		
+		try { // page 파라미터가 없을 경우, 예외 처리
+			from = (page-1) * limit; // 1page: 0(1부터), 2page:10(11부터)... <- limit = 10일 때
+			
+			// 이전, 다음을 위한 현재 페이지 & 나타날 페이징 범위 전달
+			model.addAttribute("currentPage",page);
+			
+			int whereIsMyPage = page % pagingStandard;
+			if(whereIsMyPage == 0) {
+				whereIsMyPage = pagingStandard;
+			}
+			int maxPage = page + (pagingStandard - whereIsMyPage);
+			int minPage = maxPage - pagingStandard + 1;
+			
+			if(maxPage > needPage) {
+				maxPage = needPage;
+			}
+			
+			model.addAttribute("minPage",minPage);
+			model.addAttribute("maxPage",maxPage);
+			
+		} catch(Exception e) { 
+			// page 파라미터가 없을 경우, 1페이지로 간주
+			model.addAttribute("currentPage",1);
+			
+			int maxPage = pagingStandard;
+			int minPage = 1;
+			
+			if(maxPage > needPage) {
+				maxPage = needPage;
+			}
+			
+			model.addAttribute("minPage",minPage);
+			model.addAttribute("maxPage",maxPage);
+		}
+
+		List<Post> postList = postBO.getPostListByPostTypeFromLimit(postType, from, limit);
+		
+		model.addAttribute("viewName","post/postList");
+		model.addAttribute("postType",postType);
+		model.addAttribute("postList",postList);
 		
 		return "template/layout";
 	}
