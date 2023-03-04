@@ -14,6 +14,8 @@ import com.festivalBooking.book.bo.BookBO;
 import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.comment.model.Comment;
 import com.festivalBooking.comment.model.CommentView;
+import com.festivalBooking.festival.bo.FestivalBO;
+import com.festivalBooking.festival.model.Festival;
 import com.festivalBooking.user.model.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +26,9 @@ public class BookController {
 	
 	@Autowired
 	private BookBO bookBO;
+	
+	@Autowired
+	private FestivalBO festivalBO;
 
 	// http://localhost:8080/book/myBooking_view
 	@GetMapping("/myBooking_view")
@@ -35,6 +40,10 @@ public class BookController {
 		List<BookView> myBookingList = bookBO.generateBookViewListByUserId(userId);
 		model.addAttribute("myBookingList",myBookingList);
 				
+		// 예매 내역 없을 경우, 최신 공연 3개 추천
+		List<Festival> festivalList = festivalBO.getFestivalListLimit(3);
+		model.addAttribute("festivalList",festivalList);
+		
 		model.addAttribute("viewName","book/myBooking");
 		
 		return "template/layout";

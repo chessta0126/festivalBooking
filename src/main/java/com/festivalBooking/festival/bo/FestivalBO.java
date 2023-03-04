@@ -39,19 +39,26 @@ public class FestivalBO {
 
 	// 공연 목록 가져오기
 	public List<Festival> getFestivalList() {
-		return festivalDAO.getFestivalList();
+		return festivalDAO.selectFestivalList();
 	}
+	
+	// 공연 목록 몇 개만 가져오기
+	public List<Festival> getFestivalListLimit(int limit){
+		return festivalDAO.selectFestivalListLimit(limit);
+	};
+		
 	// 기간 내 공연 목록 가져오기
 	public List<Festival> getFestivalListByLimit(String startDate, String endDate) {
-		return festivalDAO.getFestivalListByLimit(startDate,endDate);
+		return festivalDAO.selectFestivalListByLimitDate(startDate,endDate);
 	}
+	
 	// 내 공연 목록 가져오기
 	public List<Festival> getFestivalListByUserId(int userId) {
-		return festivalDAO.getFestivalListByUserId(userId);
+		return festivalDAO.selectFestivalListByUserId(userId);
 	}
 
 	// 공연 가져오기 (festivalId)
 	public Festival getFestivalByFestivalId(int festivalId) {
-		return festivalDAO.getFestivalByFestivalId(festivalId);
+		return festivalDAO.selectFestivalByFestivalId(festivalId);
 	}
 }

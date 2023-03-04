@@ -16,16 +16,19 @@ public interface FestivalDAO {
 	public boolean insertFestival(Festival festival);
 	
 	// 공연 목록 가져오기
-	public List<Festival> getFestivalList();
+	public List<Festival> selectFestivalList();
+
+	// 공연 목록 몇 개만 가져오기
+	public List<Festival> selectFestivalListLimit(int limit);
 	
 	// 기간 내 공연 목록 가져오기
-	public List<Festival> getFestivalListByLimit(
+	public List<Festival> selectFestivalListByLimitDate(
 			@Param("startDate") String startDate
 			, @Param("endDate") String endDate);
 	
 	// 내 공연 목록 가져오기
-	public List<Festival> getFestivalListByUserId(int userId);
+	public List<Festival> selectFestivalListByUserId(int userId);
 	
 	// 공연 가져오기 (festivalId)
-	public Festival getFestivalByFestivalId(int festivalId);
+	public Festival selectFestivalByFestivalId(int festivalId);
 }

@@ -27,7 +27,7 @@ public class MainController {
 		@GetMapping("/main_view")
 		public String signUpView(Model model) {
 			// 최신 공연 정보
-			List<Festival> festivalList = festivalBO.getFestivalList();
+			List<Festival> festivalList = festivalBO.getFestivalListLimit(1);
 			model.addAttribute("festivalList",festivalList);
 			
 			// 이동할 페이지 주소

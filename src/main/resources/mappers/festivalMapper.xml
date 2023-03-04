@@ -49,25 +49,31 @@
 		)
 	</insert>
 	
-	<select id="getFestivalList" resultType="map">
+	<select id="selectFestivalList" resultType="map">
 		SELECT * FROM `festival`
 		order by `id` DESC
 	</select>
+	
+	<select id="selectFestivalListLimit" parameterType="int" resultType="map">
+		SELECT * FROM `festival`
+		order by `id` DESC
+		LIMIT ${limit}
+	</select>
 
-	<select id="getFestivalListByLimit" resultType="map">
+	<select id="selectFestivalListByLimitDate" resultType="map">
 		SELECT * FROM `festival`
 		WHERE `date` >= #{startDate}
 		AND `date` &lt;= #{endDate}
 		order by `id` DESC
 	</select>
 
-	<select id="getFestivalListByUserId" parameterType="int" resultType="com.festivalBooking.festival.model.Festival">
+	<select id="selectFestivalListByUserId" parameterType="int" resultType="com.festivalBooking.festival.model.Festival">
 		SELECT * FROM `festival`
 		WHERE `userId` = #{userId}
 		order by `id` DESC
 	</select>
 
-	<select id="getFestivalByFestivalId" parameterType="int"
+	<select id="selectFestivalByFestivalId" parameterType="int"
 	resultType="com.festivalBooking.festival.model.Festival">
 		SELECT * FROM `festival`
 		WHERE `id` = #{festivalId}
