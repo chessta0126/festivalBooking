@@ -112,7 +112,7 @@
 
 <script>
 	$(document).ready(function(){
-		// 회원/ 비회원 상자 toggle
+		// 예매 확인 - 회원/ 비회원 상자 toggle
         $('#member').on('click',function(){
             // 선택창 체크 토글
             $('#memberNot').prop("checked",false);
@@ -132,5 +132,10 @@
             $('#memberBox').addClass("d-none");
             $('#memberNotBox').removeClass("d-none");
         });
+		
+		// 로그인 중일 경우 회원으로 뜨게 하기
+		if("${userId}" != ""){
+			$('#member').click();
+		}
 	});
 </script>
