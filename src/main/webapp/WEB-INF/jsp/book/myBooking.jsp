@@ -47,7 +47,7 @@
 						</c:if>
 					</div>
 					<div class="pt-2">
-						<span class="pr-4 text-success">예매: ${BookView.festival.price}원 / 현장: ${festival.priceOffline}원</span>
+						<span class="pr-4 text-success">예매: ${BookView.festival.price}원 / 현장: ${BookView.festival.priceOffline}원</span>
 					</div>
 					<div class="pt-2 text-secondary">
 						<span class="pr-4">기획자 : ${BookView.festival.festivalMaster}</span>

@@ -46,9 +46,9 @@
 	
 	<div class="d-flex justify-content-between">
 	<%-- 공지사항 --%>
-	<div class="pt-4 pb-4">
+	<div class="pt-4 pb-4 col-6 bg-secondary">
 		<h1 class="bold">공지사항</h1>
-		<div class="alert-box">
+		<div class="alert-box w-100">
 			<table class="table text-center">
 				<thead>
 					<th>No.</th>
@@ -70,9 +70,9 @@
 	</div>
 	
 	<%-- 예매 확인 --%>
-	<div class="pl-3 pt-4 pb-4">
+	<div class="pl-3 pt-4 pb-4 col-6 bg-secondary">
 		<h1 class="bold">예매 확인</h1>
-		<div class="book-confirm-box white-text bold">
+		<div class="w-100 book-confirm-box white-text bold">
 			<%-- 회원 / 비회원 선택 --%>
 			<div class="d-flex justify-content-center pt-3 mb-3">
 				<div class="mr-5">
@@ -102,13 +102,24 @@
 			<%-- 회원일 경우 : 예매 확인 페이지로 넘어가는 버튼 --%>
 			<div id="memberBox" class="container d-none">
 				<button class="w-100 btn btn-dark">
-					<a href="/book/myBooking_view" class="button">예매 목록</a>
+					<c:choose>
+						<c:when test="${userId != null}">
+							<a href="/book/myBooking_view" class="button">예매 목록</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/user/sign_in_view" class="button">로그인</a>
+						</c:otherwise>
+					</c:choose>
 				</button>
 			</div>
 		</div>
 	</div>
 	</div>
 </div>
+
+<footer class="pt-5">
+	<jsp:include page="../include/footer.jsp" />
+</footer>
 
 <script>
 	$(document).ready(function(){
