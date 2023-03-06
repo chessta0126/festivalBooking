@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <div class="pt-5 d-flex justify-content-center">
 	<div>
 		<div class="d-flex justify-content-between">
@@ -118,10 +120,20 @@
 			</table>
 		</div>
 		
-		<%-- 작성 완료 버튼 --%>
-		<div class="pt-5 d-flex justify-content-center">
-			<button type="submit" id="festivalUploadBtn" class="btn btn-dark">공연 등록</button>
-		</div>
+		<c:choose>
+			<%-- 수정 완료 버튼 : update --%>
+			<c:when test="${isUpdate}">
+				<div class="pt-5 d-flex justify-content-center">
+					<button type="submit" id="festivalUpdateBtn" class="btn btn-dark">수정 완료</button>
+				</div>
+			</c:when>
+			<%-- 작성 완료 버튼 : insert --%>
+			<c:otherwise>
+				<div class="pt-5 d-flex justify-content-center">
+					<button type="submit" id="festivalUploadBtn" class="btn btn-dark">공연 등록</button>
+				</div>
+			</c:otherwise>
+		</c:choose>
 		</form>
 	</div>
 </div>
@@ -132,6 +144,28 @@
 
 <script>
 	$(document).ready(function() {
+		// 페이지에 접근했을 때, 공연 등록(insert)/ 공연 수정(update) 여부 파악
+		if(${isUpdate}){
+			// 기존 정보 수정할 수 있도록 value로 넣어줌
+			$("#posterImg").attr("src","${festival.imagePath}");
+			$('#title').attr('value',"${festival.title}");
+			$('#date').attr('value',"${festival.date}");
+			$('#startTime').attr('value',"${festival.startTime}");
+			$('#endTime').attr('value',"${festival.endTime}");
+			$('#place').attr('value',"${festival.place}");
+			$('#address').attr('value',"${festival.address}");
+			$('#price').attr('value',"${festival.price}");
+			$('#priceOffline').attr('value',"${festival.priceOffline}");
+			
+			// textarea는 value로 안 들어간다.
+			document.getElementById("lineUp").value =`${festival.lineUp}`; 
+			document.getElementById("explain").value =`${festival.explain}`; 
+			document.getElementById("warning").value =`${festival.warning}`; 
+			
+			$('#festivalMaster').attr('value',"${festival.festivalMaster}");
+			$('#askRoot').attr('value',"${festival.askRoot}");
+		}
+		
 		// on / off toggle
 		var check = $("input[type='checkbox']");
 		check.click(function(){
@@ -145,8 +179,13 @@
 				return;				
 			}
 		});
-		check.click();
-		
+
+		// 등록 시에는 처음에 예매 가능으로 뜨도록 설정
+		// 수정하는 경우에는 예매 여부 클릭되면 안 된다.
+		if(!${isUpdate}){
+			check.click();
+		}
+			
 		// datepicker 형식
 		$.datepicker.setDefaults({
 			// 요일 표시 : 한글
@@ -286,6 +325,113 @@
 					} else{
 						// 실패
 						alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
+					}
+				}
+				, error : function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+		});
+
+		// 공연 정보 수정 (update)
+		$('#festivalUpdateBtn').on('click', function(e) {
+			e.preventDefault(); // submit 기능 중단
+			
+			// validation check
+			let id = "${festival.id}";
+			let title = $('#title').val().trim();
+			let date = $('#date').val();
+			let startTime = $('#startTime').val().trim();
+			let endTime = $('#endTime').val().trim();
+			let place = $('#place').val().trim();
+			let address = $('#address').val();
+			let price = $('#price').val().trim();
+			let priceOffline = $('#priceOffline').val().trim();
+			let posterImg = $('#poster')[0].files[0];
+			let lineUp = $('#lineUp').val().trim();
+			let explain = $('#explain').val().trim();
+			let warning = $('#warning').val().trim();
+			let festivalMaster = $('#festivalMaster').val().trim();
+			let askRoot = $('#askRoot').val().trim();
+			if($('#timeOver').hasClass("d-none")){ // 예매 중 상태
+				var isTimeOver = false;
+			} else{
+				var isTimeOver = true;
+			}
+			
+			if(title == ""){
+				alert("공연 제목을 입력해주세요");
+				return false;
+			}
+			if(date == ""){
+				alert("공연 날짜를 입력해주세요");
+				return false;
+			}
+			if(startTime == ""){
+				alert("공연이 시작하는 시간을 입력해주세요");
+				return false;
+			}
+			if(endTime == ""){
+				alert("공연이 끝나는 시간을 입력해주세요");
+				return false;
+			}
+			if(place == ""){
+				alert("공연 장소를 입력해주세요");
+				return false;
+			}
+			if(price == ""){
+				alert("티켓 예매 가격을 입력해주세요");
+				return false;
+			}
+			if(priceOffline == ""){
+				alert("티켓 현장 구매 가격을 입력해주세요");
+				return false;
+			}
+			if(festivalMaster == ""){
+				alert("공연 담당자 이름을 입력해주세요");
+				return false;
+			}
+			if(askRoot == ""){
+				alert("연락처를 입력해주세요");
+				return false;
+			}
+			
+			// form태그를 자바스크립트에서 만든다.
+			let formData = new FormData();
+			formData.append("id", id);
+			formData.append("title", title);
+			formData.append("date", date);
+			formData.append("startTime", startTime);
+			formData.append("endTime", endTime);
+			formData.append("place", place);
+			formData.append("address", address);
+			formData.append("price", price);
+			formData.append("priceOffline", priceOffline);
+			formData.append("posterImg", posterImg);
+			formData.append("lineUp", lineUp);
+			formData.append("explain", explain);
+			formData.append("warning", warning);
+			formData.append("festivalMaster", festivalMaster);
+			formData.append("askRoot", askRoot);
+			formData.append("isTimeOver", isTimeOver);
+			
+			// AJAX form 데이터 전송
+			$.ajax({
+				type:'PUT'
+				,url:'/festival/update'
+				, data: formData
+				, enctype: "multipart/form-data"    // 파일 업로드를 위한 필수 설정
+				, processData: false    // 파일 업로드를 위한 필수 설정
+				, contentType: false    // 파일 업로드를 위한 필수 설정
+				, success: function(data) {
+					if (data.code == 1) {
+						// 성공
+						alert("수정이 완료되었습니다.");
+						location.href="/festival/festival_detail_view?festivalId="+data.festivalId;
+					} else{
+						// 실패
+						alert("[error] 공연 정보 수정에 실패했습니다. \n 담당자에게 문의해주세요");
 					}
 				}
 				, error : function(jqXHR, textStatus, errorThrown) {

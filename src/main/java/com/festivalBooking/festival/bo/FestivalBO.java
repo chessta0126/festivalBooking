@@ -61,4 +61,23 @@ public class FestivalBO {
 	public Festival getFestivalByFestivalId(int festivalId) {
 		return festivalDAO.selectFestivalByFestivalId(festivalId);
 	}
+	
+	
+	// 공연 정보 수정 (update) + 포스터 이미지 저장
+	public boolean updateFestival(Festival festival, MultipartFile posterImg, String name) {
+		// 파일 업로드 => 경로
+		String imagePath = null;
+		if(!ObjectUtils.isEmpty(posterImg)) {
+			imagePath = fileManager.saveFile(name, posterImg);
+		} else {
+			// 기존에 등록했던 이미지
+			imagePath = festivalDAO.selectFestivalByFestivalId(festival.getId()).getImagePath();
+		}
+		
+		// MultipartFile이 넘어올 때 Festival 객체 형태가 되면서 String으로 이상하게 들어온 것
+		// -> 올바른 imagepath로 정정해서 다시 setting
+		festival.setImagePath(imagePath);
+		
+		return festivalDAO.updateFestival(festival);
+	}
 }

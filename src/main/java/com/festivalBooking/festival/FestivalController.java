@@ -13,6 +13,8 @@ import com.festivalBooking.book.bo.BookBO;
 import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
+import com.festivalBooking.post.model.Post;
+import com.festivalBooking.user.model.User;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -81,15 +83,29 @@ public class FestivalController {
 		return "template/layout";
 	}
 	
-	/**
-	 * 공연 홍보 글쓰기 API
-	 * @param model
-	 * @return
-	 */
-	// http://localhost:8080/festival/festival_create_view
+	// 공연 홍보 글 쓰기, 수정하기 API
+	// http://localhost:8080/festival/festival_create_view?isUpdate={isUpdate}&festivalId={festivalId}
 	@GetMapping("/festival_create_view")
-	public String festivalCreateView(Model model) {
+	public String festivalCreateView(
+			@RequestParam("isUpdate") boolean isUpdate
+			, @RequestParam(value="festivalId", required=false) Integer festivalId
+			, Model model) {
 		model.addAttribute("viewName","festival/festivalCreate");
+
+		// 공연 수정(update)인지, 공연 등록(insert)인지 파악(화면 공유)
+		if (isUpdate) { // 공연 수정일 경우
+			model.addAttribute("isUpdate", true);
+			model.addAttribute("festivalId", festivalId);
+
+			// 기존에 작성한 공연 정보를 띄워줘야 함
+			Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
+			model.addAttribute("festival", festival);
+		} else {
+			model.addAttribute("isUpdate", false);
+			// 그냥 글쓰기로 접근했을 때, ${postId}가 존재하지 않으므로 에러가 떠버림 -> 일단 0으로 둔다.
+			// insert할 때 postId는 넘기지 않으니 괜찮다.
+			model.addAttribute("postId", 0);
+		}
 		
 		return "template/layout";
 	}

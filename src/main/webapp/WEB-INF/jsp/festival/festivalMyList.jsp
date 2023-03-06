@@ -41,7 +41,7 @@
 		</c:choose>
 
 		<button id="writePostBtn" class="w-100 btn btn-primary">
-			<a href="/festival/festival_create_view" class="button">새로운 공연 등록</a>
+			<a href="/festival/festival_create_view?isUpdate=false" class="button">새로운 공연 등록</a>
 		</button>
 	</div>
 </div>

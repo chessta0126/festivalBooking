@@ -79,4 +79,29 @@
 		WHERE `id` = #{festivalId}
 		order by `id` DESC
 	</select>
+	
+	<update id="updateFestival" parameterType="com.festivalBooking.festival.model.Festival"
+	useGeneratedKeys="true" keyProperty="id">
+		UPDATE `festival`
+		SET
+			`title` = #{title}
+			, `date` = #{date}
+			, `startTime` = #{startTime}
+			, `endTime` = #{endTime}
+			, `place` = #{place}
+			, `address` = #{address}
+			, `price` = #{price}
+			, `priceOffline` = #{priceOffline}
+			, `imagePath` = #{imagePath}
+			, `lineUp` = #{lineUp}
+			, `explain` = #{explain}
+			, `warning` = #{warning}
+			, `festivalMaster` = #{festivalMaster}
+			, `askRoot` = #{askRoot}
+			, `isTimeOver` = #{isTimeOver}
+			, `updatedAt` = NOW()
+			
+		WHERE
+			`id` = #{id}
+	</update>
 </mapper>

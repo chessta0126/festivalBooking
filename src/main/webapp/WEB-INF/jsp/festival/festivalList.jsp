@@ -144,65 +144,6 @@
 					</div>
 				</div>
 			</article>
-	
-			<article class="festival4 mt-3 pr-4 pb-3 d-flex bg-dark">
-				<!-- 공연 포스터 이미지-->
-				<div class="m-3">
-					<a href="#">
-						<img src="#" alt="공연 팜플렛4" width="250" height="250">
-					</a>
-				</div>
-				<!-- 공연 정보 -->
-				<div class="pl-3">
-					<div class="pt-4 font-weight-bold">
-						<h4 class="festival-title">FRESH HOUSE 클럽공연</h4>
-					</div>
-					<div class="pt-2 white-text"></div>
-					<div class="white-text">힙합으로 즐기는 화려한 밤!! 공연 이후 11시부터 애프터
-						파티까지..!!</div>
-					<div class="text-danger">* 미성년자는 입장하실 수 없습니다.</div>
-					<div class="pt-3 yellow-text">일시 : 2022년 11월 18일(금) - 10PM ~
-						6AM</div>
-					<div class="pt-2 text-info">장소 : coc (서울 강남구 도산대로 53길 39 B1층)</div>
-					<div class="pt-2">
-						<span class="pr-4 text-success">예매: ???원 / 현장: ???원</span> <span
-							class="text-success">(잔여 예약석: 37명)</span>
-					</div>
-					<div class="pt-2 text-secondary">
-						<span class="pr-4">기획자 : 송승휘 </span> <span>문의사항:
-							@jaskionthelit_99kr</span>
-					</div>
-				</div>
-			</article>
-	
-			<article class="festival5 mt-3 pr-4 pb-3 d-flex bg-dark">
-				<!-- 공연 포스터 이미지-->
-				<div class="m-3">
-					<a href="#">
-						<img src="#" alt="공연 팜플렛5" width="250" height="250">
-					</a>
-				</div>
-				<!-- 공연 정보 -->
-				<div class="pl-3">
-					<div class="pt-4 font-weight-bold">
-						<h4 class="festival-title text-success">홍대 윗잔다리 싸이퍼 2회</h4>
-					</div>
-					<div class="pt-2 white-text"></div>
-					<div class="white-text">홍대 길거리 문화를 살리기 위해 기획한 싸이퍼</div>
-					<div class="white-text">누구나 자유롭게 참여할 수 있다.</div>
-					<div class="pt-3 yellow-text">일시 : 2023년 1월 14일(토)</div>
-					<div class="pt-2 text-info">장소 : 홍대 윗잔다리 공원 (서울 마포구 와우산로 17길
-						14 지층)</div>
-					<div class="pt-2">
-						<span class="pr-2 text-success">가격: 무료</span> <span
-							class="text-success">(* 제한 인원이 없으므로, 안전에 주의해주시기 바랍니다.)</span>
-					</div>
-					<div class="pt-2 text-secondary">
-						<span class="pr-4">기획자 : chessta </span> <span>문의사항:
-							@chessta0126</span>
-					</div>
-				</div>
-			</article>
 		</div>
 	</div>
 </div>
