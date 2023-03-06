@@ -100,6 +100,7 @@ public class FestivalController {
 			// 기존에 작성한 공연 정보를 띄워줘야 함
 			Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
 			model.addAttribute("festival", festival);
+			model.addAttribute("isTimeOver", festival.isTimeOver());
 		} else {
 			model.addAttribute("isUpdate", false);
 			// 그냥 글쓰기로 접근했을 때, ${postId}가 존재하지 않으므로 에러가 떠버림 -> 일단 0으로 둔다.

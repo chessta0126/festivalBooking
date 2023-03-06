@@ -144,6 +144,26 @@
 
 <script>
 	$(document).ready(function() {
+		// on / off toggle
+		var check = $("input[type='checkbox']");
+		check.click(function(){
+			if($('#notTimeOver').hasClass("d-none")){ // 공연 만료 상태				
+				$('#timeOver').addClass("d-none");
+				$('#notTimeOver').removeClass("d-none");
+				return;
+			} else{
+				$('#notTimeOver').addClass("d-none");
+				$('#timeOver').removeClass("d-none");
+				return;				
+			}
+		});
+
+		// 등록 시에는 처음에 예매 가능으로 뜨도록 설정
+		// 수정하는 경우에는 예매 여부 클릭되면 안 된다.
+		if(!${isUpdate}){
+			check.click();
+		}
+		
 		// 페이지에 접근했을 때, 공연 등록(insert)/ 공연 수정(update) 여부 파악
 		if(${isUpdate}){
 			// 기존 정보 수정할 수 있도록 value로 넣어줌
@@ -164,26 +184,9 @@
 			
 			$('#festivalMaster').attr('value',"${festival.festivalMaster}");
 			$('#askRoot').attr('value',"${festival.askRoot}");
-		}
-		
-		// on / off toggle
-		var check = $("input[type='checkbox']");
-		check.click(function(){
-			if($('#notTimeOver').hasClass("d-none")){ // 공연 만료 상태				
-				$('#timeOver').addClass("d-none");
-				$('#notTimeOver').removeClass("d-none");
-				return;
-			} else{
-				$('#notTimeOver').addClass("d-none");
-				$('#timeOver').removeClass("d-none");
-				return;				
+			if("${isTimeOver}" == "false"){
+				check.click();
 			}
-		});
-
-		// 등록 시에는 처음에 예매 가능으로 뜨도록 설정
-		// 수정하는 경우에는 예매 여부 클릭되면 안 된다.
-		if(!${isUpdate}){
-			check.click();
 		}
 			
 		// datepicker 형식
@@ -355,9 +358,9 @@
 			let festivalMaster = $('#festivalMaster').val().trim();
 			let askRoot = $('#askRoot').val().trim();
 			if($('#timeOver').hasClass("d-none")){ // 예매 중 상태
-				var isTimeOver = false;
+				var isTimeOverUpdate = false;
 			} else{
-				var isTimeOver = true;
+				var isTimeOverUpdate = true;
 			}
 			
 			if(title == ""){
@@ -414,7 +417,7 @@
 			formData.append("warning", warning);
 			formData.append("festivalMaster", festivalMaster);
 			formData.append("askRoot", askRoot);
-			formData.append("isTimeOver", isTimeOver);
+			formData.append("isTimeOver", isTimeOverUpdate);
 			
 			// AJAX form 데이터 전송
 			$.ajax({
