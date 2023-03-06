@@ -32,6 +32,7 @@ nav .nav-item:hover{background-color: darkcyan;}
 	overflow: hidden;}
 .festival-info-box {minheight:100px;}
 .book-font-size {font-size: 18px;}
+.dropdown-item:hover{font-weight:bold; background-color: #888;}
 
 .sign-up-box {width:650px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
 .sign-up-subject {margin:20px; font-weight:bold;}

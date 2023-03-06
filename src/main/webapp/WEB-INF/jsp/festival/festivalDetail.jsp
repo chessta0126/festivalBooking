@@ -5,28 +5,46 @@
 
 <div class="container pt-3 d-flex justify-content-center">
 	<div class="pt-3">
-		<div>
-			<%-- 예매 마감 됐을 경우에만 --%>
-			<c:choose>
-				<c:when test="${isTimeOver}">
-					<button type="button" id="expired" class="mb-3 btn btn-danger bold">
-						예매 마감
+		<div class="d-flex justify-content-between">
+			<div>
+				<%-- 예매 마감 됐을 경우에만 --%>
+				<c:choose>
+					<c:when test="${isTimeOver}">
+						<button type="button" id="expired" class="mb-3 btn btn-danger bold">
+							예매 마감
+						</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" id="expired" class="mb-3 btn btn-success bold">
+							예매중
+						</button>
+					</c:otherwise>
+				</c:choose>
+				
+				<%-- 예매 완료 됐을 경우에만 보이기 : 클릭 시 예매 취소하기 modal --%>
+				<c:if test="${isBooked}">
+					<button type="button" id="bookingOK" class="mb-3 btn btn-warning bold button"
+					data-toggle="modal" data-target="#modalBookingCancel" data-festival-id="${festival.id}">
+						예매 완료
 					</button>
-				</c:when>
-				<c:otherwise>
-					<button type="button" id="expired" class="mb-3 btn btn-success bold">
-						예매중
-					</button>
-				</c:otherwise>
-			</c:choose>
-			
-			<%-- 예매 완료 됐을 경우에만 보이기 : 클릭 시 예매 취소하기 modal --%>
-			<c:if test="${isBooked}">
-				<button type="button" id="bookingOK" class="mb-3 btn btn-warning bold button"
-				data-toggle="modal" data-target="#modalBookingCancel" data-festival-id="${festival.id}">
-					예매 완료
-				</button>
-			</c:if>
+				</c:if>
+			</div>
+
+			<div>
+				<%-- 수정 / 삭제 modal - 내가 등록한 공연일 때만 보이기 --%>
+				<c:if test="${festival.userId eq userId}">
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">공연 정보 변경</button>
+						<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">공연 정보 수정</a>
+							<a class="dropdown-item" href="#">공연 삭제</a>
+							<a class="dropdown-item" href="#">예매 마감</a>
+						</div>
+					</div>
+				</c:if>
+			</div>
 		</div>
 
 		<%-- 공연 예매 정보 --%>
