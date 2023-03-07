@@ -25,7 +25,7 @@
 	
 	<div>
 		<li class="nav-item">
-			<a href="#" class="nav-link">라인업 신청/모집</a>
+			<a href="/post/postList?postType=라인업 신청/모집" class="nav-link">라인업 신청/모집</a>
 		</li>
 	</div>
 	
