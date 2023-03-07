@@ -49,6 +49,8 @@ nav .nav-item:hover{background-color: darkcyan;}
 .contents-box {width:650px; background-color:#333;}
 #writeTextArea {height:100px;}
 
+/* 지도 */
+#map{width:500px; height:400px;}
 
 /* on / off 체크박스 */
 /* The switch - the box around the slider */
