@@ -371,7 +371,7 @@
 								});
 							} else{
 								// 실패
-								alert("[error] 공연 등록에 실패했습니다. \n 담당자에게 문의해주세요");
+								alert("[error] 공연 예매에 실패했습니다. \n 담당자에게 문의해주세요");
 							}
 						}
 						, error : function(jqXHR, textStatus, errorThrown) {
@@ -413,8 +413,51 @@
 				        inputPlaceholder: '연락처를 입력하세요..'
 				    })
 			    
-				    if (phoneNumber) {
-				        Swal.fire(`예매자 이름 : ` + bookName + "\n" + `전화번호 : ` + phoneNumber)
+				    if (phoneNumber) { // 전화번호까지 입력 완료되었을 때 변수 설정, 예매 final 확인
+				    	let festivalId = ${festival.id};
+						let headCount = $('#headCount option:selected').val();
+						let payMoney = $('#payMoney').text();
+						
+				    	Swal.fire({
+				            title: '예매 하시겠습니까?',
+				            text: "수량 : " + headCount + "매 , 가격 : " + payMoney + "원",
+				            icon: 'warning',
+				            showCancelButton: true,
+				            confirmButtonColor: '#3085d6',
+				            cancelButtonColor: '#d33',
+				            confirmButtonText: '예',
+				            cancelButtonText: '아니오'
+				        }).then((result) => { 
+				            if (result.isConfirmed) { // 예매 확정(insert)
+								// AJAX 전송
+								$.ajax({
+									type:'POST'
+									,url:'/book/addBooking'
+									, data: {"festivalId":festivalId, "payMoney":payMoney, "headCount":headCount, "isMember":false, "bookName":bookName,"phoneNumber":phoneNumber}
+									, success: function(data) {
+										if (data.code == 1) {
+											// 성공
+											Swal.fire({
+								                title : '예매가 완료되었습니다.',
+								                text : '예매완료 버튼 / 마이페이지 > 예매 확인 탭 등에서 예약을 수정하실 수 있습니다.',
+								                icon: 'success'
+											}).then((result) => { 
+									            if (result.isConfirmed) {
+													location.reload();
+									            }
+											});
+										} else{
+											// 실패
+											alert("[error] 예매에 실패했습니다. \n 담당자에게 문의해주세요");
+										}
+									}
+									, error : function(jqXHR, textStatus, errorThrown) {
+										var errorMsg = jqXHR.responseJSON.status;
+										alert(errorMsg + ":" + textStatus);
+									}
+								});
+				            }
+						});
 				    }
 			    }
 			})()

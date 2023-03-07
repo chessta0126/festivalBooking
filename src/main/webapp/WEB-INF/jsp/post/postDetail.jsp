@@ -119,8 +119,8 @@
 					</div>
 				</div>
 			
-				<button type="button" class="btn btn-dark allowUpdatedComment ml-3 d-none">
-					<a href="#" class="button">수정 완료</a>
+				<button type="button" class="btn btn-dark allowUpdatedComment ml-3 d-none button">
+					수정 완료
 				</button>
 			</div>
 		</c:if>
@@ -234,19 +234,24 @@
 		
 		// 댓글 수정(Update)
 		$('.commentUpdateBtn').on('click', function(e) {
+			// 댓글 내용 수정 가능하게 하기 : 수정하고자 하는 댓글만 지정
 			$(".commentContent").addClass("d-none");
-			$(".commentManagementBtn").addClass("d-none");
-			
 			$(".updatedComment").removeClass("d-none");
+
+			// 버튼 toggle
+			$(".commentManagementBtn").addClass("d-none");
+			// 수정하고자 하는 댓글만 지정
 			$(".allowUpdatedComment").removeClass("d-none");
 		});
 		
+		// 댓글 수정 - 수정 완료 버튼
 		$('.allowUpdatedComment').on('click', function(e) {
 			// 댓글 번호
 			let commentId = $(this).data('comment-id');
 		
 			// 수정 내용 넘기기
-			let updatedComment = $(".updatedComment").val();
+			let updatedComment = $(this).parents('input').val().trim();
+			alert(updatedComment);
 			
 			// 내용이 없으면 입력하라고 alert
 			if(updatedComment == ''){
