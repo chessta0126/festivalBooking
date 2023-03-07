@@ -23,7 +23,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
 	<!-- 지도 -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60ad894fc00b9d5a75673052a6587dfb"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60ad894fc00b9d5a75673052a6587dfb&libraries=services"></script>
 	
 	<!-- 외부 스타일 시트 -->
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
