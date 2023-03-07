@@ -225,7 +225,7 @@
 	<div class="modal-dialog modal-sm modal-dialog-centered">
 		<div class="modal-content text-center">
       		<div class="py-3 border-bottom">
-      			<a href="#" id="loginForBooking">로그인</a>
+      			<a href="/user/sign_in_view" id="loginForBooking">로그인</a>
       		</div>
       		<div class="py-3 border-bottom">
       			<a href="#" id="notMemberBooking">비회원으로 예매</a>
@@ -397,6 +397,27 @@
 		// 비로그인 modal -> 비회원 예매 클릭
 		$('#modal #notMemberBooking').on('click',function(e){
 			e.preventDefault();
+			
+			(async () => {
+			    const { value: bookName } = await Swal.fire({
+			        title: '예매자의 이름을 입력하세요.',
+			        input: 'text',
+			        inputPlaceholder: '이름을 입력하세요..'
+			    })
+
+			    // 이후 처리되는 내용.
+			    if (bookName) {
+			        const { value: phoneNumber } = await Swal.fire({
+				        title: '연락처를 입력하세요.',
+				        input: 'text',
+				        inputPlaceholder: '연락처를 입력하세요..'
+				    })
+			    
+				    if (phoneNumber) {
+				        Swal.fire(`예매자 이름 : ` + bookName + "\n" + `전화번호 : ` + phoneNumber)
+				    }
+			    }
+			})()
 		});
 		
 		// 예매 취소(delete)
