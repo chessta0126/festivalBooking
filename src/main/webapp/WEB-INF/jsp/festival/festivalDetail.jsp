@@ -417,6 +417,12 @@
 				    	let festivalId = ${festival.id};
 						let headCount = $('#headCount option:selected').val();
 						let payMoney = $('#payMoney').text();
+						let isMember = false;
+						if(isMember){
+							isMember = 1;
+						} else{
+							isMember = 0;
+						}
 						
 				    	Swal.fire({
 				            title: '예매 하시겠습니까?',
@@ -433,7 +439,7 @@
 								$.ajax({
 									type:'POST'
 									,url:'/book/addBooking'
-									, data: {"festivalId":festivalId, "payMoney":payMoney, "headCount":headCount, "isMember":false, "bookName":bookName,"phoneNumber":phoneNumber}
+									, data: {"festivalId":festivalId, "payMoney":payMoney, "headCount":headCount, "isMember":isMember, "bookName":bookName,"phoneNumber":phoneNumber}
 									, success: function(data) {
 										if (data.code == 1) {
 											// 성공
