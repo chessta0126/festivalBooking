@@ -17,8 +17,8 @@ import com.festivalBooking.common.EncryptUtils;
 import com.festivalBooking.user.bo.UserBO;
 import com.festivalBooking.user.model.User;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RequestMapping("/user")
 @RestController

@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.0.1'
+	id 'org.springframework.boot' version '2.7.9'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -26,7 +26,8 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
+	// implementation group: 'org.glassfish.web', name: 'javax.servlet.jsp.jstl', version: '2.0.0'
+	implementation 'javax.servlet:jstl:1.2'  // springboot ver 2.x
 }
 
 tasks.named('test') {

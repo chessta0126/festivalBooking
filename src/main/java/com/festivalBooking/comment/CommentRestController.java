@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.festivalBooking.comment.bo.CommentBO;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RequestMapping("/comment")
 @RestController

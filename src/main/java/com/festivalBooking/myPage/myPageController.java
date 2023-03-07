@@ -15,7 +15,7 @@ import com.festivalBooking.post.model.Post;
 import com.festivalBooking.user.bo.UserBO;
 import com.festivalBooking.user.model.User;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RequestMapping("/myPage")
 @Controller

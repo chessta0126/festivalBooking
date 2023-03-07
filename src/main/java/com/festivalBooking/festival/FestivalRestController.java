@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RequestMapping("/festival")
 @RestController
