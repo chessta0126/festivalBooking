@@ -51,4 +51,14 @@
 		WHERE
 			`id` = #{commentId}
 	</delete>
+	
+	<update id="updateCommentByCommentIdUpdatedComment" parameterType="map">
+		UPDATE `comment`
+		SET
+			`comment` = #{updatedComment}
+			,`updatedAt` = NOW()
+			
+		WHERE
+			`id` = #{commentId}
+	</update>
 </mapper>
