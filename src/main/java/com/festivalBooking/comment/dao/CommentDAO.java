@@ -23,4 +23,9 @@ public interface CommentDAO {
 	
 	// 본인 댓글 1개 삭제
 	public boolean deleteCommentByCommentId(int commentId);
+	
+	// 댓글 수정
+	public boolean updateCommentByCommentIdUpdatedComment(
+			@Param("commentId") int commentId
+			, @Param("updatedComment") String updatedComment);
 }

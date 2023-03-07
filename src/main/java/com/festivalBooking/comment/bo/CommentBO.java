@@ -68,4 +68,9 @@ public class CommentBO {
 		return commentDAO.deleteCommentByCommentId(commentId);
 	}
 	
+	// 댓글 수정
+	public boolean updateCommentByCommentIdUpdatedComment(int commentId, String updatedComment) {
+		return commentDAO.updateCommentByCommentIdUpdatedComment(commentId,updatedComment);
+	}
+	
 }

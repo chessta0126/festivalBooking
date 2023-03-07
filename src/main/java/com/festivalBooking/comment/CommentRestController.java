@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,25 @@ public class CommentRestController {
 		Map<String, Object> result = new HashMap<>();
 		
 		if(isDeleteCommentSuccess) {
+			result.put("code", 1);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("result", "실패");			
+		}
+		return result;
+	}
+	
+	@PutMapping("/update")
+	public Map<String, Object> updateComment(
+			@RequestParam("commentId") int commentId
+			,@RequestParam("updatedComment") String updatedComment
+			) {
+		boolean isUpdateCommentSuccess = commentBO.updateCommentByCommentIdUpdatedComment(commentId, updatedComment);
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		if(isUpdateCommentSuccess) {
 			result.put("code", 1);
 			result.put("result", "성공");
 		} else {

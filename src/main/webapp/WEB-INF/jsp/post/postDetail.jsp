@@ -93,19 +93,36 @@
 
 	<%-- 전체 댓글 보이기(반복문) --%>
 	<c:forEach items="${commentViewList}" var="commentView">
-	<div class="d-flex align-items-center">
-		<%-- 댓글 프로필 사진 --%>
-		<img src="${commentView.user.profileImageUrl}" width="50px" height="50px" alt="commentprofileImage">
-		<%-- 댓글 닉네임 --%>
-		<span class="pl-2 bold mr-3 valueTitle-font-size">${commentView.user.name}</span>
-		
-		<%-- 댓글 내용 --%>
-		<span>${commentView.comment.comment}</span>
+	<div class="d-flex justify-content-between">
+		<div class="d-flex align-items-center">
+			<%-- 댓글 프로필 사진 --%>
+			<img src="${commentView.user.profileImageUrl}" width="50px" height="50px" alt="commentprofileImage">
+			<%-- 댓글 닉네임 --%>
+			<span class="pl-2 bold mr-3 valueTitle-font-size">${commentView.user.name}</span>
+			
+			<%-- 댓글 내용 --%>
+			<span class="commentContent">${commentView.comment.comment}</span>
+			<input type="text" class="updatedComment form-control d-none" value="${commentView.comment.comment}">
+		</div>
 	
-		<%-- 댓글 삭제 버튼 : 여러 개이므로, class로 부여 --%>
+		<%-- 댓글 관리 버튼 : 여러 개이므로, class로 부여 --%>
 		<%-- 내 댓글일 때만 나타나기, commentId 심어두기 --%>
 		<c:if test="${commentView.user.name eq userName}">
-			<button type="button" class="commentDeleteBtn ml-5 btn btn-danger" data-comment-id="${commentView.comment.id}">댓글 삭제</button>
+			<div class="d-flex align-items-center">
+				<div class="dropdown commentManagementBtn">
+					<button class="btn btn-secondary dropdown-toggle ml-5" type="button"
+						id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">댓글 관리</button>
+					<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item commentUpdateBtn" href="#" data-comment-id="${commentView.comment.id}">댓글 수정</a>
+						<a class="dropdown-item commentDeleteBtn" href="#" data-comment-id="${commentView.comment.id}">댓글 삭제</a>
+					</div>
+				</div>
+			
+				<button type="button" class="btn btn-dark allowUpdatedComment ml-3 d-none">
+					<a href="#" class="button">수정 완료</a>
+				</button>
+			</div>
 		</c:if>
 	</div>
 	<hr>
@@ -206,6 +223,47 @@
 						location.reload(); // 새로고침
 					} else if (data.code == 500) {
 						alert("삭제 실패!");
+					}
+				}
+				,error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+		});
+		
+		// 댓글 수정(Update)
+		$('.commentUpdateBtn').on('click', function(e) {
+			$(".commentContent").addClass("d-none");
+			$(".commentManagementBtn").addClass("d-none");
+			
+			$(".updatedComment").removeClass("d-none");
+			$(".allowUpdatedComment").removeClass("d-none");
+		});
+		
+		$('.allowUpdatedComment').on('click', function(e) {
+			// 댓글 번호
+			let commentId = $(this).data('comment-id');
+		
+			// 수정 내용 넘기기
+			let updatedComment = $(".updatedComment").val();
+			
+			// 내용이 없으면 입력하라고 alert
+			if(updatedComment == ''){
+				alert("내용을 입력해 주세요");
+				return;
+			}
+			
+			// AJAX
+			$.ajax({
+				type:'PUT'
+				,url:'/comment/update'
+				,data: {"commentId":commentId, "updatedComment":updatedComment}
+				,success: function(data) {
+					if (data.code == 1) {
+						location.reload(); // 새로고침
+					} else if (data.code == 500) {
+						alert("댓글 수정 실패!");
 					}
 				}
 				,error: function(jqXHR, textStatus, errorThrown) {
