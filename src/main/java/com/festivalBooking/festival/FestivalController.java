@@ -140,7 +140,7 @@ public class FestivalController {
 			boolean isBooked = bookBO.isBookedByUserIdFestivalId(userId, festivalId);
 			model.addAttribute("isBooked",isBooked);
 			
-			BookView bookView = bookBO.generateBookViewByUserIdFestivalId(userId, festivalId);
+			BookView bookView = festivalBO.generateBookViewByUserIdFestivalId(userId, festivalId);
 			model.addAttribute("bookView",bookView);
 		}catch(Exception e){
 			// 비회원(비로그인)일 때는 예매 완료 버튼은 띄우지 않는다(false)

@@ -33,7 +33,7 @@ public class BookController {
 		int userId = (int)session.getAttribute("userId");
 		
 		// DB select
-		List<BookView> myBookingList = bookBO.generateBookViewListByUserId(userId);
+		List<BookView> myBookingList = festivalBO.generateBookViewListByUserId(userId);
 		model.addAttribute("myBookingList",myBookingList);
 				
 		// 예매 내역 없을 경우, 최신 공연 3개 추천
@@ -56,7 +56,7 @@ public class BookController {
 		int userId = (int)session.getAttribute("userId");
 		
 		// DB select
-		List<BookView> myBookingList = bookBO.generateBookViewListByLimit(startDate,endDate,userId);
+		List<BookView> myBookingList = festivalBO.generateBookViewListByLimit(startDate,endDate,userId);
 		model.addAttribute("myBookingList",myBookingList);
 		
 		// 예매 내역 없을 경우, 최신 공연 3개 추천

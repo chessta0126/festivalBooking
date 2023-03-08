@@ -1,5 +1,6 @@
 package com.festivalBooking.festival.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.festivalBooking.book.bo.BookBO;
+import com.festivalBooking.book.model.Book;
+import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.common.FileManagerService;
 import com.festivalBooking.festival.dao.FestivalDAO;
 import com.festivalBooking.festival.model.Festival;
@@ -100,5 +103,76 @@ public class FestivalBO {
 		
 		// 예약 내역(book) 삭제
 		bookBO.deleteBookingByFestivalId(festivalId);
+	}
+	
+	
+
+	// 공연과 예약 정보 매칭
+	public List<BookView> generateBookViewListByUserId(int userId) {
+		// 결과물
+		List<BookView> bookViewList = new ArrayList<>();
+		// 예매 내역(위에서 만든 메서드)
+		List<Book> bookList = bookBO.getMyBookList(userId);
+		
+		// 반복문 => 각 BookView(공연-예매 내역이 한 쌍) => 결과물에 넣는다.
+		for(Book book : bookList) {
+			BookView bookView = new BookView();
+			
+			// 예매내역
+			bookView.setBook(book);
+			
+			Festival festival = getFestivalByFestivalId(book.getFestivalId());
+			bookView.setFestival(festival);
+					
+			// 공연-예매 내역 1쌍 담기
+			bookViewList.add(bookView);
+		}
+	
+		// 결과물 리턴
+		return bookViewList;
+	}
+
+	// 공연과 예약 정보 매칭(Limit으로 제한해서 가져오기)
+	public List<BookView> generateBookViewListByLimit(
+			String startDate, String endDate, int userId) {
+		// 결과물
+		List<BookView> bookViewList = new ArrayList<>();
+		
+		// 예매 내역(위에서 만든 메서드)
+		List<Book> bookList = bookBO.getMyBookListByLimit(startDate, endDate, userId);
+		
+		// 반복문 => 각 BookView(공연-예매 내역이 한 쌍) => 결과물에 넣는다.
+		for(Book book : bookList) {
+			BookView bookView = new BookView();
+			
+			// 예매내역
+			bookView.setBook(book);
+			
+			Festival festival = getFestivalByFestivalId(book.getFestivalId());
+			bookView.setFestival(festival);
+			
+			// 공연-예매 내역 1쌍 담기
+			bookViewList.add(bookView);
+		}
+		
+		// 결과물 리턴
+		return bookViewList;
+	}
+
+	// 공연과 예약 정보 매칭 1건
+	public BookView generateBookViewByUserIdFestivalId(int userId,int festivalId) {
+		// 결과물
+		BookView bookView = new BookView();
+		
+		// 예매 정보(위에서 만든 메서드)
+		Book book = bookBO.getMyBook(userId, festivalId);
+		bookView.setBook(book);
+		
+		// 공연 정보
+		Festival festival = getFestivalByFestivalId(festivalId);
+		bookView.setFestival(festival);
+			
+		// 결과물 리턴
+		return bookView;
 	}
 }

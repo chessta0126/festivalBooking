@@ -17,9 +17,6 @@ public class BookBO {
 
 	@Autowired
 	private BookDAO bookDAO;
-
-	@Autowired
-	private FestivalBO festivalBO;
 	
 	// 예매 내역 객체 형태로 보내기(insert)
 	public void addBooking(Book book) {
@@ -52,74 +49,6 @@ public class BookBO {
 		return bookDAO.isBookedNotMember(bookName,phoneNumber,festivalId);
 	}
 	
-	// 공연과 예약 정보 매칭
-	public List<BookView> generateBookViewListByUserId(int userId) {
-		// 결과물
-		List<BookView> bookViewList = new ArrayList<>();
-		// 예매 내역(위에서 만든 메서드)
-		List<Book> bookList = getMyBookList(userId);
-		
-		// 반복문 => 각 BookView(공연-예매 내역이 한 쌍) => 결과물에 넣는다.
-		for(Book book : bookList) {
-			BookView bookView = new BookView();
-			
-			// 예매내역
-			bookView.setBook(book);
-			
-			Festival festival = festivalBO.getFestivalByFestivalId(book.getFestivalId());
-			bookView.setFestival(festival);
-					
-			// 공연-예매 내역 1쌍 담기
-			bookViewList.add(bookView);
-		}
-	
-		// 결과물 리턴
-		return bookViewList;
-	}
-
-	// 공연과 예약 정보 매칭(Limit으로 제한해서 가져오기)
-	public List<BookView> generateBookViewListByLimit(
-			String startDate, String endDate, int userId) {
-		// 결과물
-		List<BookView> bookViewList = new ArrayList<>();
-		
-		// 예매 내역(위에서 만든 메서드)
-		List<Book> bookList = getMyBookListByLimit(startDate, endDate, userId);
-		
-		// 반복문 => 각 BookView(공연-예매 내역이 한 쌍) => 결과물에 넣는다.
-		for(Book book : bookList) {
-			BookView bookView = new BookView();
-			
-			// 예매내역
-			bookView.setBook(book);
-			
-			Festival festival = festivalBO.getFestivalByFestivalId(book.getFestivalId());
-			bookView.setFestival(festival);
-			
-			// 공연-예매 내역 1쌍 담기
-			bookViewList.add(bookView);
-		}
-		
-		// 결과물 리턴
-		return bookViewList;
-	}
-
-	// 공연과 예약 정보 매칭 1건
-	public BookView generateBookViewByUserIdFestivalId(int userId,int festivalId) {
-		// 결과물
-		BookView bookView = new BookView();
-		
-		// 예매 정보(위에서 만든 메서드)
-		Book book = getMyBook(userId, festivalId);
-		bookView.setBook(book);
-		
-		// 공연 정보
-		Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
-		bookView.setFestival(festival);
-			
-		// 결과물 리턴
-		return bookView;
-	}
 	
 	
 	// 추가 예매 (update)
