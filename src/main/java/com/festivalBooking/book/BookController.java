@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,43 +27,27 @@ public class BookController {
 	@Autowired
 	private FestivalBO festivalBO;
 
-	// http://localhost:8080/book/myBooking_view
+	// http://localhost:8080/book/myBooking_view?startDate={startDate}&endDate={endDate}
 	@GetMapping("/myBooking_view")
-	public String myBookingView(Model model, HttpSession session) {
+	public String myBookingView(
+		@RequestParam(value="startDate",required = false) String startDate
+		,@RequestParam(value="endDate",required = false) String endDate
+		,Model model, HttpSession session) {
 
 		int userId = (int)session.getAttribute("userId");
 		
 		// DB select
 		List<BookView> myBookingList = festivalBO.generateBookViewListByUserId(userId);
-		model.addAttribute("myBookingList",myBookingList);
-				
-		// 예매 내역 없을 경우, 최신 공연 3개 추천
-		List<Festival> festivalList = festivalBO.getFestivalListLimit(3);
-		model.addAttribute("festivalList",festivalList);
-		
-		model.addAttribute("viewName","book/myBooking");
-		
-		return "template/layout";
-	}
-
-	// 공연 기간 검색 후 기간 내 예매 내역 다시 뿌리기 API
-	// http://localhost:8080/book/myBooking_view_limit?startDate={startDate}&endDate={endDate}
-	@GetMapping("/myBooking_view_limit")
-	public String myBookingViewLimit(
-			@RequestParam("startDate") String startDate
-			,@RequestParam("endDate") String endDate
-			,Model model, HttpSession session) {
-		
-		int userId = (int)session.getAttribute("userId");
-		
-		// DB select
-		List<BookView> myBookingList = festivalBO.generateBookViewListByLimit(startDate,endDate,userId);
+		if(!ObjectUtils.isEmpty(startDate) && !ObjectUtils.isEmpty(endDate)) {
+			myBookingList = festivalBO.generateBookViewListByLimit(startDate, endDate, userId);
+		}
 		model.addAttribute("myBookingList",myBookingList);
 		
-		// 예매 내역 없을 경우, 최신 공연 3개 추천
-		List<Festival> festivalList = festivalBO.getFestivalListLimit(3);
+		// 예매 내역 없을 경우, 최신 공연 n개 추천
+		int recommendCount = 3;
+		List<Festival> festivalList = festivalBO.getFestivalListLimit(recommendCount);
 		model.addAttribute("festivalList",festivalList);
-
+		
 		model.addAttribute("viewName","book/myBooking");
 		
 		return "template/layout";

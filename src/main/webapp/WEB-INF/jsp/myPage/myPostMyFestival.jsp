@@ -54,7 +54,7 @@
 				<h1 class="bold">공지사항</h1>
 				<c:if test="${userId != null}">
 					<button id="writePostBtn" class="btn btn-danger">
-						<a href="/post/post_create_view?postType=자유게시판&isUpdate=false" class="button">글쓰기</a>
+						<a href="/post/post_create_view?postType=공지사항&isUpdate=false" class="button">글쓰기</a>
 					</button>
 				</c:if>
 			</div>

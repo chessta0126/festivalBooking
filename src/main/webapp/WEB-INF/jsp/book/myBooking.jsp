@@ -149,7 +149,7 @@
 
 			// startDate < 공연 < endDate
 			// 데이터 보낸 다음 DB에서 where로 꺼내서 Controller에서 화면 다시 이동
-			location.href="/book/myBooking_view_limit?startDate="+startDate+"&endDate="+endDate;
+			location.href="/book/myBooking_view?startDate="+startDate+"&endDate="+endDate;
 		});
 	});
 </script>
