@@ -131,4 +131,9 @@ public class BookBO {
 	public void deleteBooking(int festivalId, int userId) {
 		bookDAO.deleteBooking(festivalId, userId);
 	}
+
+	// 공연에 대한 모든 예매내역 삭제 (delete) - festivalId
+	public void deleteBookingByFestivalId(int festivalId) {
+		bookDAO.deleteBookingByFestivalId(festivalId);
+	}
 }

@@ -104,4 +104,11 @@
 		WHERE
 			`id` = #{id}
 	</update>
+	
+	<delete id="deleteFestivalByFestivalIdUserId" parameterType="map">
+ 		DELETE FROM	`festival`
+		WHERE
+			`id` = #{festivalId}
+		AND `userId` = #{festivalUserId}
+ 	</delete>
 </mapper>

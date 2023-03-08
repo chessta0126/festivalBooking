@@ -1,7 +1,8 @@
 package com.festivalBooking.book;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.festivalBooking.book.bo.BookBO;
 import com.festivalBooking.book.model.BookView;
-import com.festivalBooking.comment.model.Comment;
-import com.festivalBooking.comment.model.CommentView;
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
-import com.festivalBooking.user.model.User;
-
-import javax.servlet.http.HttpSession;
 
 @RequestMapping("/book")
 @Controller

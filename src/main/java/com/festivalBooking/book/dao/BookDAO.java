@@ -51,4 +51,7 @@ public interface BookDAO {
 		public void deleteBooking(
 				@Param("festivalId") int festivalId
 				,@Param("userId") int userId);
+		
+	// 공연에 대한 모든 예매내역 삭제 (delete) - festivalId
+	public void deleteBookingByFestivalId(int festivalId);
 }

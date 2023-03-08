@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.festivalBooking.book.bo.BookBO;
 import com.festivalBooking.common.FileManagerService;
 import com.festivalBooking.festival.dao.FestivalDAO;
 import com.festivalBooking.festival.model.Festival;
@@ -16,6 +17,9 @@ public class FestivalBO {
 
 	@Autowired
 	private FestivalDAO festivalDAO;
+
+	@Autowired
+	private BookBO bookBO;
 	
 	@Autowired
 	private FileManagerService fileManager;
@@ -79,5 +83,22 @@ public class FestivalBO {
 		festival.setImagePath(imagePath);
 		
 		return festivalDAO.updateFestival(festival);
+	}
+	
+	// 공연 삭제 (delete)
+	public void deleteFestivalByFestivalIdUserId(int festivalId, int festivalUserId) {
+		// 기존 공연 가져오기
+		Festival festival = getFestivalByFestivalId(festivalId);
+		
+		// 공연 포스터 파일 있으면 삭제
+		if(festival.getImagePath() != null) {
+			fileManager.deleteFile(festival.getImagePath());
+		}
+
+		// 공연(festival) 삭제 - DAO 메서드를 통해
+		festivalDAO.deleteFestivalByFestivalIdUserId(festivalId, festivalUserId);
+		
+		// 예약 내역(book) 삭제
+		bookBO.deleteBookingByFestivalId(festivalId);
 	}
 }

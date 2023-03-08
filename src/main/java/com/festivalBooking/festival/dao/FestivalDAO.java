@@ -34,4 +34,9 @@ public interface FestivalDAO {
 	
 	// 공연 정보 수정 (update)
 	public boolean updateFestival(Festival festival);
+	
+	// 공연 삭제 (delete)
+	public void deleteFestivalByFestivalIdUserId(
+		@Param("festivalId") int festivalId
+		, @Param("festivalUserId") int festivalUserId);
 }

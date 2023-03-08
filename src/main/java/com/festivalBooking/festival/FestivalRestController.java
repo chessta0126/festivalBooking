@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
+import com.festivalBooking.post.model.Post;
 
 import javax.servlet.http.HttpSession;
 
@@ -78,4 +80,21 @@ public class FestivalRestController {
 		}
 		return result;
 	}
+	
+	// 공연 삭제 (delete)
+		@DeleteMapping("/delete")
+		public Map<String, Object> delete(
+				@RequestParam("festivalId") int festivalId
+				,@RequestParam("festivalUserId") int festivalUserId
+				){
+			// 어떤 공연인지 (festivalId), 누가 등록했는지(festivalUserId) 알아야 지움
+			// DB delete
+			festivalBO.deleteFestivalByFestivalIdUserId(festivalId, festivalUserId);
+			
+			// 삭제 시 에러가 없으면 성공한 것
+			Map<String, Object> result = new HashMap<>();
+			result.put("result", true);
+			
+			return result;
+	 	}
 }

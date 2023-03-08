@@ -135,4 +135,9 @@
 		WHERE `festivalId` = #{festivalId}
 		AND `userId` = #{userId}
 	</delete>
+
+	<delete id="deleteBookingByFestivalId" parameterType="int">
+		DELETE FROM `book`
+		WHERE `festivalId` = #{festivalId}
+	</delete>
 </mapper>

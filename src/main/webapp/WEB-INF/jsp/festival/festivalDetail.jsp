@@ -39,7 +39,7 @@
 							aria-haspopup="true" aria-expanded="false">공연 정보 변경</button>
 						<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="/festival/festival_create_view?isUpdate=true&festivalId=${festival.id}">공연 정보 수정</a>
-							<a class="dropdown-item" href="#">공연 삭제</a>
+							<a class="dropdown-item" href="#" id="deleteFestivalBtn">공연 삭제</a>
 							<a class="dropdown-item" href="#">예매 마감</a>
 						</div>
 					</div>
@@ -499,6 +499,49 @@
 								}).then((result) => { 
 						            if (result.isConfirmed) {
 										location.reload();
+						            }
+								});
+	    					}
+	    				}
+	    				,error: function(jqXHR, textStatus, errorThrown) {
+	    					var errorMsg = jqXHR.responseJSON.status;
+	    					alert(errorMsg + ":" + textStatus);
+	    				}
+	    			});
+	            }
+			});
+		});
+		
+		// 공연 정보 변경(내 공연) -> 공연 삭제 (delete)
+		$('#deleteFestivalBtn').on('click',function(e){
+			e.preventDefault();
+			
+			Swal.fire({
+	            title: '예매를 취소 하시겠습니까?',
+	            icon: 'warning',
+	            showCancelButton: true,
+	            confirmButtonColor: '#3085d6',
+	            cancelButtonColor: '#d33',
+	            confirmButtonText: '예',
+	            cancelButtonText: '아니오'
+	        }).then((result) => { 
+	            if (result.isConfirmed) { // 예매 취소(delete) 확정
+	            	let festivalId = ${festival.id};
+	            	let festivalUserId = "${userId}" // 비로그인 시 세션 없을 수도 있으므로 "" 사용
+
+	            	// AJAX
+	    			$.ajax({
+	    				type:'DELETE'
+	    				,url:'/festival/delete'
+	    				,data: {"festivalId":festivalId, "festivalUserId":festivalUserId}
+	    				,success: function(data) {
+	    					if (data.result) {
+	    						Swal.fire({
+					                title : '예매 취소가 완료되었습니다.',
+					                icon: 'success'
+								}).then((result) => { 
+						            if (result.isConfirmed) {
+						            	location.href="/festival/festival_list_view";
 						            }
 								});
 	    					}
