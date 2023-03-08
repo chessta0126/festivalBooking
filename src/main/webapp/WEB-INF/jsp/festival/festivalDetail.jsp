@@ -517,7 +517,7 @@
 			e.preventDefault();
 			
 			Swal.fire({
-	            title: '예매를 취소 하시겠습니까?',
+	            title: '이 공연을 삭제 하시겠습니까?',
 	            icon: 'warning',
 	            showCancelButton: true,
 	            confirmButtonColor: '#3085d6',
@@ -525,7 +525,7 @@
 	            confirmButtonText: '예',
 	            cancelButtonText: '아니오'
 	        }).then((result) => { 
-	            if (result.isConfirmed) { // 예매 취소(delete) 확정
+	            if (result.isConfirmed) { // 공연 삭제(delete) 확정
 	            	let festivalId = ${festival.id};
 	            	let festivalUserId = "${userId}" // 비로그인 시 세션 없을 수도 있으므로 "" 사용
 
@@ -537,7 +537,7 @@
 	    				,success: function(data) {
 	    					if (data.result) {
 	    						Swal.fire({
-					                title : '예매 취소가 완료되었습니다.',
+					                title : '공연이 정상적으로 삭제되었습니다.',
 					                icon: 'success'
 								}).then((result) => { 
 						            if (result.isConfirmed) {
