@@ -1,6 +1,7 @@
 @charset "UTF-8";
 a , a:hover {text-decoration:none;}
 textarea {resize: none;}
+pre {font-size: 16px;}
 
 header {height:100px; background-color:black;}
 
@@ -30,7 +31,7 @@ nav .nav-item:hover{background-color: darkcyan;}
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 4;
 	overflow: hidden;}
-.festival-info-box {minheight:100px;}
+.festival-info-box {width:690px; minheight:100px;}
 .book-font-size {font-size: 18px;}
 .dropdown-item:hover{font-weight:bold; background-color: #888;}
 

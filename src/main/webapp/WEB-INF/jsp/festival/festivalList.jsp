@@ -56,65 +56,6 @@
 				</div>
 			</article>
 			</c:forEach>
-			
-			<article class="festival2 mt-3 pr-4 pb-3 d-flex bg-dark">
-				<!-- 공연 포스터 이미지-->
-				<div class="m-3">
-					<a href="#">
-						<img src="#" alt="공연 팜플렛2" width="250" height="250">
-					</a>
-				</div>
-				<!-- 공연 정보 -->
-				<div class="pl-3">
-					<div class="pt-4 font-weight-bold">
-						<h4 class="festival-title text-info">카르트 크루 정기공연</h4>
-					</div>
-					<div class="pt-2 white-text"></div>
-					<div class="white-text">쌈디의 극찬을 받은 래퍼 '정진'과 irzest, VALHASH 등
-					</div>
-					<div class="white-text">카르트 크루 멤버들과 초특급 게스트들이 불태우는 무대</div>
-					<div class="pt-3 yellow-text">일시 : 2023년 2월 4일(토)</div>
-					<div class="pt-2 text-info">장소 : 홍대 블루프린트 (서울 마포구 와우산로 17길 14
-						지층)</div>
-					<div class="pt-2">
-						<span class="pr-4 text-success">예매: 10,000원 / 현장: 15,000원</span> <span
-							class="text-danger">(잔여 예약석: 17명)</span>
-					</div>
-					<div class="pt-2 text-secondary">
-						<span class="pr-4">기획자 : chessta </span> <span>문의사항:
-							@chessta0126</span>
-					</div>
-				</div>
-			</article>
-	
-			<article class="festival3 mt-3 pr-4 pb-3 d-flex bg-dark">
-				<!-- 공연 포스터 이미지-->
-				<div class="m-3">
-					<a href="#">
-						<img src="#" alt="공연 팜플렛3" width="250" height="250">
-					</a>
-				</div>
-				<!-- 공연 정보 -->
-				<div class="pl-3">
-					<div class="pt-4 font-weight-bold">
-						<h4 class="festival-title text-danger">크리스가디 단독 쇼케이스</h4>
-					</div>
-					<div class="pt-2 white-text"></div>
-					<div class="white-text">STEAMPUNK, EP앨범 '가디 더 디몬' 발매 기념!!</div>
-					<div class="white-text">수많은 래퍼에게 샤라웃을 받고 있는 크리스가디의 단독공연</div>
-					<div class="pt-3 yellow-text">일시 : 2023년 1월 14일(토)</div>
-					<div class="pt-2 text-info">장소 : 홍대 블루프린트 (서울 마포구 와우산로 17길 14
-						지층)</div>
-					<div class="pt-2">
-						<span class="pr-4 text-success">예매: 15,000원 / 현장: 15,000원</span> <span
-							class="text-success">(잔여 예약석: 22명)</span>
-					</div>
-					<div class="pt-2 text-secondary">
-						<span class="pr-4">기획자 : CHRIS GUARDY </span> <span>문의사항:
-							010-1234-5678</span>
-					</div>
-				</div>
-			</article>
 		</div>
 	</div>
 </div>

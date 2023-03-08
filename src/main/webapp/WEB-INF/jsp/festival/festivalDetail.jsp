@@ -156,7 +156,7 @@
 			<c:if test="${!empty festival.lineUp}">
 				<h2 class="bold pt-5 pb-2">공연 라인업</h2>
 				<div class="festival-info-box border border-info">
-					<div class="m-2">${festival.lineUp}</div>
+					<pre class="m-2">${festival.lineUp}</pre>
 				</div>
 			</c:if>
 			
@@ -164,7 +164,7 @@
 			<c:if test="${!empty festival.explain}">
 				<h2 class="bold pt-5 pb-2">공연 설명</h2>
 				<div class="festival-info-box border border-success">
-					<div class="m-2">${festival.explain}</div>
+					<pre class="m-2">${festival.explain}</pre>
 				</div>
 			</c:if>
 			
@@ -172,7 +172,7 @@
 			<c:if test="${!empty festival.warning}">
 				<h2 class="bold pt-5 pb-2">주의사항</h2>
 				<div class="festival-info-box border border-danger">
-					<div class="m-2">${festival.warning}</div>
+					<pre class="m-2">${festival.warning}</pre>
 				</div>
 			</c:if>
 			
