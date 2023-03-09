@@ -17,7 +17,7 @@
 						<th>No.</th>
 						<th>공연명</th>
 						<th>게시일</th>
-						<th>조회수</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,7 +26,19 @@
 						<td>${festival.id}</td>
 						<td><a href="/festival/festival_detail_view?festivalId=${festival.id}">${festival.title}</a></td>
 						<td><fmt:formatDate value="${festival.createdAt}" pattern="yyyy-MM-dd"/></td>
-						<td>조회수</td>
+						<td>
+							<%-- 공연 관리 버튼 --%>
+							<div class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">공연 관리</button>
+								<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="/book/myFestivalBookingConfirm_view?festivalId=${festival.id}">예매 현황</a>
+									<a class="dropdown-item" href="/festival/festival_create_view?isUpdate=true&festivalId=${festival.id}">공연 정보 수정</a>
+									<a class="dropdown-item deleteFestivalBtn" href="#" data-festival-id="${festival.id}">공연 삭제</a>
+									<a class="dropdown-item" href="#">예매 마감</a>
+								</div>
+							</div>
+						</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -45,3 +57,50 @@
 		</button>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		// 공연 관리(내 공연) -> 공연 삭제 (delete)
+		$('.deleteFestivalBtn').on('click',function(e){
+			e.preventDefault();
+			
+			Swal.fire({
+	            title: '이 공연을 삭제 하시겠습니까?',
+	            icon: 'warning',
+	            showCancelButton: true,
+	            confirmButtonColor: '#3085d6',
+	            cancelButtonColor: '#d33',
+	            confirmButtonText: '예',
+	            cancelButtonText: '아니오'
+	        }).then((result) => { 
+	            if (result.isConfirmed) { // 공연 삭제(delete) 확정
+	            	let festivalId = $(this).data("festival-id");
+	            	let festivalUserId = "${userId}" // 비로그인 시 세션 없을 수도 있으므로 "" 사용
+
+	            	// AJAX
+	    			$.ajax({
+	    				type:'DELETE'
+	    				,url:'/festival/delete'
+	    				,data: {"festivalId":festivalId, "festivalUserId":festivalUserId}
+	    				,success: function(data) {
+	    					if (data.result) {
+	    						Swal.fire({
+					                title : '공연이 정상적으로 삭제되었습니다.',
+					                icon: 'success'
+								}).then((result) => { 
+						            if (result.isConfirmed) {
+						            	location.href="/festival/festival_myList_view";
+						            }
+								});
+	    					}
+	    				}
+	    				,error: function(jqXHR, textStatus, errorThrown) {
+	    					var errorMsg = jqXHR.responseJSON.status;
+	    					alert(errorMsg + ":" + textStatus);
+	    				}
+	    			});
+	            }
+			});
+		});
+	});
+</script>

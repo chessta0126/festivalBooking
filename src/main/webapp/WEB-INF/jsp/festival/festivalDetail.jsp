@@ -31,12 +31,12 @@
 			</div>
 
 			<div>
-				<%-- 수정 / 삭제 modal - 내가 등록한 공연일 때만 보이기 --%>
+				<%-- 공연 관리 - 내가 등록한 공연일 때만 보이기 --%>
 				<c:if test="${festival.userId eq userId}">
 					<div class="dropdown">
 						<button class="btn btn-secondary dropdown-toggle" type="button"
 							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">공연 정보 변경</button>
+							aria-haspopup="true" aria-expanded="false">내 공연 관리</button>
 						<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="/book/myFestivalBookingConfirm_view?festivalId=${festival.id}">예매 현황</a>
 							<a class="dropdown-item" href="/festival/festival_create_view?isUpdate=true&festivalId=${festival.id}">공연 정보 수정</a>
