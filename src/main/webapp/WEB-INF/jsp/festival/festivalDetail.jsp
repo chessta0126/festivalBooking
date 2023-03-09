@@ -38,6 +38,7 @@
 							id="dropdownMenuButton" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">공연 정보 변경</button>
 						<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="/book/myFestivalBookingConfirm_view?festivalId=${festival.id}">예매 현황</a>
 							<a class="dropdown-item" href="/festival/festival_create_view?isUpdate=true&festivalId=${festival.id}">공연 정보 수정</a>
 							<a class="dropdown-item" href="#" id="deleteFestivalBtn">공연 삭제</a>
 							<a class="dropdown-item" href="#">예매 마감</a>

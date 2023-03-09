@@ -50,6 +50,24 @@
 			`festivalId` = #{festivalId}
 	</select>
 
+	<select id="selectBookListByFestivalId" parameterType="int" resultType="com.festivalBooking.book.model.Book">
+		SELECT
+			`id`
+			,`festivalId`
+			,`userId`
+			, `headCount`
+			, `payMoney`
+			, `isMember`
+			, `bookName`
+			, `phoneNumber`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`book`
+		WHERE
+			`festivalId` = #{festivalId}
+	</select>
+
 	<select id="selectMyBookList" parameterType="int" resultType="com.festivalBooking.book.model.Book">
 		SELECT
 			`id`

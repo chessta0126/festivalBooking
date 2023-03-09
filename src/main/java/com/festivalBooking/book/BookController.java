@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.festivalBooking.book.bo.BookBO;
+import com.festivalBooking.book.model.Book;
 import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
@@ -60,4 +61,24 @@ public class BookController {
 		
 		return "template/layout";
 	}
+	
+	
+	// http://localhost:8080/book/myFestivalBookingConfirm_view?festivalId={festivalId}
+		@GetMapping("/myFestivalBookingConfirm_view")
+		public String myFestivalBookingConfirmView(
+				@RequestParam("festivalId") int festivalId
+				,Model model) {
+
+			// 공연 정보(id, 이름) 내려주기
+			Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
+			model.addAttribute("festival",festival);			
+			
+			// 예매 내역
+			List<Book> bookList = bookBO.getBookListByFestivalId(festivalId);
+			model.addAttribute("bookList",bookList);
+
+			// 페이지 이동경로
+			model.addAttribute("viewName","book/myFestivalBookingConfirm");
+			return "template/layout";
+		}
 }

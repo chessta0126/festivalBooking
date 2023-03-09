@@ -13,6 +13,9 @@ public interface BookDAO {
 	// 예매 내역 객체 형태로 보내기(insert)
 	public void insertBooking(Book book);
 	
+	// 공연에 대한 전체 예매 내역 가져오기(select) : festivalId
+	public List<Book> selectBookListByFestivalId(int festivalId);
+	
 	// 내 예매 내역 가져오기(select)
 	public List<Book> selectMyBookList(int userId);
 

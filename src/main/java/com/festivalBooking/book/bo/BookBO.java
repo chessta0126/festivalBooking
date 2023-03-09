@@ -1,6 +1,5 @@
 package com.festivalBooking.book.bo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.festivalBooking.book.dao.BookDAO;
 import com.festivalBooking.book.model.Book;
-import com.festivalBooking.book.model.BookView;
-import com.festivalBooking.festival.bo.FestivalBO;
-import com.festivalBooking.festival.model.Festival;
+import com.festivalBooking.user.bo.UserBO;
+import com.festivalBooking.user.model.User;
 
 @Service
 public class BookBO {
@@ -18,9 +16,21 @@ public class BookBO {
 	@Autowired
 	private BookDAO bookDAO;
 	
+	@Autowired
+	private UserBO userBO;
+	
 	// 예매 내역 객체 형태로 보내기(insert)
 	public void addBooking(Book book) {
+		User user = userBO.getUserByUserId(book.getUserId());
+		String bookName = user.getName();
+		book.setBookName(bookName);
+		
 		bookDAO.insertBooking(book);
+	}
+
+	// 공연에 대한 전체 예매 내역 가져오기(select) : festivalId
+	public List<Book> getBookListByFestivalId(int festivalId) {
+		return bookDAO.selectBookListByFestivalId(festivalId);
 	}
 
 	// 내 예매 내역 가져오기(select)
