@@ -27,7 +27,7 @@ public class BookController {
 	@Autowired
 	private FestivalBO festivalBO;
 
-	// http://localhost:8080/book/myBooking_view?startDate={startDate}&endDate={endDate}
+	// http://localhost:8080/book/myBooking_view?startDate={startDate}&endDate={endDate}&bookName={bookName}&phoneNumber={phoneNumber}
 	@GetMapping("/myBooking_view")
 	public String myBookingView(
 		@RequestParam(value="startDate",required = false) String startDate

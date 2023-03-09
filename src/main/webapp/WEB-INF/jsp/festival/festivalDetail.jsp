@@ -449,7 +449,7 @@
 								                icon: 'success'
 											}).then((result) => { 
 									            if (result.isConfirmed) {
-													location.reload();
+													location.href="/book/myBooking_view?bookName="+bookName+"&phoneNumber="+phoneNumber;
 									            }
 											});
 										} else{
