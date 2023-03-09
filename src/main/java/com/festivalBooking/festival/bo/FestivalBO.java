@@ -175,4 +175,29 @@ public class FestivalBO {
 		// 결과물 리턴
 		return bookView;
 	}
+	
+	// 공연과 예약 정보 매칭(비회원)
+	public List<BookView> generateBookViewListBybookNamephoneNumber(String bookName, String phoneNumber) {
+		// 결과물
+		List<BookView> bookViewList = new ArrayList<>();
+		// 예매 내역(위에서 만든 메서드)
+		List<Book> bookList = bookBO.getMyBookListNotMember(bookName,phoneNumber);
+
+		// 반복문 => 각 BookView(공연-예매 내역이 한 쌍) => 결과물에 넣는다.
+		for(Book book : bookList) {
+			BookView bookView = new BookView();
+
+			// 예매내역
+			bookView.setBook(book);
+
+			Festival festival = getFestivalByFestivalId(book.getFestivalId());
+			bookView.setFestival(festival);
+
+			// 공연-예매 내역 1쌍 담기
+			bookViewList.add(bookView);
+		}
+
+		// 결과물 리턴
+		return bookViewList;
+	}
 }

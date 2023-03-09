@@ -32,23 +32,31 @@ public class BookController {
 	public String myBookingView(
 		@RequestParam(value="startDate",required = false) String startDate
 		,@RequestParam(value="endDate",required = false) String endDate
+		,@RequestParam(value="bookName",required = false) String bookName
+		,@RequestParam(value="phoneNumber",required = false) String phoneNumber
 		,Model model, HttpSession session) {
 
-		int userId = (int)session.getAttribute("userId");
-		
-		// DB select
-		List<BookView> myBookingList = festivalBO.generateBookViewListByUserId(userId);
-		if(!ObjectUtils.isEmpty(startDate) && !ObjectUtils.isEmpty(endDate)) {
-			myBookingList = festivalBO.generateBookViewListByLimit(startDate, endDate, userId);
+		try { // 회원 예매내역 확인(id 존재)
+			int userId = (int)session.getAttribute("userId");
+			
+			// DB select
+			List<BookView> myBookingList = festivalBO.generateBookViewListByUserId(userId);
+			if(!ObjectUtils.isEmpty(startDate) && !ObjectUtils.isEmpty(endDate)) {
+				myBookingList = festivalBO.generateBookViewListByLimit(startDate, endDate, userId);
+			}
+			model.addAttribute("myBookingList",myBookingList);
+			
+		} catch(Exception e) { // 비회원 예매내역 확인
+			// DB select
+			List<BookView> myBookingList = festivalBO.generateBookViewListBybookNamephoneNumber(bookName,phoneNumber);
+			model.addAttribute("myBookingList",myBookingList);
 		}
-		model.addAttribute("myBookingList",myBookingList);
+		model.addAttribute("viewName","book/myBooking");
 		
 		// 예매 내역 없을 경우, 최신 공연 n개 추천
 		int recommendCount = 3;
 		List<Festival> festivalList = festivalBO.getFestivalListLimit(recommendCount);
 		model.addAttribute("festivalList",festivalList);
-		
-		model.addAttribute("viewName","book/myBooking");
 		
 		return "template/layout";
 	}

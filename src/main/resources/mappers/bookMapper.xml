@@ -99,7 +99,7 @@
 			`festivalId` = #{festivalId}
 	</select>
 
-	<select id="isBookedNotMember" parameterType="map" resultType="boolean">
+	<select id="selectMyBookListNotMember" parameterType="map" resultType="com.festivalBooking.book.model.Book">
 		SELECT
 			`id`
 			,`festivalId`
@@ -117,8 +117,6 @@
 			`bookName` = #{bookName}
 		AND
 			`phoneNumber` = #{phoneNumber}
-		AND
-			`festivalId` = #{festivalId}
 	</select>
 	
 	<update id="updateBooking" parameterType="map">

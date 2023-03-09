@@ -33,11 +33,10 @@ public interface BookDAO {
 			@Param("userId") int userId
 			, @Param("festivalId") int festivalId);
 	
-	// 비회원 예매 여부 확인(bookName,phoneNumber / festivalId)
-	public boolean isBookedNotMember(
-			@Param("bookName") int bookName
-			, @Param("phoneNumber") int phoneNumber
-			, @Param("festivalId") int festivalId);
+	// 비회원 예매 내역(bookName,phoneNumber)
+	public List<Book> selectMyBookListNotMember(
+			@Param("bookName") String bookName
+			, @Param("phoneNumber") String phoneNumber);
 	
 	// 추가 예매 (update) : 회원용
 	public void updateBooking(

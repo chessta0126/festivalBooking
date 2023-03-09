@@ -44,9 +44,9 @@ public class BookBO {
 		return bookDAO.isBookedByUserIdFestivalId(userId,festivalId);
 	}
 
-	// 비회원 예매 여부 확인(bookName,phoneNumber / festivalId)
-	public boolean isBookedNotMember(int bookName, int phoneNumber, int festivalId) {
-		return bookDAO.isBookedNotMember(bookName,phoneNumber,festivalId);
+	// 비회원 예매 내역(bookName,phoneNumber)
+	public List<Book> getMyBookListNotMember(String bookName, String phoneNumber) {
+		return bookDAO.selectMyBookListNotMember(bookName,phoneNumber);
 	}
 	
 	

@@ -87,6 +87,7 @@
 			
 			<%-- 비회원일 경우 : 이름, 전화번호 --%>
 			<div id="memberNotBox" class="container">
+			<form id="bookedFestivalConfirm" method="get" action="/book/myBooking_view">
 				<div class="d-flex align-items-center mb-3">
 					<label for="bookName" class="ml-3 col-4">예약자</label>
 					<input type="text" id="bookName" name="bookName" class="form-control" placeholder="예약자 이름">
@@ -96,7 +97,8 @@
 					<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="전화번호">
 				</div>
 				
-				<button class="w-100 btn btn-dark">확인하기</button>
+				<button type="submit" class="w-100 btn btn-dark">확인하기</button>
+			</form>	
 			</div>
 			
 			<%-- 회원일 경우 : 예매 확인 페이지로 넘어가는 버튼 --%>
