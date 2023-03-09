@@ -18,7 +18,11 @@ public class FileManagerService {
 
 	// 실제 이미지가 저장될 경로(서버)
 	// public static final String FILE_UPLOAD_PATH = "D:\\chessta\\6_Spring Project\\festivalBooking\\workspace\\images/";
-	public static final String FILE_UPLOAD_PATH = "D:\\Spring 프로젝트\\festivalBooking\\workspace\\images/";
+	// AWS 전용
+	public static final String FILE_UPLOAD_PATH = "/home/ec2-user/images/";
+	
+	// 집
+	// public static final String FILE_UPLOAD_PATH = "D:\\Spring 프로젝트\\festivalBooking\\workspace\\images/";
 	
 	// input : MultipartFile, userLoginId
 	// output : imagePath
