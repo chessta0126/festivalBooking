@@ -10,6 +10,7 @@
 		<c:choose>
 			<c:when test="${myBookingList[0] != null}">
 				<!-- 공연 기한 검색 -->
+				<c:if test="${userId != null}">
 				<div class="pt-2 d-flex align-items-center">
 					<span class="font-weight-bold">공연 기간 </span>
 					<div class="col-4">
@@ -22,6 +23,7 @@
 					</div>
 					<button type="button" id="dateLimitBtn" class="btn btn-dark">검색</button>
 				</div>
+				</c:if>
 			
 				<div class="pt-1">
 					<c:forEach items="${myBookingList}" var="BookView">

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.festivalBooking.book.model.Book;
-import com.festivalBooking.book.model.BookView;
 
 @Repository
 public interface BookDAO {
