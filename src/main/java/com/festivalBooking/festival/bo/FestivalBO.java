@@ -14,6 +14,8 @@ import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.common.FileManagerService;
 import com.festivalBooking.festival.dao.FestivalDAO;
 import com.festivalBooking.festival.model.Festival;
+import com.festivalBooking.user.bo.UserBO;
+import com.festivalBooking.user.model.User;
 
 @Service
 public class FestivalBO {
@@ -23,6 +25,9 @@ public class FestivalBO {
 
 	@Autowired
 	private BookBO bookBO;
+
+	@Autowired
+	private UserBO userBO;
 	
 	@Autowired
 	private FileManagerService fileManager;
@@ -107,7 +112,7 @@ public class FestivalBO {
 	
 	
 
-	// 공연과 예약 정보 매칭
+	// 공연, 예매, 회원 정보 매칭(userId)
 	public List<BookView> generateBookViewListByUserId(int userId) {
 		// 결과물
 		List<BookView> bookViewList = new ArrayList<>();
@@ -118,9 +123,14 @@ public class FestivalBO {
 		for(Book book : bookList) {
 			BookView bookView = new BookView();
 			
-			// 예매내역
+			// 예매 내역
 			bookView.setBook(book);
+
+			// 회원 정보
+			User user = userBO.getUserByUserId(book.getUserId());
+			bookView.setUser(user);
 			
+			// 공연 정보
 			Festival festival = getFestivalByFestivalId(book.getFestivalId());
 			bookView.setFestival(festival);
 					
@@ -128,6 +138,37 @@ public class FestivalBO {
 			bookViewList.add(bookView);
 		}
 	
+		// 결과물 리턴
+		return bookViewList;
+	}
+	
+	// 공연, 예매, 회원 정보 매칭(festivalId)
+	public List<BookView> generateBookViewListByfestivalId(int festivalId) {
+		// 결과물
+		List<BookView> bookViewList = new ArrayList<>();
+		
+		// 공연에 대한 전체 예매 내역 가져오기
+		List<Book> bookList = bookBO.getBookListByFestivalId(festivalId);
+
+		// 반복문 => 각 BookView(공연-예매 내역이 한 쌍) => 결과물에 넣는다.
+		for(Book book : bookList) {
+			BookView bookView = new BookView();
+
+			// 예매 내역
+			bookView.setBook(book);
+
+			// 회원 정보
+			User user = userBO.getUserByUserId(book.getUserId());
+			bookView.setUser(user);
+			
+			// 공연 정보
+			Festival festival = festivalDAO.selectFestivalByFestivalId(festivalId);
+			bookView.setFestival(festival);
+
+			// 공연-예매 내역 1쌍 담기
+			bookViewList.add(bookView);
+		}
+
 		// 결과물 리턴
 		return bookViewList;
 	}

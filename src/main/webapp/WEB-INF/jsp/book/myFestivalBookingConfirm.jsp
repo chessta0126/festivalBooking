@@ -12,7 +12,7 @@
 		<h4 class="bold pb-3">공연명 : <span class="text-info">${festival.title}</span></h4>
 		
 		<c:choose>
-			<c:when test="${bookList[0] != null}">
+			<c:when test="${bookViewList[0] != null}">
 			<table class="table text-center">
 				<thead>
 					<tr>
@@ -25,21 +25,28 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${bookList}" var="book">
+					<c:forEach items="${bookViewList}" var="bookView">
 					<tr>
-						<td>${book.bookName}</td>
-						<td>${book.headCount}매</td>
-						<td>${book.payMoney}원</td>
-						<td>${book.phoneNumber}</td>
+						<td>${bookView.book.bookName}</td>
+						<td>${bookView.book.headCount}매</td>
+						<td>${bookView.book.payMoney}원</td>
 						<c:choose>
-							<c:when test="${book.isMember == 1}">
+							<c:when test="${bookView.book.phoneNumber ne null}">
+								<td>${bookView.book.phoneNumber}</td>
+							</c:when>
+							<c:otherwise>
+								<td>${bookView.user.email}</td>							
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${bookView.book.isMember == 1}">
 								<td>회원</td>
 							</c:when>
 							<c:otherwise>
 								<td>비회원</td>
 							</c:otherwise>
 						</c:choose>
-						<td><fmt:formatDate value="${book.createdAt}" pattern="yyyy-MM-dd"/></td>
+						<td><fmt:formatDate value="${bookView.book.createdAt}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 					</c:forEach>
 				</tbody>

@@ -1,12 +1,15 @@
 package com.festivalBooking.book.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import com.festivalBooking.book.dao.BookDAO;
 import com.festivalBooking.book.model.Book;
+import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.user.bo.UserBO;
 import com.festivalBooking.user.model.User;
 
