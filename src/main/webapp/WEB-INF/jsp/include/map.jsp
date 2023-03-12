@@ -117,7 +117,7 @@
 	var ps = new kakao.maps.services.Places();
 
 	// 키워드로 장소를 검색합니다
-	ps.keywordSearch('홍대입구역', placesSearchCB);
+	ps.keywordSearch('${festival.place}', placesSearchCB);
 
 	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	function placesSearchCB(data, status, pagination) {
