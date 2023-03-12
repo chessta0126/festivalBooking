@@ -8,7 +8,8 @@
 	<%-- 최신 공연 정보 --%>
 	<div class="pt-4 pb-4">
 		<h1 class="bold">최신 공연 정보</h1>
-		<c:forEach items="${festivalList}" var="festival">
+		<c:forEach items="${festivalList}" var="festival" varStatus="status">
+		<div name="${status.count}" class="mainRecommendFestivalCard">
 			<article class="w-100 festivalCard mt-3 pr-4 pb-3 d-flex bg-dark">
 				<!-- 공연 포스터 이미지-->
 				<div class="m-3 pt-3 pl-2">
@@ -41,7 +42,8 @@
 					</div>
 				</div>
 			</article>
-			</c:forEach>
+		</div>
+		</c:forEach>
 	</div>
 	
 	<div class="d-flex justify-content-between">
@@ -125,6 +127,37 @@
 
 <script>
 	$(document).ready(function(){
+		// 추천 공연 전부 숨기기
+		$(".mainRecommendFestivalCard").addClass("d-none");
+		if(${recommendFestivalLimit} != 0){
+			$(".mainRecommendFestivalCard[name=1]").removeClass("d-none");
+		}
+		
+		// 메인이미지 5초마다 순환 : setInterval
+        let festivalCardList = [];
+		for(let i = 1; i <= ${recommendFestivalLimit}; i++){
+			festivalCardList.push($(".mainRecommendFestivalCard[name="+i+"]"));
+		}
+        setInterval(function(){
+            for(let i = 0; i < festivalCardList.length; i++){
+                if(festivalCardList[i].is(":visible")){
+                	festivalCardList[i].addClass("d-none");
+                    // 마지막 카드일 때 처음으로 돌아가기, 아니면 다음 카드 보이기
+                	if(i == festivalCardList.length-1){
+                    	festivalCardList[0].removeClass("d-none");
+                        break;
+                    } else{
+                    	festivalCardList[i+1].removeClass("d-none");
+                        // 안 끊어주면 로직이 계속 실행됨. (다음 카드가 visible로 바뀌고 처음으로 돌아가기 때문에 계속 true가 되고, 사진이 쭉 넘어가서 맨 끝 사진만 보여주고 끝난다.)
+                        // -> 여기서는 다시 처음으로 돌아오게 해놨기 때문에 맨 끝 사진으로 끝나는 것이 아니라 무한루프를 실행한다.
+                        // 변하지 않는 것처럼 보이지만 무한히 실행되고 있는 중
+                        // -> break;로 function 완료 후 5000이 적용되고, setInterval에 의해 다시 for이 시작되는 것이다.
+                        break;
+                    }
+                }
+            }
+        }, 5000);
+		
 		// 예매 확인 - 회원/ 비회원 상자 toggle
         $('#member').on('click',function(){
             // 선택창 체크 토글
