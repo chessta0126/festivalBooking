@@ -61,7 +61,7 @@ public class BookRestController {
 			,@RequestParam("userId") int userId
 			){
 		
-		// DB update
+		// DB delete
 		bookBO.deleteBooking(festivalId, userId);
 		
 		// 여기까지 내려왔다는 것은 잘 수정됐다는 것
