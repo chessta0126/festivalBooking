@@ -40,6 +40,9 @@
 			let loginId = $("input[name=loginId]").val().trim();
 			let password = $('#password').val();
 			
+			// 로그인 누르기 전 페이지
+			let referrer = document.referrer;
+			
 			if (loginId == '') {
 				alert("아이디를 입력해주세요");
 				return false;
@@ -59,7 +62,7 @@
 			$.post(url, params)   // request
 			.done(function(data) {  // response
 				if (data.code == 1) { // 성공
-					location.href = "/main/main_view";
+					location.href = referrer;
 				} else { // 실패
 					alert(data.errorMessage);
 				}
