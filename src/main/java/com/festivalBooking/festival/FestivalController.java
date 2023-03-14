@@ -103,9 +103,6 @@ public class FestivalController {
 			model.addAttribute("isTimeOver", festival.isTimeOver());
 		} else {
 			model.addAttribute("isUpdate", false);
-			// 그냥 글쓰기로 접근했을 때, ${postId}가 존재하지 않으므로 에러가 떠버림 -> 일단 0으로 둔다.
-			// insert할 때 postId는 넘기지 않으니 괜찮다.
-			model.addAttribute("postId", 0);
 		}
 		
 		return "template/layout";
