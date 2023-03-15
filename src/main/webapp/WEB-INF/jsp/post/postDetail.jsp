@@ -101,8 +101,9 @@
 			<span class="pl-2 bold mr-3 valueTitle-font-size">${commentView.user.name}</span>
 			
 			<%-- 댓글 내용 --%>
-			<span class="commentContent">${commentView.comment.comment}</span>
-			<input type="text" class="updatedComment form-control d-none" value="${commentView.comment.comment}">
+			<span class="commentContent" name="${commentView.comment.id}">${commentView.comment.comment}</span>
+			<input type="text" class="updatedComment form-control d-none" name="${commentView.comment.id}"
+			value="${commentView.comment.comment}">
 		</div>
 	
 		<%-- 댓글 관리 버튼 : 여러 개이므로, class로 부여 --%>
@@ -119,7 +120,7 @@
 					</div>
 				</div>
 			
-				<button type="button" class="btn btn-dark allowUpdatedComment ml-3 d-none button">
+				<button type="button" class="btn btn-dark allowUpdatedComment ml-3 d-none button" name="${commentView.comment.id}">
 					수정 완료
 				</button>
 			</div>
@@ -234,23 +235,29 @@
 		
 		// 댓글 수정(Update)
 		$('.commentUpdateBtn').on('click', function(e) {
+			e.preventDefault(); // 화면 올라감 방지
+			
+			let changeCommentId = $(this).data('comment-id');
 			// 댓글 내용 수정 가능하게 하기 : 수정하고자 하는 댓글만 지정
-			$(".commentContent").addClass("d-none");
-			$(".updatedComment").removeClass("d-none");
+			$(".commentContent[name="+changeCommentId+"]").addClass("d-none");
+			$(".updatedComment[name="+changeCommentId+"]").removeClass("d-none");
 
 			// 버튼 toggle
 			$(".commentManagementBtn").addClass("d-none");
 			// 수정하고자 하는 댓글만 지정
-			$(".allowUpdatedComment").removeClass("d-none");
+			$(".allowUpdatedComment[name="+changeCommentId+"]").removeClass("d-none");
 		});
 		
 		// 댓글 수정 - 수정 완료 버튼
 		$('.allowUpdatedComment').on('click', function(e) {
+			e.preventDefault(); // 화면 올라감 방지
+			
 			// 댓글 번호
-			let commentId = $(this).data('comment-id');
+			let commentId = $(this).attr('name');
+			// alert(commentId);
 		
 			// 수정 내용 넘기기
-			let updatedComment = $(this).parents('input').val().trim();
+			let updatedComment = $(".updatedComment[name="+commentId+"]").val().trim();
 			alert(updatedComment);
 			
 			// 내용이 없으면 입력하라고 alert

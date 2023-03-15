@@ -70,6 +70,11 @@ public class myPageController {
 			String postType = "공지사항";
 			List<Post> myPostListAlert = postBO.getPostListByUserIdPostType(userId,postType);
 			model.addAttribute("myPostListAlert",myPostListAlert);
+
+			// 내 글 목록 - 공지사항
+			postType = "라인업 신청/모집";
+			List<Post> myPostListLineUP = postBO.getPostListByUserIdPostType(userId,postType);
+			model.addAttribute("myPostListLineUP",myPostListLineUP);
 			
 			// 내 글 목록 - 자유게시판
 			postType = "자유게시판";

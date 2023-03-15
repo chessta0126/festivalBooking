@@ -169,7 +169,7 @@ public class UserRestController {
 			result.put("code", 1);		
 			result.put("result", true);
 		} else { // 수정 실패
-			result.put("code", 1);		
+			result.put("code", 500);		
 			result.put("result", false);
 		}
 		

@@ -74,8 +74,8 @@ public class BookController {
 			model.addAttribute("festival",festival);			
 			
 			// 예매 내역
-			List<Book> bookList = bookBO.getBookListByFestivalId(festivalId);
-			model.addAttribute("bookList",bookList);
+			List<BookView> bookViewList = festivalBO.generateBookViewListByfestivalId(festivalId);
+			model.addAttribute("bookViewList",bookViewList);
 
 			// 페이지 이동경로
 			model.addAttribute("viewName","book/myFestivalBookingConfirm");

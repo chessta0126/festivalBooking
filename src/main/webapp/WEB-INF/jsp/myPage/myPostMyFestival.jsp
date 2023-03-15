@@ -43,7 +43,7 @@
 			</c:choose>
 	
 			<button id="writePostBtn" class="w-100 btn btn-dark">
-				<a href="/festival/festival_create_view" class="button">새로운 공연 등록</a>
+				<a href="/festival/festival_create_view?isUpdate=false" class="button">새로운 공연 등록</a>
 			</button>
 		</div>
 		<hr>
@@ -69,6 +69,39 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${myPostListAlert}" var="post">
+					<tr>
+						<td>${post.id}</td>
+						<td><a href="/post/post_detail_view?postType=${post.postType}&postId=${post.id}">${post.postTitle}</a></td>
+						<td><fmt:formatDate value="${post.createdAt}" pattern="yyyy-MM-dd"/></td>
+						<td>조회수</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<hr>
+
+		<%-- my postList - 라인업 신청 / 모집 --%>
+		<div class="pt-3 pb-3">
+			<div class="pb-3 d-flex justify-content-between align-items-center">
+				<h1 class="bold">라인업 신청 / 모집</h1>
+				<c:if test="${userId != null}">
+					<button id="writePostBtn" class="btn btn-warning">
+						<a href="/post/post_create_view?postType=라인업 신청/모집&isUpdate=false" class="button">글쓰기</a>
+					</button>
+				</c:if>
+			</div>
+			<table class="table text-center">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>제목</th>
+						<th>게시일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${myPostListLineUP}" var="post">
 					<tr>
 						<td>${post.id}</td>
 						<td><a href="/post/post_detail_view?postType=${post.postType}&postId=${post.id}">${post.postTitle}</a></td>

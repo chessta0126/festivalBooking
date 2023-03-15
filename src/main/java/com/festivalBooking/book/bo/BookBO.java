@@ -1,12 +1,15 @@
 package com.festivalBooking.book.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import com.festivalBooking.book.dao.BookDAO;
 import com.festivalBooking.book.model.Book;
+import com.festivalBooking.book.model.BookView;
 import com.festivalBooking.user.bo.UserBO;
 import com.festivalBooking.user.model.User;
 
@@ -21,10 +24,16 @@ public class BookBO {
 	
 	// 예매 내역 객체 형태로 보내기(insert)
 	public void addBooking(Book book) {
-		User user = userBO.getUserByUserId(book.getUserId());
-		String bookName = user.getName();
-		book.setBookName(bookName);
+		// 회원일 때, 받아온 객체에 들어있는 userId로 이름 가져와 bookName 채워넣기
+		try{
+			User user = userBO.getUserByUserId(book.getUserId());
+			String bookName = user.getName();
+			book.setBookName(bookName);
+		} catch(Exception e) {
+			
+		}
 		
+		// DB insert
 		bookDAO.insertBooking(book);
 	}
 
