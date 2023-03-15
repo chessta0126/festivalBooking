@@ -17,11 +17,15 @@ https://ovenapp.io/view/dBXl2nBRYnvxnx9XZg6uypsdz05R43BV/
 ![image](https://user-images.githubusercontent.com/115543049/225202563-1d5944a2-60e6-4236-9ac9-108af07b817a.png)
 
 ## 일정표
-* 스프레드 시트 링크
+스프레드 시트 링크
+
+
 https://docs.google.com/spreadsheets/d/1o5kyt4qd3r-UE-K2WXLFp3a_3xvSuRW9dhQkt7MRDOU/edit?usp=sharing
 
 ## DB / 화면 URL / API 설계
-* 구글 스프레드시트 주소
+구글 스프레드시트 주소
+
+
 https://docs.google.com/spreadsheets/d/1BbgqZSMm_HnliuyXlSI3jzeiCv0LuQ9KHPi-hk6bdyU/edit?usp=sharing
 
 ### ERD(Entity Relationship Diagram)
