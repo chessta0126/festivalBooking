@@ -11,6 +11,16 @@
 ## 🗓 개발 기간
 2021-01-30 ~ 2021-03-13
 
+## 기획서
+ovenapp 기획서 QR 코드
+![image](https://user-images.githubusercontent.com/115543049/225202563-1d5944a2-60e6-4236-9ac9-108af07b817a.png)
+
+* ovenapp 기획서 링크
+https://ovenapp.io/view/dBXl2nBRYnvxnx9XZg6uypsdz05R43BV/
+
+## 🎞주요 기능
+
+
 ## 🖥 개발 환경
 * Java 11
 * JDK
@@ -35,7 +45,3 @@
 ![image](https://user-images.githubusercontent.com/115543049/225201862-c19675e2-c0be-472f-8be9-ebc0cb97bf23.png)
 ![image](https://user-images.githubusercontent.com/115543049/225201878-ee70b7d9-577e-48ca-aff6-7c8003244e47.png)
 ![image](https://user-images.githubusercontent.com/115543049/225201883-7e3beb68-577b-4499-838d-caba95ad2c07.png)
-
-## 주요 기능
-
-
