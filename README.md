@@ -35,6 +35,12 @@ https://docs.google.com/spreadsheets/d/1BbgqZSMm_HnliuyXlSI3jzeiCv0LuQ9KHPi-hk6b
 
 
 ## 🎞주요 기능
+1) 공연 등록
+2) 공연 예매
+3) 예매 확인
+4) 내 공연 관리
+5) 게시판 - 글/댓글 쓰기
+6) 카카오 지도 API
 
 ## 🖥 개발 환경
 * Java 11
