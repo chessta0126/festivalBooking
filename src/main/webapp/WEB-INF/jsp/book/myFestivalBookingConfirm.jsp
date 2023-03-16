@@ -27,7 +27,14 @@
 				<tbody>
 					<c:forEach items="${bookViewList}" var="bookView">
 					<tr>
-						<td>${bookView.book.bookName}</td>
+						<c:choose>
+							<c:when test="${bookView.book.isMember == 1}">
+								<td>${bookView.user.name}</td>
+							</c:when>
+							<c:otherwise>
+								<td>${bookView.book.bookName}</td>
+							</c:otherwise>
+						</c:choose>
 						<td>${bookView.book.headCount}매</td>
 						<td>${bookView.book.payMoney}원</td>
 						<c:choose>
