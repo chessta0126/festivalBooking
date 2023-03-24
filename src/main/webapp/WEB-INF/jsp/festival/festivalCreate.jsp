@@ -273,8 +273,7 @@
 				return false;
 			}
 			if(place == ""){
-				alert("공연 장소를 입력해주세요");
-				return false;
+				place = "미정";
 			}
 			if(price == ""){
 				alert("티켓 예매 가격을 입력해주세요");
@@ -380,8 +379,7 @@
 				return false;
 			}
 			if(place == ""){
-				alert("공연 장소를 입력해주세요");
-				return false;
+				place = '미정';
 			}
 			if(price == ""){
 				alert("티켓 예매 가격을 입력해주세요");

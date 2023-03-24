@@ -178,7 +178,9 @@
 			</c:if>
 			
 			<%-- 오시는 길 --%>
-			<jsp:include page="../include/map.jsp" />		
+			<c:if test="${festival.place ne '미정'}">
+				<jsp:include page="../include/map.jsp" />		
+			</c:if>
 			
 			<%-- 공연 담당자 --%>
 			<h2 class="bold pt-5 pb-2">공연 담당자</h2>
