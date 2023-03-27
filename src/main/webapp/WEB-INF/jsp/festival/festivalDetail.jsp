@@ -41,7 +41,14 @@
 							<a class="dropdown-item" href="/book/myFestivalBookingConfirm_view?festivalId=${festival.id}">예매 현황</a>
 							<a class="dropdown-item" href="/festival/festival_create_view?isUpdate=true&festivalId=${festival.id}">공연 정보 수정</a>
 							<a class="dropdown-item" href="#" id="deleteFestivalBtn">공연 삭제</a>
-							<a class="dropdown-item" href="#">예매 마감</a>
+							<c:choose>
+								<c:when test="${!isTimeOver}">
+									<a class="dropdown-item" href="/festival/update_expire?festivalId=${festival.id}&isTimeOver=${isTimeOver}" id="updateExpireBtn">예매 마감</a>
+								</c:when>
+								<c:otherwise>
+									<a class="dropdown-item" href="/festival/update_expire?festivalId=${festival.id}&isTimeOver=${isTimeOver}" id="updateExpireBtn">예매 마감 해제</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</c:if>
