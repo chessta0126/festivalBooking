@@ -78,14 +78,14 @@
 				<tr>
 					<th>예매 가격</th>
 					<td class="d-flex align-items-center">
-						<input type="text" id="price" class="mr-2 form-control" placeholder="예매 가격">
+						<input type="number" id="price" class="mr-2 form-control" placeholder="예매 가격">
 						원
 					</td>
 				</tr>
 				<tr>
 					<th>현장 가격</th>
 					<td class="d-flex align-items-center">
-						<input type="text" id="priceOffline" class="mr-2 form-control" placeholder="현장 가격">
+						<input type="number" id="priceOffline" class="mr-2 form-control" placeholder="현장 가격">
 						원
 					</td>
 				</tr>
