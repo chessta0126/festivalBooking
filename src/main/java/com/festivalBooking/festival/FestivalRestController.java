@@ -32,10 +32,18 @@ public class FestivalRestController {
 	public Map<String, Object> create(
 			@ModelAttribute Festival festival
 			,@RequestParam(value="posterImg",required = false) MultipartFile posterImg
+			,@RequestParam("isTimeOver") String isTimeOver
 			,HttpSession session){
 		
 		// 파일 이름 만들 때 BO 에서 필요
 		String name = (String)session.getAttribute("userName");
+		
+		// String 형태의 isTimeOver >> boolean으로 setting
+		boolean isTimeOverBoolean = false;
+		if(isTimeOver.equals("true")) {
+			isTimeOverBoolean = true;
+		}
+		festival.setTimeOver(isTimeOverBoolean);
 		
 		// DB insert
 		boolean isfestivalCreateSuccess = festivalBO.addFestival(festival, posterImg, name);
@@ -59,11 +67,19 @@ public class FestivalRestController {
 	public Map<String, Object> update(
 			@ModelAttribute Festival festival
 			,@RequestParam(value="posterImg",required = false) MultipartFile posterImg
+			,@RequestParam("isTimeOver") String isTimeOver
 			,HttpSession session){
 		
 		// 파일 이름 만들 때 BO 에서 필요
 		String name = (String)session.getAttribute("userName");
 		
+		// String 형태의 isTimeOver >> boolean으로 setting
+		boolean isTimeOverBoolean = false;
+		if(isTimeOver.equals("true")) {
+			isTimeOverBoolean = true;
+		}
+		festival.setTimeOver(isTimeOverBoolean);
+				
 		// DB update
 		boolean isfestivalUpdateSuccess = festivalBO.updateFestival(festival, posterImg, name);
 		

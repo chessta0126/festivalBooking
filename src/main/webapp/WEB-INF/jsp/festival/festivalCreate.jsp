@@ -250,10 +250,9 @@
 			let warning = $('#warning').val().trim();
 			let festivalMaster = $('#festivalMaster').val().trim();
 			let askRoot = $('#askRoot').val().trim();
-			if($('#timeOver').hasClass("d-none")){ // 예매 중 상태
-				var isTimeOver = false;
-			} else{
-				var isTimeOver = true;
+			let isTimeOver = false;
+			if(!$('#timeOver').hasClass("d-none")){ // 예매 중 상태
+				isTimeOver = true;
 			}
 			
 			if(title == ""){
@@ -356,10 +355,9 @@
 			let warning = $('#warning').val().trim();
 			let festivalMaster = $('#festivalMaster').val().trim();
 			let askRoot = $('#askRoot').val().trim();
-			if($('#timeOver').hasClass("d-none")){ // 예매 중 상태
-				var isTimeOverUpdate = false;
-			} else{
-				var isTimeOverUpdate = true;
+			let isTimeOver = false;
+			if(!$('#timeOver').hasClass("d-none")){ // 예매 중 상태
+				isTimeOver = true;
 			}
 			
 			if(title == ""){
@@ -415,7 +413,7 @@
 			formData.append("warning", warning);
 			formData.append("festivalMaster", festivalMaster);
 			formData.append("askRoot", askRoot);
-			formData.append("isTimeOver", isTimeOverUpdate);
+			formData.append("isTimeOver", isTimeOver);
 			
 			// AJAX form 데이터 전송
 			$.ajax({
