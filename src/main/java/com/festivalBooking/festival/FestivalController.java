@@ -148,16 +148,17 @@ public class FestivalController {
 	}
 	
 	// 예매 마감(클릭 시 바로 예매 마감)
-	// http://localhost:8080/festival/update_expire?festivalId=${festival.id}
+	// http://localhost:8080/festival/update_expire?festivalId=${festival.id}&isTimeOver={isTimeOver}
 	@GetMapping("/update_expire")
 	public String updateExpire(
 			@RequestParam("festivalId") int festivalId
+			,@RequestParam("isTimeOver") boolean isTimeOver
 			) {
 		// 어떤 공연 예매 가능 여부 수정?
 		Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
 
-		// 예매 마감
-		festival.setTimeOver(true);
+		// 예매 중지 여부 수정
+		festival.setTimeOver(!isTimeOver);
 		
 		// DB update
 		festivalBO.updateFestival(festival, null, null);
