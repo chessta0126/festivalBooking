@@ -268,6 +268,12 @@
 
 <script>
 	$(document).ready(function() {
+		// 예매 마감의 경우 예매 버튼 가리기
+		if(${isTimeOver}){
+			$('#memberBookingBtn').addClass("d-none");
+			$('#notMemberBookingBtn').addClass("d-none");
+		}
+		
 		if(${isBooked}){
 			let memberBookingBtn = document.getElementById("memberBookingBtn");
 			memberBookingBtn.innerText = "추가 예매";
