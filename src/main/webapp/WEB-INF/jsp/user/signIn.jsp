@@ -42,6 +42,9 @@
 			
 			// 로그인 누르기 전 페이지
 			let referrer = document.referrer;
+			if("${recognizePage}" != ""){
+				referrer = "${recognizePage}";
+			}
 			
 			if (loginId == '') {
 				alert("아이디를 입력해주세요");

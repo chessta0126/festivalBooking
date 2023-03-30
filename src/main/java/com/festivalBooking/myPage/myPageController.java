@@ -46,6 +46,7 @@ public class myPageController {
 			model.addAttribute("userInfo",userInfo);
 		} else {
 			model.addAttribute("viewName","user/signIn");
+			model.addAttribute("recognizePage","/myPage/myPage_view");
 		}
 		
 		return "template/layout";
