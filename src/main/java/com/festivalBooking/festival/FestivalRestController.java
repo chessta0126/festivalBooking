@@ -3,9 +3,12 @@ package com.festivalBooking.festival;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,9 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.festivalBooking.festival.bo.FestivalBO;
 import com.festivalBooking.festival.model.Festival;
-import com.festivalBooking.post.model.Post;
-
-import javax.servlet.http.HttpSession;
 
 @RequestMapping("/festival")
 @RestController
@@ -32,10 +32,18 @@ public class FestivalRestController {
 	public Map<String, Object> create(
 			@ModelAttribute Festival festival
 			,@RequestParam(value="posterImg",required = false) MultipartFile posterImg
+			,@RequestParam("isTimeOver") String isTimeOver
 			,HttpSession session){
 		
 		// 파일 이름 만들 때 BO 에서 필요
 		String name = (String)session.getAttribute("userName");
+		
+		// String 형태의 isTimeOver >> boolean으로 setting
+		boolean isTimeOverBoolean = false;
+		if(isTimeOver.equals("true")) {
+			isTimeOverBoolean = true;
+		}
+		festival.setTimeOver(isTimeOverBoolean);
 		
 		// DB insert
 		boolean isfestivalCreateSuccess = festivalBO.addFestival(festival, posterImg, name);
@@ -59,11 +67,19 @@ public class FestivalRestController {
 	public Map<String, Object> update(
 			@ModelAttribute Festival festival
 			,@RequestParam(value="posterImg",required = false) MultipartFile posterImg
+			,@RequestParam("isTimeOver") String isTimeOver
 			,HttpSession session){
 		
 		// 파일 이름 만들 때 BO 에서 필요
 		String name = (String)session.getAttribute("userName");
 		
+		// String 형태의 isTimeOver >> boolean으로 setting
+		boolean isTimeOverBoolean = false;
+		if(isTimeOver.equals("true")) {
+			isTimeOverBoolean = true;
+		}
+		festival.setTimeOver(isTimeOverBoolean);
+				
 		// DB update
 		boolean isfestivalUpdateSuccess = festivalBO.updateFestival(festival, posterImg, name);
 		
@@ -82,19 +98,19 @@ public class FestivalRestController {
 	}
 	
 	// 공연 삭제 (delete)
-		@DeleteMapping("/delete")
-		public Map<String, Object> delete(
-				@RequestParam("festivalId") int festivalId
-				,@RequestParam("festivalUserId") int festivalUserId
-				){
-			// 어떤 공연인지 (festivalId), 누가 등록했는지(festivalUserId) 알아야 지움
-			// DB delete
-			festivalBO.deleteFestivalByFestivalIdUserId(festivalId, festivalUserId);
-			
-			// 삭제 시 에러가 없으면 성공한 것
-			Map<String, Object> result = new HashMap<>();
-			result.put("result", true);
-			
-			return result;
-	 	}
+	@DeleteMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("festivalId") int festivalId
+			,@RequestParam("festivalUserId") int festivalUserId
+			){
+		// 어떤 공연인지 (festivalId), 누가 등록했는지(festivalUserId) 알아야 지움
+		// DB delete
+		festivalBO.deleteFestivalByFestivalIdUserId(festivalId, festivalUserId);
+
+		// 삭제 시 에러가 없으면 성공한 것
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", true);
+
+		return result;
+	}
 }

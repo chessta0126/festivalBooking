@@ -17,7 +17,8 @@
 						<th>No.</th>
 						<th>공연명</th>
 						<th>게시일</th>
-						<th></th>
+						<th>공연 관리</th>
+						<th>마감 여부</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,9 +36,30 @@
 									<a class="dropdown-item" href="/book/myFestivalBookingConfirm_view?festivalId=${festival.id}">예매 현황</a>
 									<a class="dropdown-item" href="/festival/festival_create_view?isUpdate=true&festivalId=${festival.id}">공연 정보 수정</a>
 									<a class="dropdown-item deleteFestivalBtn" href="#" data-festival-id="${festival.id}">공연 삭제</a>
-									<a class="dropdown-item" href="#">예매 마감</a>
+									<c:choose>
+										<c:when test="${!festival.isTimeOver()}">
+											<a class="dropdown-item" href="/festival/update_expire?festivalId=${festival.id}&isTimeOver=${festival.isTimeOver()}&isPageFestivalMyList=true" id="updateExpireBtn">예매 마감</a>
+										</c:when>
+										<c:otherwise>
+											<a class="dropdown-item" href="/festival/update_expire?festivalId=${festival.id}&isTimeOver=${festival.isTimeOver()}&isPageFestivalMyList=true" id="updateExpireBtn">예매 마감 해제</a>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${festival.isTimeOver() == true}">
+									<button type="button" id="expired" class="mb-3 btn btn-danger bold">
+										예매 마감
+									</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" id="expired" class="mb-3 btn btn-success bold">
+										예매중
+									</button>
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 					</c:forEach>

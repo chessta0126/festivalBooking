@@ -75,11 +75,16 @@ public class FestivalController {
 	public String festivalMyListView(Model model, HttpSession session) {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
-		List<Festival> festivalList = festivalBO.getFestivalListByUserId(userId);
-		
-		model.addAttribute("viewName","festival/festivalMyList");
-		model.addAttribute("festivalList",festivalList);
-		
+		// 로그인 시 마이페이지로, 비로그인 시 로그인 페이지로 이동
+		if(userId != null) {
+			List<Festival> festivalList = festivalBO.getFestivalListByUserId(userId);
+			model.addAttribute("viewName","festival/festivalMyList");
+			model.addAttribute("festivalList",festivalList);
+		} else {
+			model.addAttribute("viewName","user/signIn");
+			model.addAttribute("recognizePage","/festival/festival_myList_view");
+		}
+				
 		return "template/layout";
 	}
 	
@@ -145,5 +150,28 @@ public class FestivalController {
 		}
 		
 		return "template/layout";
+	}
+	
+	// 예매 마감(클릭 시 바로 예매 마감)
+	// http://localhost:8080/festival/update_expire?festivalId=${festival.id}&isTimeOver={isTimeOver}&isPageFestivalMyList={boolean}
+	@GetMapping("/update_expire")
+	public String updateExpire(
+			@RequestParam("festivalId") int festivalId
+			,@RequestParam("isTimeOver") boolean isTimeOver
+			,@RequestParam(value="isPageFestivalMyList", required=false) boolean isPageFestivalMyList
+			) {
+		// 어떤 공연
+		Festival festival = festivalBO.getFestivalByFestivalId(festivalId);
+
+		// 예매 마감 여부 수정
+		festival.setTimeOver(!isTimeOver);
+		
+		// DB update
+		festivalBO.updateFestival(festival, null, null);
+		
+		if(isPageFestivalMyList) {			
+			return "redirect:/festival/festival_myList_view";
+		}
+		return "redirect:/festival/festival_detail_view?festivalId="+festivalId;
 	}
 }

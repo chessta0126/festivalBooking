@@ -58,35 +58,43 @@
 				</tr>
 				<tr>
 					<th>공연 시간</th>
-					<td class="d-flex align-items-center">
-						<input type="text" id="startTime" class="form-control" placeholder="공연 시작 시간">
-						<span class="bold ml-4 mr-4">~</span>
-						<input type="text" id="endTime" class="form-control" placeholder="공연 끝나는 시간">
+					<td>
+						<div class="d-flex align-items-center">
+							<input type="number" id="startTimeHour" class="form-control col-2 mr-1" alt="공연 시작 시간 시">시
+							<input type="number" id="startTimeMinute" class="form-control col-2 ml-1 mr-1" alt="공연 시작 시간 분">분
+							<span class="bold ml-3 mr-3">~</span>
+							<input type="number" id="endTimeHour" class="form-control col-2 mr-1" alt="공연 끝나는 시간">시
+							<input type="number" id="endTimeMinute" class="form-control col-2 ml-1 mr-1" alt="공연 끝나는 시간">분
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>공연 장소</th>
-					<td class="d-flex input-group">
-						<div class="input-group-prepend">
-							<input type="text" id="place" class="form-control" placeholder="직접 입력">
-						</div>
-						<div class="input-group-append">
-							<button class="btn btn-dark">주소 찾기</button>
+					<td>
+						<div class="d-flex input-group">
+							<div class="input-group-prepend">
+								<input type="text" id="place" class="form-control" placeholder="직접 입력">
+							</div>
+							<div class="input-group-append">
+								<button type="button" class="btn btn-dark">주소 찾기</button>
+							</div>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>예매 가격</th>
-					<td class="d-flex align-items-center">
-						<input type="text" id="price" class="mr-2 form-control" placeholder="예매 가격">
-						원
+					<td>
+						<div class="d-flex align-items-center">
+							<input type="number" id="price" class="mr-2 form-control" placeholder="예매 가격">원
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>현장 가격</th>
-					<td class="d-flex align-items-center">
-						<input type="text" id="priceOffline" class="mr-2 form-control" placeholder="현장 가격">
-						원
+					<td>
+						<div class="d-flex align-items-center">
+							<input type="number" id="priceOffline" class="mr-2 form-control" placeholder="현장 가격">원
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -170,8 +178,10 @@
 			$("#posterImg").attr("src","${festival.imagePath}");
 			$('#title').attr('value',"${festival.title}");
 			$('#date').attr('value',"${festival.date}");
-			$('#startTime').attr('value',"${festival.startTime}");
-			$('#endTime').attr('value',"${festival.endTime}");
+			$('#startTimeHour').attr('value',"${festival.startTime.split('시')[0]}");
+			$('#startTimeMinute').attr('value',"${festival.startTime.split(' ')[1].split('분')[0]}");
+			$('#endTimeHour').attr('value',"${festival.endTime.split('시')[0]}");
+			$('#endTimeMinute').attr('value',"${festival.endTime.split(' ')[1].split('분')[0]}");
 			$('#place').attr('value',"${festival.place}");
 			$('#address').attr('value',"${festival.address}");
 			$('#price').attr('value',"${festival.price}");
@@ -238,8 +248,21 @@
 			let userId = ${userId};
 			let title = $('#title').val().trim();
 			let date = $('#date').val();
-			let startTime = $('#startTime').val().trim();
-			let endTime = $('#endTime').val().trim();
+
+			let startTimeHour = $('#startTimeHour').val().trim();
+			let startTimeMinute = $('#startTimeMinute').val().trim();
+			if(startTimeMinute == ''){
+				startTimeMinute = 0;
+			}
+			let startTime = startTimeHour + "시 " + startTimeMinute + "분";
+			
+			let endTimeHour = $('#endTimeHour').val().trim();
+			let endTimeMinute = $('#endTimeMinute').val().trim();
+			if(endTimeMinute == ''){
+				endTimeMinute = 0;
+			}
+			let endTime = endTimeHour + "시 " + endTimeMinute + "분";
+
 			let place = $('#place').val().trim();
 			let address = $('#address').val();
 			let price = $('#price').val().trim();
@@ -250,10 +273,9 @@
 			let warning = $('#warning').val().trim();
 			let festivalMaster = $('#festivalMaster').val().trim();
 			let askRoot = $('#askRoot').val().trim();
-			if($('#timeOver').hasClass("d-none")){ // 예매 중 상태
-				var isTimeOver = false;
-			} else{
-				var isTimeOver = true;
+			let isTimeOver = false;
+			if(!$('#timeOver').hasClass("d-none")){ // 예매 중 상태
+				isTimeOver = true;
 			}
 			
 			if(title == ""){
@@ -264,17 +286,24 @@
 				alert("공연 날짜를 입력해주세요");
 				return false;
 			}
-			if(startTime == ""){
+			if($('#startTimeHour').val().trim() == ""){
 				alert("공연이 시작하는 시간을 입력해주세요");
 				return false;
 			}
-			if(endTime == ""){
+			if($('#startTimeHour').val().trim() < 0){
+				alert("공연 시작 시간이 잘못 입력되었습니다.");
+				return false;
+			}
+			if($('#endTimeHour').val().trim() == ""){
 				alert("공연이 끝나는 시간을 입력해주세요");
 				return false;
 			}
-			if(place == ""){
-				alert("공연 장소를 입력해주세요");
+			if(endTime < startTime){
+				alert("공연 종료 시간이 시작 시간보다 빠릅니다.");
 				return false;
+			}
+			if(place == ""){
+				place = "미정";
 			}
 			if(price == ""){
 				alert("티켓 예매 가격을 입력해주세요");
@@ -345,8 +374,21 @@
 			let id = "${festival.id}";
 			let title = $('#title').val().trim();
 			let date = $('#date').val();
-			let startTime = $('#startTime').val().trim();
-			let endTime = $('#endTime').val().trim();
+			
+			let startTimeHour = $('#startTimeHour').val().trim();
+			let startTimeMinute = $('#startTimeMinute').val().trim();
+			if(startTimeMinute == ''){
+				startTimeMinute = 0;
+			}
+			let startTime = startTimeHour + "시 " + startTimeMinute + "분";
+			
+			let endTimeHour = $('#endTimeHour').val().trim();
+			let endTimeMinute = $('#endTimeMinute').val().trim();
+			if(endTimeMinute == ''){
+				endTimeMinute = 0;
+			}
+			let endTime = endTimeHour + "시 " + endTimeMinute + "분";
+			
 			let place = $('#place').val().trim();
 			let address = $('#address').val();
 			let price = $('#price').val().trim();
@@ -357,10 +399,9 @@
 			let warning = $('#warning').val().trim();
 			let festivalMaster = $('#festivalMaster').val().trim();
 			let askRoot = $('#askRoot').val().trim();
-			if($('#timeOver').hasClass("d-none")){ // 예매 중 상태
-				var isTimeOverUpdate = false;
-			} else{
-				var isTimeOverUpdate = true;
+			let isTimeOver = false;
+			if(!$('#timeOver').hasClass("d-none")){ // 예매 중 상태
+				isTimeOver = true;
 			}
 			
 			if(title == ""){
@@ -371,17 +412,24 @@
 				alert("공연 날짜를 입력해주세요");
 				return false;
 			}
-			if(startTime == ""){
+			if($('#startTimeHour').val().trim() == ""){
 				alert("공연이 시작하는 시간을 입력해주세요");
 				return false;
 			}
-			if(endTime == ""){
+			if($('#startTimeHour').val().trim() < 0){
+				alert("공연 시작 시간이 잘못 입력되었습니다.");
+				return false;
+			}
+			if($('#endTimeHour').val().trim() == ""){
 				alert("공연이 끝나는 시간을 입력해주세요");
 				return false;
 			}
-			if(place == ""){
-				alert("공연 장소를 입력해주세요");
+			if(endTime < startTime){
+				alert("공연 종료 시간이 시작 시간보다 빠릅니다.");
 				return false;
+			}
+			if(place == ""){
+				place = '미정';
 			}
 			if(price == ""){
 				alert("티켓 예매 가격을 입력해주세요");
@@ -417,7 +465,7 @@
 			formData.append("warning", warning);
 			formData.append("festivalMaster", festivalMaster);
 			formData.append("askRoot", askRoot);
-			formData.append("isTimeOver", isTimeOverUpdate);
+			formData.append("isTimeOver", isTimeOver);
 			
 			// AJAX form 데이터 전송
 			$.ajax({

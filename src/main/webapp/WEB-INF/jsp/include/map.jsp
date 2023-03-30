@@ -27,28 +27,8 @@
 	// 2. 지도 확대 축소를 제어할 수 있는 줌 컨트롤
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-					
-	// 3. 클릭 시 마커 표시하기
-	// 지도를 클릭한 위치에 표출할 마커입니다
-	var marker = new kakao.maps.Marker({
-		// 지도 중심좌표에 마커를 생성합니다 
-		position : map.getCenter()
-	});
-	// 지도에 마커를 표시합니다
-	marker.setMap(map);
 
-	// 지도에 클릭 이벤트를 등록합니다
-	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-
-		// 클릭한 위도, 경도 정보를 가져옵니다 
-		var latlng = mouseEvent.latLng;
-
-		// 마커 위치를 클릭한 위치로 옮깁니다
-		marker.setPosition(latlng);
-	});
-
-	// 4. 내 위치
+	// 3. 내 위치
 	function locationLoadSuccess(pos) {
 		// 현재 위치 받아오기
 		var currentPos = new kakao.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
@@ -75,39 +55,7 @@
 		navigator.geolocation.getCurrentPosition(locationLoadSuccess,locationLoadError);
 	};
 
-	// 5. 주소 검색으로 좌표 얻어내기
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(
-					'제주특별자치도 제주시 첨단로 242',
-					function(result, status) {
-
-						// 정상적으로 검색이 완료됐으면 
-						if (status === kakao.maps.services.Status.OK) {
-							var coords = new kakao.maps.LatLng(result[0].y,
-									result[0].x);
-
-							// 결과값으로 받은 위치를 마커로 표시합니다
-							var marker = new kakao.maps.Marker({
-								map : map,
-								position : coords
-							});
-
-							// 인포윈도우로 장소에 대한 설명을 표시합니다
-							var infowindow = new kakao.maps.InfoWindow(
-									{
-										content : '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-									});
-							infowindow.open(map, marker);
-
-							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-							map.setCenter(coords);
-						}
-					});
-
-	// 6. 키워드로 장소 검색
+	// 4. 키워드로 장소 검색
 	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 	var infowindow = new kakao.maps.InfoWindow({
 		zIndex : 1

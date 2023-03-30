@@ -41,7 +41,14 @@
 							<a class="dropdown-item" href="/book/myFestivalBookingConfirm_view?festivalId=${festival.id}">예매 현황</a>
 							<a class="dropdown-item" href="/festival/festival_create_view?isUpdate=true&festivalId=${festival.id}">공연 정보 수정</a>
 							<a class="dropdown-item" href="#" id="deleteFestivalBtn">공연 삭제</a>
-							<a class="dropdown-item" href="#">예매 마감</a>
+							<c:choose>
+								<c:when test="${!isTimeOver}">
+									<a class="dropdown-item" href="/festival/update_expire?festivalId=${festival.id}&isTimeOver=${isTimeOver}" id="updateExpireBtn">예매 마감</a>
+								</c:when>
+								<c:otherwise>
+									<a class="dropdown-item" href="/festival/update_expire?festivalId=${festival.id}&isTimeOver=${isTimeOver}" id="updateExpireBtn">예매 마감 해제</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</c:if>
@@ -178,7 +185,9 @@
 			</c:if>
 			
 			<%-- 오시는 길 --%>
-			<jsp:include page="../include/map.jsp" />		
+			<c:if test="${festival.place ne '미정'}">
+				<jsp:include page="../include/map.jsp" />		
+			</c:if>
 			
 			<%-- 공연 담당자 --%>
 			<h2 class="bold pt-5 pb-2">공연 담당자</h2>
@@ -259,6 +268,12 @@
 
 <script>
 	$(document).ready(function() {
+		// 예매 마감의 경우 예매 버튼 가리기
+		if(${isTimeOver}){
+			$('#memberBookingBtn').addClass("d-none");
+			$('#notMemberBookingBtn').addClass("d-none");
+		}
+		
 		if(${isBooked}){
 			let memberBookingBtn = document.getElementById("memberBookingBtn");
 			memberBookingBtn.innerText = "추가 예매";

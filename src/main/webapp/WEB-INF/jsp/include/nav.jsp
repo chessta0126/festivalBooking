@@ -12,14 +12,7 @@
 	
 	<div>
 		<li class="nav-item">
-		<c:choose>
-			<c:when test="${userId != null}">
-				<a href="/festival/festival_myList_view" class="nav-link">공연 홍보</a>
-			</c:when>
-			<c:otherwise>
-				<a href="/user/sign_in_view" class="nav-link">공연 홍보</a>
-			</c:otherwise>
-		</c:choose>
+			<a href="/festival/festival_myList_view" class="nav-link">공연 홍보</a>
 		</li>
 	</div>
 	
