@@ -75,11 +75,16 @@ public class FestivalController {
 	public String festivalMyListView(Model model, HttpSession session) {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
-		List<Festival> festivalList = festivalBO.getFestivalListByUserId(userId);
-		
-		model.addAttribute("viewName","festival/festivalMyList");
-		model.addAttribute("festivalList",festivalList);
-		
+		// 로그인 시 마이페이지로, 비로그인 시 로그인 페이지로 이동
+		if(userId != null) {
+			List<Festival> festivalList = festivalBO.getFestivalListByUserId(userId);
+			model.addAttribute("viewName","festival/festivalMyList");
+			model.addAttribute("festivalList",festivalList);
+		} else {
+			model.addAttribute("viewName","user/signIn");
+			model.addAttribute("recognizePage","/festival/festival_myList_view");
+		}
+				
 		return "template/layout";
 	}
 	
