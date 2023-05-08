@@ -186,6 +186,11 @@
 			
 			<%-- 오시는 길 --%>
 			<c:if test="${festival.place ne '미정'}">
+				<div class="d-flex justify-content-between align-items-center pt-5">
+					<h2 class="bold pb-2">오시는 길</h2>
+					<button type="button" class="btn btn-secondary" onclick="getCurrentPosBtn()">내 위치</button>
+				</div>
+				
 				<jsp:include page="../include/map.jsp" />		
 			</c:if>
 			
