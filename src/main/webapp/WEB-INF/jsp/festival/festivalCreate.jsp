@@ -31,7 +31,7 @@
 				<%-- default 이미지 --%>
 				<div>
 					<a href="#" class="posterUploadBtn">
-						<img width="250" src="\images\★default file/no-image-found-360x250-1-300x208.png" id="posterImg">
+						<img width="250" src="\images\★default file/image_icon-icons.com_50366.png" id="posterImg">
 					</a>
 					<div class="pt-3 d-flex justify-content-center">
 						<button type="button" class="posterUploadBtn btn btn-secondary">공연 포스터</button>
@@ -158,16 +158,15 @@
 		<div class="modal-content text-center">
       		<div class="py-3 border-bottom">
       			<!-- 주소 검색창 -->
-	      		<div class="d-flex justify-content-center mb-3 input-group">
+	      		<div class="d-flex justify-content-center align-items-center input-group">
 					<div class="input-group-prepend">
 						<input type="text" id="addressFind" class="form-control" placeholder="공연 장소 주소">
 					</div>
 					<div class="input-group-append">
-						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddress">주소 찾기</button>
+						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddressFind">주소 찾기</button>
 					</div>
 				</div>
 				
-      			<jsp:include page="../include/map.jsp" />
       		</div>
       		<div class="py-3">
       			<%-- data-dismiss="modal" : modal창 닫힘 --%>
