@@ -317,7 +317,8 @@
 				alert("공연이 시작하는 시간을 입력해주세요");
 				return false;
 			}
-			if(startTimeHour < 0 || startTimeMinute < 0){
+			if(startTimeHour < 0 || startTimeMinute < 0
+					|| startTimeHour > 23 || startTimeMinute > 59){
 				alert("공연 시작 시간이 잘못 입력되었습니다.");
 				return false;
 			}
@@ -325,7 +326,8 @@
 				alert("공연이 끝나는 시간을 입력해주세요");
 				return false;
 			}
-			if(endTimeMinute < 0){
+			if(endTimeHour < 0 || endTimeMinute < 0
+					|| endTimeHour > 23 || endTimeMinute > 59){
 				alert("공연 끝나는 시간이 잘못 입력되었습니다.");
 				return false;
 			}
@@ -447,7 +449,8 @@
 				alert("공연이 시작하는 시간을 입력해주세요");
 				return false;
 			}
-			if(startTimeHour < 0 || startTimeMinute < 0){
+			if(startTimeHour < 0 || startTimeMinute < 0
+					|| startTimeHour > 23 || startTimeMinute > 59 ){
 				alert("공연 시작 시간이 잘못 입력되었습니다.");
 				return false;
 			}
@@ -455,7 +458,8 @@
 				alert("공연이 끝나는 시간을 입력해주세요");
 				return false;
 			}
-			if(endTimeHour < 0 || endTimeMinute < 0){
+			if(endTimeHour < 0 || endTimeMinute < 0
+					|| endTimeHour > 23 || endTimeMinute > 59){
 				alert("공연이 끝나는 시간이 잘못 입력되었습니다.");
 				return false;
 			}
