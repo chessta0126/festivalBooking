@@ -277,9 +277,15 @@
 			let date = $('#date').val();
 
 			let startTimeHour = $('#startTimeHour').val().trim();
+			if(startTimeHour.length == 1){
+				startTimeHour = "0" + startTimeHour;
+			}
 			let startTimeMinute = $('#startTimeMinute').val().trim();
 			if(startTimeMinute == ''){
 				startTimeMinute = 0;
+			}
+			if(startTimeMinute.length == 1){
+				startTimeMinute = "0" + startTimeMinute;
 			}
 			let startTime = startTimeHour + "시 " + startTimeMinute + "분";
 			
@@ -409,9 +415,15 @@
 			let date = $('#date').val();
 			
 			let startTimeHour = $('#startTimeHour').val().trim();
+			if(startTimeHour.length == 1){
+				startTimeHour = "0" + startTimeHour;
+			}
 			let startTimeMinute = $('#startTimeMinute').val().trim();
 			if(startTimeMinute == ''){
 				startTimeMinute = 0;
+			}
+			if(startTimeMinute.length == 1){
+				startTimeMinute = "0" + startTimeMinute;
 			}
 			let startTime = startTimeHour + "시 " + startTimeMinute + "분";
 			
