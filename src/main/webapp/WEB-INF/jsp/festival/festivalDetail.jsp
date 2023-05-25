@@ -430,8 +430,22 @@
 			    if (bookName) {
 			        const { value: phoneNumber } = await Swal.fire({
 				        title: '연락처를 입력하세요.',
-				        input: 'text',
-				        inputPlaceholder: '연락처를 입력하세요..'
+				        html:
+				        	'<div class="d-flex align-items-center bold">'+
+				            '<input id="phoneNumberHead" class="swal2-input mr-2">' + "-" +
+				            '<input id="phoneNumberMiddle" class="swal2-input ml-2 mr-2">' + "-" +
+				            '<input id="phoneNumberEnd" class="swal2-input ml-2">' +
+				            '</div>',
+				          focusConfirm: false,
+				          preConfirm: () => {
+			            	let phoneNumber = 
+				              document.getElementById('phoneNumberHead').value + "-" +
+				              document.getElementById('phoneNumberMiddle').value + "-" +
+				              document.getElementById('phoneNumberEnd').value;
+				            return [
+				            	phoneNumber
+				            ]
+				          }
 				    })
 			    
 				    if (phoneNumber) { // 전화번호까지 입력 완료되었을 때 변수 설정, 예매 final 확인
