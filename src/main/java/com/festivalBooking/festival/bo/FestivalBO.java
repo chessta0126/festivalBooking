@@ -39,7 +39,7 @@ public class FestivalBO {
 		if(!ObjectUtils.isEmpty(posterImg)) {
 			imagePath = fileManager.saveFile(name, posterImg);
 		} else {
-			imagePath = "/images/★default file/no-image-found-360x250-1-300x208.png";
+			imagePath = "/images/★default file/image_icon-icons.com_50366.png";
 		}
 		
 		// MultipartFile이 넘어올 때 Festival 객체 형태가 되면서 String으로 이상하게 들어온 것

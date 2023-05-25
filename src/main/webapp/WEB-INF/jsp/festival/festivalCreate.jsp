@@ -31,7 +31,7 @@
 				<%-- default 이미지 --%>
 				<div>
 					<a href="#" class="posterUploadBtn">
-						<img width="250" src="\images\★default file/no-image-found-360x250-1-300x208.png" id="posterImg">
+						<img width="250" src="\images\★default file/image_icon-icons.com_50366.png" id="posterImg">
 					</a>
 					<div class="pt-3 d-flex justify-content-center">
 						<button type="button" class="posterUploadBtn btn btn-secondary">공연 포스터</button>
@@ -76,7 +76,7 @@
 								<input type="text" id="place" class="form-control" placeholder="직접 입력">
 							</div>
 							<div class="input-group-append">
-								<button type="button" class="btn btn-dark">주소 찾기</button>
+								<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddress">주소 찾기</button>
 							</div>
 						</div>
 					</td>
@@ -149,6 +149,33 @@
 <footer class="pt-5">
 	<jsp:include page="../include/footer.jsp" />
 </footer>
+
+
+<!-- 주소 찾기 버튼 Modal -->
+<div class="modal fade" id="modalAddress">
+<%-- modal-dialog-centered : 모달 창을 수직으로 가운데 정렬 --%>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content text-center">
+      		<div class="py-3 border-bottom">
+      			<!-- 주소 검색창 -->
+	      		<div class="d-flex justify-content-center align-items-center input-group">
+					<div class="input-group-prepend">
+						<input type="text" id="addressFind" class="form-control" placeholder="공연 장소 주소">
+					</div>
+					<div class="input-group-append">
+						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddressFind">주소 찾기</button>
+					</div>
+				</div>
+				
+      		</div>
+      		<div class="py-3">
+      			<%-- data-dismiss="modal" : modal창 닫힘 --%>
+      			<a href="#" data-dismiss="modal">창 닫기</a>
+      		</div>
+		</div>
+	</div>
+</div>	
+
 
 <script>
 	$(document).ready(function() {
@@ -250,9 +277,15 @@
 			let date = $('#date').val();
 
 			let startTimeHour = $('#startTimeHour').val().trim();
+			if(startTimeHour.length == 1){
+				startTimeHour = "0" + startTimeHour;
+			}
 			let startTimeMinute = $('#startTimeMinute').val().trim();
 			if(startTimeMinute == ''){
 				startTimeMinute = 0;
+			}
+			if(startTimeMinute.length == 1){
+				startTimeMinute = "0" + startTimeMinute;
 			}
 			let startTime = startTimeHour + "시 " + startTimeMinute + "분";
 			
@@ -286,16 +319,22 @@
 				alert("공연 날짜를 입력해주세요");
 				return false;
 			}
-			if($('#startTimeHour').val().trim() == ""){
+			if(startTimeHour == ""){
 				alert("공연이 시작하는 시간을 입력해주세요");
 				return false;
 			}
-			if($('#startTimeHour').val().trim() < 0){
+			if(startTimeHour < 0 || startTimeMinute < 0
+					|| startTimeHour > 23 || startTimeMinute > 59){
 				alert("공연 시작 시간이 잘못 입력되었습니다.");
 				return false;
 			}
-			if($('#endTimeHour').val().trim() == ""){
+			if(endTimeHour == ""){
 				alert("공연이 끝나는 시간을 입력해주세요");
+				return false;
+			}
+			if(endTimeHour < 0 || endTimeMinute < 0
+					|| endTimeHour > 23 || endTimeMinute > 59){
+				alert("공연 끝나는 시간이 잘못 입력되었습니다.");
 				return false;
 			}
 			if(endTime < startTime){
@@ -376,9 +415,15 @@
 			let date = $('#date').val();
 			
 			let startTimeHour = $('#startTimeHour').val().trim();
+			if(startTimeHour.length == 1){
+				startTimeHour = "0" + startTimeHour;
+			}
 			let startTimeMinute = $('#startTimeMinute').val().trim();
 			if(startTimeMinute == ''){
 				startTimeMinute = 0;
+			}
+			if(startTimeMinute.length == 1){
+				startTimeMinute = "0" + startTimeMinute;
 			}
 			let startTime = startTimeHour + "시 " + startTimeMinute + "분";
 			
@@ -412,16 +457,22 @@
 				alert("공연 날짜를 입력해주세요");
 				return false;
 			}
-			if($('#startTimeHour').val().trim() == ""){
+			if(startTimeHour == ""){
 				alert("공연이 시작하는 시간을 입력해주세요");
 				return false;
 			}
-			if($('#startTimeHour').val().trim() < 0){
+			if(startTimeHour < 0 || startTimeMinute < 0
+					|| startTimeHour > 23 || startTimeMinute > 59 ){
 				alert("공연 시작 시간이 잘못 입력되었습니다.");
 				return false;
 			}
-			if($('#endTimeHour').val().trim() == ""){
+			if(endTimeHour == ""){
 				alert("공연이 끝나는 시간을 입력해주세요");
+				return false;
+			}
+			if(endTimeHour < 0 || endTimeMinute < 0
+					|| endTimeHour > 23 || endTimeMinute > 59){
+				alert("공연이 끝나는 시간이 잘못 입력되었습니다.");
 				return false;
 			}
 			if(endTime < startTime){

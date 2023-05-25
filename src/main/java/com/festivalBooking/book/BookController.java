@@ -35,6 +35,9 @@ public class BookController {
 		,@RequestParam(value="endDate",required = false) String endDate
 		,@RequestParam(value="bookName",required = false) String bookName
 		,@RequestParam(value="phoneNumber",required = false) String phoneNumber
+		,@RequestParam(value="phoneNumberHead",required = false) String phoneNumberHead
+		,@RequestParam(value="phoneNumberMiddle",required = false) String phoneNumberMiddle
+		,@RequestParam(value="phoneNumberEnd",required = false) String phoneNumberEnd
 		,Model model, HttpSession session) {
 
 		try { // 회원 예매내역 확인(id 존재)
@@ -49,6 +52,9 @@ public class BookController {
 			
 		} catch(Exception e) { // 비회원 예매내역 확인
 			// DB select
+			if(ObjectUtils.isEmpty(phoneNumber)) {
+				phoneNumber = phoneNumberHead+ "-" + phoneNumberMiddle+ "-" + phoneNumberEnd;
+			}
 			List<BookView> myBookingList = festivalBO.generateBookViewListBybookNamephoneNumber(bookName,phoneNumber);
 			model.addAttribute("myBookingList",myBookingList);
 		}

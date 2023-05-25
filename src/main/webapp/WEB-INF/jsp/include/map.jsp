@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<div class="d-flex justify-content-between align-items-center pt-5">
-	<h2 class="bold pb-2">오시는 길</h2>
-	<button type="button" class="btn btn-secondary" onclick="getCurrentPosBtn()">내 위치</button>
-</div>
 				
 <div id="map" class="w-100"></div>
+
 <script>
 	// 지도
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
