@@ -91,12 +91,18 @@
 			<div id="memberNotBox" class="container">
 			<form id="bookedFestivalConfirm" method="get" action="/book/myBooking_view">
 				<div class="d-flex align-items-center mb-3">
-					<label for="bookName" class="ml-3 col-4">예약자</label>
+					<label for="bookName" class="ml-3 col-3">예약자</label>
 					<input type="text" id="bookName" name="bookName" class="form-control" placeholder="예약자 이름">
 				</div>
 				<div class="d-flex align-items-center mb-4">
-					<label for="phoneNumber" class="ml-3 col-4">전화번호</label>
-					<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="전화번호">
+					<label for="phoneNumber" class="ml-3 col-3">전화번호</label>
+					<div class="d-flex justify-content-between">
+						<input type="text" id="phoneNumberHead" name="phoneNumberHead" class="form-control mr-2">
+						-
+						<input type="text" id="phoneNumberMiddle" name="phoneNumberMiddle" class="form-control ml-2 mr-2">
+						-
+						<input type="text" id="phoneNumberEnd" name="phoneNumberEnd" class="form-control ml-2">
+					</div>
 				</div>
 				
 				<button type="submit" class="w-100 btn btn-dark">확인하기</button>
