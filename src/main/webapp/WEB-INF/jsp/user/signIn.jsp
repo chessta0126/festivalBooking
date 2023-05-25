@@ -65,6 +65,12 @@
 			$.post(url, params)   // request
 			.done(function(data) {  // response
 				if (data.code == 1) { // 성공
+					// referrer가 로그인/회원가입 페이지일 경우 메인으로 이동
+					// http://localhost:8080/user/sign_in_view
+					if(referrer.split("/")[3] == "user"){
+						location.href = "/main/main_view";
+						return;
+					}
 					location.href = referrer;
 				} else { // 실패
 					alert(data.errorMessage);
