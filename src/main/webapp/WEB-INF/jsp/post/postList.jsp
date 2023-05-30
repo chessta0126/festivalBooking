@@ -49,8 +49,8 @@
 				</span>
 			</c:forEach>
 	
-			<%-- 다음 페이지 <= 마지막 페이지 경우에만 다음 표시 --%>
-			<c:if test="${currentPage + 1 <= needPage}">
+			<%-- 마지막 페이지 < 전체 필요 페이지 경우에만 다음 표시 --%>
+			<c:if test="${maxPage < needPage}">
 				<a href="/post/postList?postType=${postType}&page=${maxPage + 1}">>></a>
 			</c:if>
 		</div>
