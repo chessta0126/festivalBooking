@@ -15,11 +15,11 @@
 					<span class="font-weight-bold">공연 기간 </span>
 					<div class="col-4">
 						<input type="text" id="startDate" value="시작기한(선택)"
-							class="form-control">
+							class="form-control" readonly/>
 					</div>
 					~
 					<div class="col-4">
-						<input type="text" id="endDate" value="끝 기한(선택)" class="form-control">
+						<input type="text" id="endDate" value="끝 기한(선택)" class="form-control" readonly/>
 					</div>
 					<button type="button" id="dateLimitBtn" class="btn btn-dark">검색</button>
 				</div>

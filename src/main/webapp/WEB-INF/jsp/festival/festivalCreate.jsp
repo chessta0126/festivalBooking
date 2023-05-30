@@ -53,7 +53,7 @@
 				<tr>
 					<th>공연 날짜</th>
 					<td>
-						<input type="text" id="date" class="form-control" placeholder="공연 날짜 (클릭)">
+						<input type="text" id="date" class="form-control" placeholder="공연 날짜 (클릭)" readonly/>
 					</td>
 				</tr>
 				<tr>
